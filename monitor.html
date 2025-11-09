@@ -6,16 +6,53 @@
   <title>ONEDEV - Monitor Bot</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* Grid container responsif */
+    /* SIDEBAR & MENU BTN */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 250px;
+      height: 100%;
+      background: #050510;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: 200;
+      padding-top: 2rem;
+    }
+
+    .sidebar.active {
+      transform: translateX(0);
+    }
+
+    .menu-btn {
+      position: relative;
+      z-index: 300; /* di atas konten */
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      color: #00b4d8;
+      cursor: pointer;
+      margin-right: 1rem;
+    }
+
+    /* MAIN CONTENT */
+    .main-content {
+      margin-left: 0;
+      transition: margin-left 0.3s ease;
+    }
+    .sidebar.active ~ .main-content {
+      margin-left: 250px;
+    }
+
+    /* Bot Card Grid */
     .monitor-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* card menyesuaikan lebar */
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1.5rem;
       margin-top: 50px;
       padding: 0 10px;
     }
 
-    /* Card Bot */
     .monitor-card {
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.1);
@@ -25,7 +62,6 @@
       transition: 0.3s;
       min-height: 120px;
     }
-
     .monitor-card.online {
       border-color: #00ff85;
       box-shadow: 0 0 20px rgba(0,255,133,0.2);
@@ -38,7 +74,6 @@
       border-color: #ffb300;
       box-shadow: 0 0 20px rgba(255,179,0,0.2);
     }
-
     .monitor-card h3 {
       margin-bottom: 10px;
       font-size: 1.3em;
@@ -66,11 +101,9 @@
 
   <!-- MAIN CONTENT -->
   <div class="main-content">
-    <header>
-      <div class="header-left">
-        <button class="menu-btn">☰</button>
-        <h1>System Monitor Bot</h1>
-      </div>
+    <header style="display:flex; align-items:center; padding:1rem 5%;">
+      <button class="menu-btn">☰</button>
+      <h1>System Monitor Bot</h1>
     </header>
 
     <section style="text-align:center; margin-top:50px; padding:0 10px;">
@@ -88,9 +121,15 @@
   </div>
 
   <script>
-    const monitorGrid = document.getElementById("monitorGrid");
+    // Toggle sidebar
+    const menuBtn = document.querySelector('.menu-btn');
+    const sidebar = document.querySelector('.sidebar');
 
-    // Daftar bot
+    menuBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+    });
+
+    // List bot
     const bots = [
       { name: "Main Bot", id: "BOT_ID_1" },
       { name: "Helper Bot", id: "BOT_ID_2" },
@@ -142,7 +181,7 @@
       }
     }
 
-    // Refresh setiap 10 detik
+    // Refresh status setiap 10 detik
     updateBotStatus();
     setInterval(updateBotStatus, 10000);
   </script>
