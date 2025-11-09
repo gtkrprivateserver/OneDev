@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ONEDEV — Pricing</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="navbar" id="navbar">
+    <div class="logo">🤖 ONE<span>DEV</span></div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="features.html">Features</a>
+      <a href="pricing.html" class="active">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <button class="btn-primary">Get Started</button>
+  </header>
+
+  <section class="pricing fade-in">
+    <h2>Paket Layanan ONEDEV</h2>
+    <p>Pilih solusi sesuai skala bisnis robotikmu.</p>
+
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>Starter</h3>
+        <p class="price">Gratis</p>
+        <ul>
+          <li>1 Robot aktif</li>
+          <li>Simulasi dasar</li>
+          <li>Support komunitas</li>
+        </ul>
+      </div>
+
+      <div class="pricing-card featured">
+        <h3>Pro</h3>
+        <p class="price">$499/bulan</p>
+        <ul>
+          <li>25 Robot aktif</li>
+          <li>AI penuh</li>
+          <li>Prioritas support</li>
+        </ul>
+      </div>
+
+      <div class="pricing-card">
+        <h3>Enterprise</h3>
+        <p class="price">Kustom</p>
+        <ul>
+          <li>Robot tak terbatas</li>
+          <li>Keamanan premium</li>
+          <li>Dedicated engineer</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2025 ONEDEV — All Rights Reserved</p>
+  </footer>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      if (window.scrollY > 50) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    });
+  </script>
+</body>
+</html>
