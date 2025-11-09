@@ -6,26 +6,28 @@
   <title>ONEDEV - Monitor Bot</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* MENU BUTTON & HEADER */
+    /* HEADER */
     header {
-      display: flex;
-      align-items: center;
-      padding: 1rem 5%;
       position: sticky;
       top: 0;
       background: rgba(0,0,0,0.8);
-      z-index: 1000;
       backdrop-filter: blur(10px);
+      padding: 1rem 5%;
+      display: flex;
+      align-items: center;
+      z-index: 10; /* header dibawah menu-btn */
     }
 
+    /* MENU BUTTON */
     .menu-btn {
+      position: relative;
       font-size: 1.5rem;
       background: none;
       border: none;
       color: #00b4d8;
       cursor: pointer;
       margin-right: 1rem;
-      z-index: 1001;
+      z-index: 1000; /* tombol selalu di atas */
     }
 
     /* SIDEBAR */
