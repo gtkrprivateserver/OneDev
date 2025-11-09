@@ -6,11 +6,10 @@
   <title>ONEDEV - Monitor Bot</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* Flex container untuk bot card */
+    /* Grid container responsif */
     .monitor-grid {
-      display: flex;
-      flex-wrap: nowrap; /* tetap sejajar */
-      overflow-x: auto;   /* scroll horizontal jika layar sempit */
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* card menyesuaikan lebar */
       gap: 1.5rem;
       margin-top: 50px;
       padding: 0 10px;
@@ -18,14 +17,13 @@
 
     /* Card Bot */
     .monitor-card {
-      flex: 0 0 250px; /* lebar tetap */
-      min-height: 120px;
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 12px;
       padding: 1.5rem;
       text-align: center;
       transition: 0.3s;
+      min-height: 120px;
     }
 
     .monitor-card.online {
@@ -49,25 +47,6 @@
     .monitor-card p {
       color: #ccc;
       font-size: 1em;
-    }
-
-    /* Scroll bar styling */
-    .monitor-grid::-webkit-scrollbar {
-      height: 8px;
-    }
-    .monitor-grid::-webkit-scrollbar-thumb {
-      background: rgba(0,183,255,0.5);
-      border-radius: 4px;
-    }
-    .monitor-grid::-webkit-scrollbar-track {
-      background: rgba(255,255,255,0.02);
-    }
-
-    /* Responsive mobile: biar tetap scroll horizontal */
-    @media (max-width: 600px) {
-      .monitor-grid {
-        flex-wrap: nowrap;
-      }
     }
   </style>
 </head>
@@ -120,7 +99,6 @@
       { name: "Moderation Bot", id: "BOT_ID_5" }
     ];
 
-    // Membuat card awal sebagai disconnected
     function createCard(bot) {
       const div = document.createElement("div");
       div.classList.add("monitor-card", "disconnected");
@@ -131,10 +109,8 @@
       return div;
     }
 
-    // Render card awal
     bots.forEach(bot => monitorGrid.appendChild(createCard(bot)));
 
-    // Update status bot dari backend
     async function updateBotStatus() {
       try {
         const res = await fetch("/bot-status");
