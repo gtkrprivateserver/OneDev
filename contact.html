@@ -1,44 +1,32 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ONEDEV — Contact</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontak ONEDEV</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="navbar" id="navbar">
-    <div class="logo">🤖 ONE<span>DEV</span></div>
+  <aside class="sidebar open">
+    <div class="sidebar-logo">ONE<span>DEV</span></div>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="features.html">Features</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="about.html">About</a>
-      <a href="contact.html" class="active">Contact</a>
+      <a href="index.html">Beranda</a>
+      <a href="about.html">Tentang</a>
+      <a href="services.html">Layanan</a>
+      <a href="contact.html" class="active">Kontak</a>
     </nav>
-    <button class="btn-primary">Get Started</button>
-  </header>
+  </aside>
 
-  <section class="contact fade-in">
-    <h2>Hubungi ONEDEV</h2>
-    <form>
-      <input type="text" placeholder="Nama Lengkap" required />
-      <input type="email" placeholder="Email Perusahaan" required />
-      <textarea placeholder="Pesan kamu..." rows="4"></textarea>
-      <button class="btn-primary">Kirim Pesan</button>
-    </form>
-  </section>
-
-  <footer class="footer">
-    <p>© 2025 ONEDEV — All Rights Reserved</p>
-  </footer>
-
-  <script>
-    window.addEventListener('scroll', () => {
-      const nav = document.getElementById('navbar');
-      if (window.scrollY > 50) nav.classList.add('scrolled');
-      else nav.classList.remove('scrolled');
-    });
-  </script>
+  <main class="content">
+    <section class="page fade-in">
+      <h1>Hubungi Kami</h1>
+      <form class="contact-form">
+        <input type="text" placeholder="Nama Anda" required />
+        <input type="email" placeholder="Email" required />
+        <textarea rows="5" placeholder="Pesan Anda"></textarea>
+        <button type="submit" class="btn-primary">Kirim Pesan</button>
+      </form>
+    </section>
+  </main>
 </body>
 </html>
