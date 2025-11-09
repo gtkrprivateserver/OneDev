@@ -5,6 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ONEDEV - Coming Soon</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Countdown timer styling */
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 30px;
+      font-size: 2em;
+      color: #00b4d8;
+      font-weight: bold;
+    }
+    .countdown div {
+      text-align: center;
+    }
+    .countdown div span {
+      display: block;
+      font-size: 0.6em;
+      color: #ccc;
+      margin-top: 5px;
+    }
+  </style>
 </head>
 <body>
   <!-- SIDEBAR -->
@@ -35,9 +56,41 @@
         Kami sedang dalam pengembangan.<br>
         Silakan kunjungi kembali nanti!
       </p>
+
+      <!-- Countdown Timer -->
+      <div class="countdown" id="countdown">
+        <div><span id="days">0</span>Days</div>
+        <div><span id="hours">0</span>Hours</div>
+        <div><span id="minutes">0</span>Minutes</div>
+        <div><span id="seconds">0</span>Seconds</div>
+      </div>
     </section>
   </div>
 
   <script src="script.js"></script>
+  <script>
+    // Set tanggal rilis Countdown (ubah sesuai jadwal)
+    const launchDate = new Date("Dec 31, 2025 00:00:00").getTime();
+
+    const countdownTimer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = launchDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days;
+      document.getElementById("hours").innerText = hours;
+      document.getElementById("minutes").innerText = minutes;
+      document.getElementById("seconds").innerText = seconds;
+
+      if (distance < 0) {
+        clearInterval(countdownTimer);
+        document.getElementById("countdown").innerHTML = "<h3>🚀 Bot Telah Tersedia!</h3>";
+      }
+    }, 1000);
+  </script>
 </body>
 </html>
