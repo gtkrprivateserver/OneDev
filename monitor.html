@@ -3,79 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ONEDEV - Monitor Bot</title>
+  <title>ONEDEV - System Monitor Bot</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* Countdown Timer Styling */
-    .countdown {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 30px;
-      font-size: 2em;
-      color: #00b4d8;
-      font-weight: bold;
-      flex-wrap: wrap;
+    /* Monitor Grid */
+    .monitor-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 50px;
+      padding: 0 10px;
     }
-    .countdown-item {
+    .monitor-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 1.5rem;
       text-align: center;
-      min-width: 60px;
+      transition: 0.3s;
     }
-    .countdown-item span {
-      display: block;
-      font-size: 1.2em;
+    .monitor-card.online {
+      border-color: #00ff85;
+      box-shadow: 0 0 20px rgba(0,255,133,0.2);
+    }
+    .monitor-card.offline {
+      border-color: #ff4c4c;
+      box-shadow: 0 0 20px rgba(255,76,76,0.2);
+    }
+    .monitor-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.3em;
       color: #00b4d8;
-      margin-bottom: 5px;
     }
-
-    /* Bot Status */
-    .bot-status {
-      margin-top: 40px;
-      font-size: 1.2em;
+    .monitor-card p {
       color: #ccc;
-      transition: all 0.3s;
-    }
-    .bot-status span {
-      font-weight: bold;
-      color: #00b4d8;
-    }
-    .bot-status.online span {
-      color: #00ff85;
-    }
-    .bot-status.offline span {
-      color: #ff4c4c;
-    }
-
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-      .countdown {
-        font-size: 1.5em;
-        gap: 10px;
-      }
-      .countdown-item {
-        min-width: 50px;
-      }
-      .countdown-item span {
-        font-size: 1em;
-      }
-      .bot-status {
-        font-size: 1em;
-      }
-    }
-    @media (max-width: 480px) {
-      .countdown {
-        font-size: 1.2em;
-        gap: 8px;
-      }
-      .countdown-item {
-        min-width: 45px;
-      }
-      .countdown-item span {
-        font-size: 0.95em;
-      }
-      .bot-status {
-        font-size: 0.9em;
-      }
+      font-size: 1em;
     }
   </style>
 </head>
@@ -98,83 +60,51 @@
     <header>
       <div class="header-left">
         <button class="menu-btn">☰</button>
-        <h1>Monitor Bot</h1>
+        <h1>System Monitor Bot</h1>
       </div>
     </header>
 
-    <section style="text-align:center; margin-top:80px; padding:0 10px;">
-      <h2 style="font-size:2em; color:#00b4d8;">Monitor Bot 🚀</h2>
+    <section style="text-align:center; margin-top:50px; padding:0 10px;">
+      <h2 style="font-size:2em; color:#00b4d8;">Monitor Status Discord Bot 🚀</h2>
       <p style="margin-top:20px; color:#ccc; font-size:1.1em;">
-        Halaman Monitor Bot sedang dalam pengembangan.<br>
-        Nanti akan menampilkan status bot Discord secara real-time!
+        Halaman ini menampilkan status realtime bot Discord.<br>
+        Mirip seperti UptimeRobot!
       </p>
 
-      <!-- Countdown Timer -->
-      <div class="countdown" id="countdown">
-        <div class="countdown-item"><span id="days">0</span>Days</div>
-        <div class="countdown-item"><span id="hours">0</span>Hours</div>
-        <div class="countdown-item"><span id="minutes">0</span>Minutes</div>
-        <div class="countdown-item"><span id="seconds">0</span>Seconds</div>
-      </div>
-
-      <!-- Bot Status -->
-      <div class="bot-status offline" id="botStatus">
-        Status Bot: <span>Loading...</span>
-      </div>
+      <!-- Monitor Grid -->
+      <div class="monitor-grid" id="monitorGrid"></div>
     </section>
   </div>
 
   <script>
-    // ===========================
-    // Countdown Timer
-    // ===========================
-    const launchDate = new Date("Dec 31, 2025 00:00:00").getTime();
-    const countdownTimer = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = launchDate - now;
+    const monitorGrid = document.getElementById("monitorGrid");
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    // Render card awal
+    function renderBots(bots) {
+      monitorGrid.innerHTML = "";
+      bots.forEach(bot => {
+        const card = document.createElement("div");
+        card.classList.add("monitor-card", bot.status);
+        card.innerHTML = `
+          <h3>${bot.name}</h3>
+          <p>Status: <span>${bot.status === "online" ? "Online ✅" : "Offline ❌"}</span></p>
+        `;
+        monitorGrid.appendChild(card);
+      });
+    }
 
-      document.getElementById("days").innerText = days;
-      document.getElementById("hours").innerText = hours;
-      document.getElementById("minutes").innerText = minutes;
-      document.getElementById("seconds").innerText = seconds;
-
-      if (distance < 0) {
-        clearInterval(countdownTimer);
-        document.getElementById("countdown").innerHTML = "<h3>🚀 Bot Telah Tersedia!</h3>";
-      }
-    }, 1000);
-
-    // ===========================
-    // Fetch Bot Status via Discord API (Backend)
-    // ===========================
+    // Fetch status dari backend
     async function fetchBotStatus() {
-      const botStatus = document.getElementById("botStatus");
       try {
-        const res = await fetch("/bot-status"); // Pastikan backend /bot-status berjalan
+        const res = await fetch("/bot-status");
         const data = await res.json();
-
-        if (data.status === "online") {
-          botStatus.classList.remove("offline");
-          botStatus.classList.add("online");
-          botStatus.innerHTML = `Status Bot: <span>Online ✅</span>`;
-        } else {
-          botStatus.classList.remove("online");
-          botStatus.classList.add("offline");
-          botStatus.innerHTML = `Status Bot: <span>Offline ❌</span>`;
-        }
+        renderBots(data);
       } catch (error) {
-        botStatus.classList.remove("online");
-        botStatus.classList.add("offline");
-        botStatus.innerHTML = `Status Bot: <span>Offline ❌</span>`;
+        console.error("Error fetching bot status", error);
       }
     }
 
-    // Refresh status setiap 10 detik
+    // Fetch pertama & interval setiap 10 detik
     fetchBotStatus();
     setInterval(fetchBotStatus, 10000);
   </script>
