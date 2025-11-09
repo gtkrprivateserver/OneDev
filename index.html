@@ -8,11 +8,14 @@
 </head>
 <body>
 
+  <!-- Background Animasi -->
+  <div class="bg-animated"></div>
+
   <!-- NAVBAR -->
   <header class="navbar">
     <div class="logo">ONE<span>DEV</span></div>
     <nav>
-      <a href="index.html">Beranda</a>
+      <a href="index.html" class="active">Beranda</a>
       <a href="about.html">Tentang</a>
       <a href="services.html">Layanan</a>
       <a href="contact.html">Kontak</a>
@@ -20,11 +23,11 @@
   </header>
 
   <!-- HERO -->
-  <section class="hero">
-    <div class="hero-content fade-in">
-      <h1>Revolusi Robotik oleh <span class="accent">ONEDEV</span></h1>
-      <p>Kami menghadirkan teknologi AI dan robotik canggih untuk membentuk masa depan yang lebih efisien, aman, dan cerdas.</p>
-      <a href="about.html" class="btn-primary">Jelajahi</a>
+  <section class="hero fade-in">
+    <div class="hero-content">
+      <h1>Membangun Masa Depan <span class="accent">Robotik & AI</span></h1>
+      <p>ONEDEV menghadirkan inovasi robotik yang melampaui batas, dengan teknologi kecerdasan buatan dan desain futuristik berkelas dunia.</p>
+      <a href="services.html" class="btn-primary">Lihat Layanan</a>
       <a href="contact.html" class="btn-outline">Hubungi Kami</a>
     </div>
     <div class="hero-visual">
@@ -35,37 +38,28 @@
 
   <!-- FEATURES -->
   <section class="features fade-in">
-    <h2>Keunggulan Teknologi Kami</h2>
+    <h2>Keunggulan Kami</h2>
     <div class="features-grid">
       <div class="feature-card">
-        <h3>AI Otomatis</h3>
-        <p>Robot pintar kami dilengkapi sistem pembelajaran mesin untuk meningkatkan performa setiap saat.</p>
+        <h3>AI Cerdas</h3>
+        <p>Integrasi machine learning untuk sistem yang semakin pintar setiap harinya.</p>
       </div>
       <div class="feature-card">
-        <h3>Presisi Tinggi</h3>
-        <p>Setiap unit dirancang dengan akurasi mikron untuk hasil terbaik di industri modern.</p>
+        <h3>Presisi Mekanik</h3>
+        <p>Struktur robotik presisi tinggi untuk mendukung operasi industri skala besar.</p>
       </div>
       <div class="feature-card">
-        <h3>Keamanan Canggih</h3>
-        <p>Sistem deteksi dan respons cepat menjamin operasi yang aman dan stabil.</p>
+        <h3>Keamanan Otomatis</h3>
+        <p>Sensor dan algoritma canggih untuk menghindari kesalahan sistemik.</p>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer class="footer">
-    <p>© 2025 ONEDEV. Semua hak dilindungi.</p>
+    <p>© 2025 ONEDEV. Semua hak cipta dilindungi.</p>
   </footer>
 
-  <script>
-    const fadeEls = document.querySelectorAll('.fade-in');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    });
-    fadeEls.forEach(el => observer.observe(el));
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
