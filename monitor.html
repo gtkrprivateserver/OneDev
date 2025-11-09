@@ -10,20 +10,49 @@
     .countdown {
       display: flex;
       justify-content: center;
-      gap: 25px;
+      gap: 20px;
       margin-top: 30px;
       font-size: 2em;
       color: #00b4d8;
       font-weight: bold;
+      flex-wrap: wrap;
     }
     .countdown div {
       text-align: center;
+      min-width: 70px;
     }
     .countdown div span {
       display: block;
       font-size: 0.6em;
       color: #ccc;
       margin-top: 5px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      section h2 {
+        font-size: 1.7em;
+      }
+      section p {
+        font-size: 1em;
+      }
+      .countdown {
+        font-size: 1.5em;
+        gap: 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      section h2 {
+        font-size: 1.4em;
+      }
+      section p {
+        font-size: 0.95em;
+      }
+      .countdown {
+        font-size: 1.2em;
+        gap: 10px;
+      }
     }
   </style>
 </head>
@@ -50,7 +79,7 @@
       </div>
     </header>
 
-    <section style="text-align:center; margin-top:100px;">
+    <section style="text-align:center; margin-top:80px; padding: 0 10px;">
       <h2 style="font-size:2em; color:#00b4d8;">Coming Soon 🚀</h2>
       <p style="margin-top:20px; color:#ccc; font-size:1.1em;">
         Kami sedang dalam pengembangan.<br>
@@ -69,7 +98,7 @@
 
   <script src="script.js"></script>
   <script>
-    // Set tanggal rilis Countdown (ubah sesuai jadwal)
+    // Set tanggal rilis Countdown
     const launchDate = new Date("Dec 31, 2025 00:00:00").getTime();
 
     const countdownTimer = setInterval(() => {
