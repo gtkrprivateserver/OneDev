@@ -5,12 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KinetiX Robotics — The Future of Intelligent Machines</title>
   <link rel="stylesheet" href="styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <header class="navbar">
+  <header class="navbar" id="navbar">
     <div class="logo">🤖 KinetiX<span> Robotics</span></div>
     <nav>
       <a href="#home">Home</a>
@@ -22,12 +20,12 @@
     <button class="btn-primary">Get Started</button>
   </header>
 
-  <section id="home" class="hero">
+  <section id="home" class="hero fade-in">
     <div class="hero-content">
-      <h1>Masa Depan Robotika Dimulai <span class="accent">Di Sini</span></h1>
+      <h1>Masa Depan <span class="accent">Robotika</span> Dimulai Di Sini</h1>
       <p>
-        Kami membangun sistem robot cerdas dengan AI generatif dan otonomi penuh —
-        memberdayakan industri manufaktur, logistik, dan layanan modern.
+        Sistem robot otonom berbasis AI yang beradaptasi, belajar, dan membantu manusia
+        mencapai efisiensi industri yang belum pernah ada sebelumnya.
       </p>
       <div class="hero-actions">
         <a href="#contact" class="btn-primary">Request Demo</a>
@@ -36,32 +34,32 @@
     </div>
     <div class="hero-visual">
       <div class="robot-sphere"></div>
-      <div class="robot-lights"></div>
+      <div class="glow"></div>
     </div>
   </section>
 
-  <section id="features" class="features">
+  <section id="features" class="features fade-in">
     <h2>Teknologi Kami</h2>
     <p>Platform modular yang mengintegrasikan AI, sensor, dan edge computing.</p>
     <div class="features-grid">
       <div class="feature-card">
         <h3>Simulasi Real-Time</h3>
-        <p>Gunakan simulasi fisika presisi tinggi untuk menguji robot sebelum deployment.</p>
+        <p>Uji performa robot dengan lingkungan fisik digital berakurasi tinggi.</p>
       </div>
       <div class="feature-card">
         <h3>AI Adaptif</h3>
-        <p>Model pembelajaran mesin yang beradaptasi dengan kondisi dunia nyata.</p>
+        <p>Robot belajar dari pengalaman untuk meningkatkan efisiensi tugas.</p>
       </div>
       <div class="feature-card">
         <h3>Fleksibilitas Industri</h3>
-        <p>Dari manufaktur, keamanan, hingga riset — siap diintegrasikan di semua sektor.</p>
+        <p>Solusi robotik siap pakai untuk pabrik, riset, dan keamanan.</p>
       </div>
     </div>
   </section>
 
-  <section id="pricing" class="pricing">
-    <h2>Paket yang Fleksibel</h2>
-    <p>Skalakan bisnis robotikmu dengan paket yang transparan dan terukur.</p>
+  <section id="pricing" class="pricing fade-in">
+    <h2>Paket Fleksibel</h2>
+    <p>Skalakan bisnis robotikmu dengan paket terjangkau & transparan.</p>
     <div class="pricing-grid">
       <div class="pricing-card">
         <h3>Starter</h3>
@@ -78,7 +76,7 @@
         <ul>
           <li>25 Robot aktif</li>
           <li>Integrasi AI penuh</li>
-          <li>Support premium</li>
+          <li>Support prioritas</li>
         </ul>
       </div>
       <div class="pricing-card">
@@ -86,22 +84,23 @@
         <p class="price">Kustom</p>
         <ul>
           <li>Robot tak terbatas</li>
-          <li>Keamanan & analitik penuh</li>
-          <li>Dedicated support team</li>
+          <li>Keamanan & analitik</li>
+          <li>Dedicated support</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <section id="about" class="about">
+  <section id="about" class="about fade-in">
     <h2>Tentang KinetiX Robotics</h2>
     <p>
-      Kami adalah startup teknologi yang fokus pada pengembangan AI otonom dan robot industri masa depan.
-      Misi kami: mempercepat transisi dunia menuju kolaborasi manusia dan mesin yang lebih cerdas.
+      KinetiX adalah startup global yang berfokus pada masa depan robotika otonom.
+      Kami menggabungkan AI generatif dengan rekayasa robotik untuk membangun masa depan
+      yang kolaboratif antara manusia dan mesin.
     </p>
   </section>
 
-  <section id="contact" class="contact">
+  <section id="contact" class="contact fade-in">
     <h2>Hubungi Kami</h2>
     <form>
       <input type="text" placeholder="Nama Lengkap" required />
@@ -119,5 +118,26 @@
       <a href="#">Twitter</a>
     </div>
   </footer>
+
+  <script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+
+    // Fade-in on scroll
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.2 });
+    fadeEls.forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
