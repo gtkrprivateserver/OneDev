@@ -9,7 +9,6 @@
     /* HEADER */
     header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
       padding: 1.5rem 5%;
       position: fixed;
@@ -23,6 +22,7 @@
     .header-left {
       display: flex;
       align-items: center;
+      gap: 1rem; /* jarak menu-btn dengan h1 */
     }
 
     .menu-btn {
@@ -31,8 +31,7 @@
       border: none;
       color: #00b4d8;
       cursor: pointer;
-      margin-right: 1rem;
-      z-index: 1001; /* tombol selalu di atas */
+      z-index: 1001; /* selalu di atas */
     }
 
     .header-left h1 {
