@@ -1,76 +1,35 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ONEDEV | Inovasi Teknologi Futuristik</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ONEDEV - Futuristic AI Startup</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-  <!-- SIDEBAR -->
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-logo">ONE<span>DEV</span></div>
+  <aside class="sidebar">
+    <h2 class="logo">ONE<span>DEV</span></h2>
     <nav>
-      <a href="index.html" class="active">Beranda</a>
-      <a href="about.html">Tentang</a>
-      <a href="services.html">Layanan</a>
-      <a href="contact.html">Kontak</a>
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </aside>
 
-  <!-- TOGGLE BUTTON -->
-  <button class="menu-toggle" id="menuToggle">☰</button>
+  <div class="main-content">
+    <header>
+      <button class="menu-btn">☰</button>
+      <h1>Selamat Datang di ONEDEV</h1>
+    </header>
 
-  <!-- MAIN CONTENT -->
-  <main class="content">
-    <section class="hero fade-in">
-      <h1>Selamat Datang di <span class="accent">ONEDEV</span></h1>
-      <p>Kami membangun masa depan dengan teknologi robotik, kecerdasan buatan, dan inovasi digital.</p>
-      <div class="buttons">
-        <a href="about.html" class="btn-primary">Pelajari Lebih Lanjut</a>
-        <a href="contact.html" class="btn-outline">Hubungi Kami</a>
-      </div>
+    <section class="hero">
+      <h2>Solusi Kecerdasan Buatan & Otomasi Masa Depan</h2>
+      <p>Kami membangun sistem AI yang mempercepat transformasi digital dunia.</p>
+      <a href="services.html" class="btn-primary">Jelajahi Layanan</a>
     </section>
+  </div>
 
-    <section class="features fade-in">
-      <h2>Teknologi Unggulan Kami</h2>
-      <div class="features-grid">
-        <div class="feature-card">
-          <h3>AI Robotics</h3>
-          <p>Integrasi robot cerdas dengan kemampuan analitik real-time.</p>
-        </div>
-        <div class="feature-card">
-          <h3>Cloud Automation</h3>
-          <p>Sistem otomatis berbasis cloud untuk industri dan bisnis.</p>
-        </div>
-        <div class="feature-card">
-          <h3>Smart Integration</h3>
-          <p>Solusi menyeluruh yang menghubungkan hardware dan software AI.</p>
-        </div>
-      </div>
-    </section>
-
-    <footer class="footer">
-      <p>© 2025 ONEDEV. Semua hak cipta dilindungi.</p>
-    </footer>
-  </main>
-
-  <script>
-    const sidebar = document.getElementById("sidebar");
-    const toggle = document.getElementById("menuToggle");
-    toggle.addEventListener("click", () => {
-      sidebar.classList.toggle("open");
-    });
-
-    const fadeEls = document.querySelectorAll('.fade-in');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    });
-    fadeEls.forEach(el => observer.observe(el));
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
