@@ -28,12 +28,20 @@
 
     <section>
       <h2>Kirim Pesan ke ONEDEV</h2>
-      <form class="contact-form">
-        <input type="text" placeholder="Nama Lengkap" required>
-        <input type="email" placeholder="Alamat Email" required>
-        <textarea rows="5" placeholder="Pesan Anda..." required></textarea>
+      <form class="contact-form" 
+            action="mailto:gtkrprivateserver@gmail.com" 
+            method="post" 
+            enctype="text/plain">
+        <input type="text" name="name" placeholder="Nama Lengkap" required>
+        <input type="email" name="email" placeholder="Alamat Email" required>
+        <textarea name="message" rows="5" placeholder="Pesan Anda..." required></textarea>
         <button type="submit" class="btn-primary">Kirim</button>
       </form>
+
+      <p style="margin-top: 15px; color: #aaa;">
+        Atau hubungi langsung: 
+        <a href="mailto:gtkrprivateserver@gmail.com" style="color: #00b4d8;">gtkrprivateserver@gmail.com [GTKRPS]</a>
+      </p>
     </section>
   </div>
 
