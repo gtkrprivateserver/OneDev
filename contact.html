@@ -1,32 +1,38 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kontak ONEDEV</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hubungi ONEDEV</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <aside class="sidebar open">
-    <div class="sidebar-logo">ONE<span>DEV</span></div>
+  <aside class="sidebar">
+    <h2 class="logo">ONE<span>DEV</span></h2>
     <nav>
-      <a href="index.html">Beranda</a>
-      <a href="about.html">Tentang</a>
-      <a href="services.html">Layanan</a>
-      <a href="contact.html" class="active">Kontak</a>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html" class="active">Contact</a>
     </nav>
   </aside>
 
-  <main class="content">
-    <section class="page fade-in">
+  <div class="main-content">
+    <header>
+      <button class="menu-btn">☰</button>
       <h1>Hubungi Kami</h1>
+    </header>
+
+    <section>
       <form class="contact-form">
-        <input type="text" placeholder="Nama Anda" required />
-        <input type="email" placeholder="Email" required />
-        <textarea rows="5" placeholder="Pesan Anda"></textarea>
+        <input type="text" placeholder="Nama Anda" required>
+        <input type="email" placeholder="Email Anda" required>
+        <textarea rows="5" placeholder="Pesan Anda..." required></textarea>
         <button type="submit" class="btn-primary">Kirim Pesan</button>
       </form>
     </section>
-  </main>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
