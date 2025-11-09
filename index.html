@@ -1,46 +1,123 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KinetiX Robotics</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KinetiX Robotics — The Future of Intelligent Machines</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <header class="nav">
-    <div class="nav-brand">
-      <h1>KinetiX Robotics</h1>
-      <p>AI · Robotics · Infrastructure</p>
-    </div>
-    <nav class="nav-links">
+  <header class="navbar">
+    <div class="logo">🤖 KinetiX<span> Robotics</span></div>
+    <nav>
+      <a href="#home">Home</a>
       <a href="#features">Features</a>
       <a href="#pricing">Pricing</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
-      <button class="btn-primary">Get started</button>
     </nav>
+    <button class="btn-primary">Get Started</button>
   </header>
 
-  <section class="hero">
-    <h2>Bangun robot cerdas yang <span class="highlight">mengubah industri</span></h2>
-    <p>Platform end-to-end untuk desain, simulasi, dan deployment robotik — cepat, aman, dan dapat diskalakan.</p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Request demo</a>
-      <a href="#features" class="btn-outline">Learn more</a>
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Masa Depan Robotika Dimulai <span class="accent">Di Sini</span></h1>
+      <p>
+        Kami membangun sistem robot cerdas dengan AI generatif dan otonomi penuh —
+        memberdayakan industri manufaktur, logistik, dan layanan modern.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Request Demo</a>
+        <a href="#features" class="btn-outline">Pelajari Lebih Lanjut</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="robot-sphere"></div>
+      <div class="robot-lights"></div>
     </div>
   </section>
 
   <section id="features" class="features">
-    <h3>Platform capabilities</h3>
+    <h2>Teknologi Kami</h2>
+    <p>Platform modular yang mengintegrasikan AI, sensor, dan edge computing.</p>
     <div class="features-grid">
-      <div class="feature-card"><h4>Simulate & Iterate</h4><p>High-fidelity physics simulation.</p></div>
-      <div class="feature-card"><h4>Enterprise Security</h4><p>Encrypted communication & audit logs.</p></div>
-      <div class="feature-card"><h4>Production-ready</h4><p>CI/CD for robot apps and OTA updates.</p></div>
+      <div class="feature-card">
+        <h3>Simulasi Real-Time</h3>
+        <p>Gunakan simulasi fisika presisi tinggi untuk menguji robot sebelum deployment.</p>
+      </div>
+      <div class="feature-card">
+        <h3>AI Adaptif</h3>
+        <p>Model pembelajaran mesin yang beradaptasi dengan kondisi dunia nyata.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Fleksibilitas Industri</h3>
+        <p>Dari manufaktur, keamanan, hingga riset — siap diintegrasikan di semua sektor.</p>
+      </div>
     </div>
   </section>
 
+  <section id="pricing" class="pricing">
+    <h2>Paket yang Fleksibel</h2>
+    <p>Skalakan bisnis robotikmu dengan paket yang transparan dan terukur.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>Starter</h3>
+        <p class="price">Gratis</p>
+        <ul>
+          <li>1 Robot aktif</li>
+          <li>Simulasi dasar</li>
+          <li>Support komunitas</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <h3>Pro</h3>
+        <p class="price">$499/bulan</p>
+        <ul>
+          <li>25 Robot aktif</li>
+          <li>Integrasi AI penuh</li>
+          <li>Support premium</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <h3>Enterprise</h3>
+        <p class="price">Kustom</p>
+        <ul>
+          <li>Robot tak terbatas</li>
+          <li>Keamanan & analitik penuh</li>
+          <li>Dedicated support team</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <h2>Tentang KinetiX Robotics</h2>
+    <p>
+      Kami adalah startup teknologi yang fokus pada pengembangan AI otonom dan robot industri masa depan.
+      Misi kami: mempercepat transisi dunia menuju kolaborasi manusia dan mesin yang lebih cerdas.
+    </p>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Hubungi Kami</h2>
+    <form>
+      <input type="text" placeholder="Nama Lengkap" required />
+      <input type="email" placeholder="Email Perusahaan" required />
+      <textarea placeholder="Pesan kamu..." rows="4"></textarea>
+      <button class="btn-primary">Kirim Pesan</button>
+    </form>
+  </section>
+
   <footer class="footer">
-    <p>© 2025 KinetiX Robotics — All rights reserved</p>
+    <p>© 2025 KinetiX Robotics — All Rights Reserved</p>
+    <div class="socials">
+      <a href="#">LinkedIn</a>
+      <a href="#">GitHub</a>
+      <a href="#">Twitter</a>
+    </div>
   </footer>
 </body>
 </html>
