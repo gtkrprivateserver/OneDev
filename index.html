@@ -1,35 +1,34 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KinetiX Robotics — The Future of Intelligent Machines</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ONEDEV — Future of Robotics & AI</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="navbar" id="navbar">
-    <div class="logo">🤖 KinetiX<span> Robotics</span></div>
+    <div class="logo">🤖 ONE<span>DEV</span></div>
     <nav>
-      <a href="#home">Home</a>
-      <a href="#features">Features</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <a href="index.html" class="active">Home</a>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
     </nav>
     <button class="btn-primary">Get Started</button>
   </header>
 
-  <section id="home" class="hero fade-in">
+  <section class="hero fade-in">
     <div class="hero-content">
-      <h1>Masa Depan <span class="accent">Robotika</span> Dimulai Di Sini</h1>
+      <h1>Masa Depan <span class="accent">Teknologi & Robotika</span></h1>
       <p>
-        Sistem robot otonom berbasis AI yang beradaptasi, belajar, dan membantu manusia
-        mencapai efisiensi industri yang belum pernah ada sebelumnya.
+        ONEDEV menghadirkan kecerdasan buatan dan robot otonom untuk mendukung
+        industri masa depan dengan efisiensi, kecepatan, dan presisi tinggi.
       </p>
       <div class="hero-actions">
-        <a href="#contact" class="btn-primary">Request Demo</a>
-        <a href="#features" class="btn-outline">Pelajari Lebih Lanjut</a>
+        <a href="features.html" class="btn-primary">Jelajahi Teknologi</a>
+        <a href="contact.html" class="btn-outline">Hubungi Kami</a>
       </div>
     </div>
     <div class="hero-visual">
@@ -38,106 +37,16 @@
     </div>
   </section>
 
-  <section id="features" class="features fade-in">
-    <h2>Teknologi Kami</h2>
-    <p>Platform modular yang mengintegrasikan AI, sensor, dan edge computing.</p>
-    <div class="features-grid">
-      <div class="feature-card">
-        <h3>Simulasi Real-Time</h3>
-        <p>Uji performa robot dengan lingkungan fisik digital berakurasi tinggi.</p>
-      </div>
-      <div class="feature-card">
-        <h3>AI Adaptif</h3>
-        <p>Robot belajar dari pengalaman untuk meningkatkan efisiensi tugas.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Fleksibilitas Industri</h3>
-        <p>Solusi robotik siap pakai untuk pabrik, riset, dan keamanan.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="pricing" class="pricing fade-in">
-    <h2>Paket Fleksibel</h2>
-    <p>Skalakan bisnis robotikmu dengan paket terjangkau & transparan.</p>
-    <div class="pricing-grid">
-      <div class="pricing-card">
-        <h3>Starter</h3>
-        <p class="price">Gratis</p>
-        <ul>
-          <li>1 Robot aktif</li>
-          <li>Simulasi dasar</li>
-          <li>Support komunitas</li>
-        </ul>
-      </div>
-      <div class="pricing-card featured">
-        <h3>Pro</h3>
-        <p class="price">$499/bulan</p>
-        <ul>
-          <li>25 Robot aktif</li>
-          <li>Integrasi AI penuh</li>
-          <li>Support prioritas</li>
-        </ul>
-      </div>
-      <div class="pricing-card">
-        <h3>Enterprise</h3>
-        <p class="price">Kustom</p>
-        <ul>
-          <li>Robot tak terbatas</li>
-          <li>Keamanan & analitik</li>
-          <li>Dedicated support</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section id="about" class="about fade-in">
-    <h2>Tentang KinetiX Robotics</h2>
-    <p>
-      KinetiX adalah startup global yang berfokus pada masa depan robotika otonom.
-      Kami menggabungkan AI generatif dengan rekayasa robotik untuk membangun masa depan
-      yang kolaboratif antara manusia dan mesin.
-    </p>
-  </section>
-
-  <section id="contact" class="contact fade-in">
-    <h2>Hubungi Kami</h2>
-    <form>
-      <input type="text" placeholder="Nama Lengkap" required />
-      <input type="email" placeholder="Email Perusahaan" required />
-      <textarea placeholder="Pesan kamu..." rows="4"></textarea>
-      <button class="btn-primary">Kirim Pesan</button>
-    </form>
-  </section>
-
   <footer class="footer">
-    <p>© 2025 KinetiX Robotics — All Rights Reserved</p>
-    <div class="socials">
-      <a href="#">LinkedIn</a>
-      <a href="#">GitHub</a>
-      <a href="#">Twitter</a>
-    </div>
+    <p>© 2025 ONEDEV — All Rights Reserved</p>
   </footer>
 
   <script>
-    // Navbar scroll effect
     window.addEventListener('scroll', () => {
       const nav = document.getElementById('navbar');
-      if (window.scrollY > 50) {
-        nav.classList.add('scrolled');
-      } else {
-        nav.classList.remove('scrolled');
-      }
+      if (window.scrollY > 50) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
     });
-
-    // Fade-in on scroll
-    const fadeEls = document.querySelectorAll('.fade-in');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: 0.2 });
-    fadeEls.forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
