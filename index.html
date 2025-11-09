@@ -3,33 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ONEDEV — Future of Robotics & AI</title>
+  <title>ONEDEV - Inovasi Robotik Masa Depan</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="navbar" id="navbar">
-    <div class="logo">🤖 ONE<span>DEV</span></div>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">ONE<span>DEV</span></div>
     <nav>
-      <a href="index.html" class="active">Home</a>
-      <a href="features.html">Features</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+      <a href="index.html">Beranda</a>
+      <a href="about.html">Tentang</a>
+      <a href="services.html">Layanan</a>
+      <a href="contact.html">Kontak</a>
     </nav>
-    <button class="btn-primary">Get Started</button>
   </header>
 
-  <section class="hero fade-in">
-    <div class="hero-content">
-      <h1>Masa Depan <span class="accent">Teknologi & Robotika</span></h1>
-      <p>
-        ONEDEV menghadirkan kecerdasan buatan dan robot otonom untuk mendukung
-        industri masa depan dengan efisiensi, kecepatan, dan presisi tinggi.
-      </p>
-      <div class="hero-actions">
-        <a href="features.html" class="btn-primary">Jelajahi Teknologi</a>
-        <a href="contact.html" class="btn-outline">Hubungi Kami</a>
-      </div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content fade-in">
+      <h1>Revolusi Robotik oleh <span class="accent">ONEDEV</span></h1>
+      <p>Kami menghadirkan teknologi AI dan robotik canggih untuk membentuk masa depan yang lebih efisien, aman, dan cerdas.</p>
+      <a href="about.html" class="btn-primary">Jelajahi</a>
+      <a href="contact.html" class="btn-outline">Hubungi Kami</a>
     </div>
     <div class="hero-visual">
       <div class="robot-sphere"></div>
@@ -37,16 +33,39 @@
     </div>
   </section>
 
+  <!-- FEATURES -->
+  <section class="features fade-in">
+    <h2>Keunggulan Teknologi Kami</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3>AI Otomatis</h3>
+        <p>Robot pintar kami dilengkapi sistem pembelajaran mesin untuk meningkatkan performa setiap saat.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Presisi Tinggi</h3>
+        <p>Setiap unit dirancang dengan akurasi mikron untuk hasil terbaik di industri modern.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Keamanan Canggih</h3>
+        <p>Sistem deteksi dan respons cepat menjamin operasi yang aman dan stabil.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer class="footer">
-    <p>© 2025 ONEDEV — All Rights Reserved</p>
+    <p>© 2025 ONEDEV. Semua hak dilindungi.</p>
   </footer>
 
   <script>
-    window.addEventListener('scroll', () => {
-      const nav = document.getElementById('navbar');
-      if (window.scrollY > 50) nav.classList.add('scrolled');
-      else nav.classList.remove('scrolled');
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
     });
+    fadeEls.forEach(el => observer.observe(el));
   </script>
+
 </body>
 </html>
