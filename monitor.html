@@ -6,17 +6,17 @@
   <title>ONEDEV - Monitor Bot</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* SIDEBAR & MENU BTN */
+    /* SIDEBAR */
     .sidebar {
       position: fixed;
-      left: 0;
       top: 0;
+      left: 0;
       width: 250px;
       height: 100%;
       background: #050510;
       transform: translateX(-100%);
       transition: transform 0.3s ease;
-      z-index: 200;
+      z-index: 999; /* pastikan paling atas */
       padding-top: 2rem;
     }
 
@@ -24,33 +24,36 @@
       transform: translateX(0);
     }
 
+    /* MENU BUTTON */
     .menu-btn {
-      position: relative;
-      z-index: 300; /* di atas konten */
+      position: fixed; /* tetap di layar */
+      top: 1rem;
+      left: 1rem;
       font-size: 1.5rem;
       background: none;
       border: none;
       color: #00b4d8;
       cursor: pointer;
-      margin-right: 1rem;
+      z-index: 1000; /* lebih tinggi dari sidebar */
     }
 
     /* MAIN CONTENT */
     .main-content {
       margin-left: 0;
       transition: margin-left 0.3s ease;
+      padding: 2rem 5%;
     }
+
     .sidebar.active ~ .main-content {
       margin-left: 250px;
     }
 
-    /* Bot Card Grid */
+    /* BOT GRID */
     .monitor-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1.5rem;
       margin-top: 50px;
-      padding: 0 10px;
     }
 
     .monitor-card {
@@ -59,8 +62,8 @@
       border-radius: 12px;
       padding: 1.5rem;
       text-align: center;
-      transition: 0.3s;
       min-height: 120px;
+      transition: 0.3s;
     }
     .monitor-card.online {
       border-color: #00ff85;
@@ -87,7 +90,7 @@
 </head>
 <body>
   <!-- SIDEBAR -->
-  <aside class="sidebar">
+  <aside class="sidebar" id="sidebar">
     <h2 class="logo">ONE<span>DEV</span></h2>
     <nav>
       <a href="index.html">🏠 Home</a>
@@ -99,14 +102,16 @@
     <footer>© 2025 ONEDEV</footer>
   </aside>
 
+  <!-- MENU BUTTON -->
+  <button class="menu-btn" id="menuBtn">☰</button>
+
   <!-- MAIN CONTENT -->
   <div class="main-content">
-    <header style="display:flex; align-items:center; padding:1rem 5%;">
-      <button class="menu-btn">☰</button>
+    <header>
       <h1>System Monitor Bot</h1>
     </header>
 
-    <section style="text-align:center; margin-top:50px; padding:0 10px;">
+    <section style="text-align:center; margin-top:50px;">
       <h2 style="font-size:2em; color:#00b4d8;">Monitor Status Discord Bot 🚀</h2>
       <p style="margin-top:20px; color:#ccc; font-size:1.1em;">
         Status bot realtime: <br>
@@ -115,21 +120,20 @@
         <span style="color:#ffb300;">Disconnected ❌</span>
       </p>
 
-      <!-- Monitor Grid -->
       <div class="monitor-grid" id="monitorGrid"></div>
     </section>
   </div>
 
   <script>
     // Toggle sidebar
-    const menuBtn = document.querySelector('.menu-btn');
-    const sidebar = document.querySelector('.sidebar');
+    const menuBtn = document.getElementById('menuBtn');
+    const sidebar = document.getElementById('sidebar');
 
     menuBtn.addEventListener('click', () => {
       sidebar.classList.toggle('active');
     });
 
-    // List bot
+    // Daftar bot
     const bots = [
       { name: "Main Bot", id: "BOT_ID_1" },
       { name: "Helper Bot", id: "BOT_ID_2" },
@@ -137,6 +141,8 @@
       { name: "Fun Bot", id: "BOT_ID_4" },
       { name: "Moderation Bot", id: "BOT_ID_5" }
     ];
+
+    const monitorGrid = document.getElementById("monitorGrid");
 
     function createCard(bot) {
       const div = document.createElement("div");
@@ -181,7 +187,6 @@
       }
     }
 
-    // Refresh status setiap 10 detik
     updateBotStatus();
     setInterval(updateBotStatus, 10000);
   </script>
