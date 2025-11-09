@@ -6,52 +6,69 @@
   <title>ONEDEV - Coming Soon</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    <!-- Countdown Timer -->
-<div class="countdown" id="countdown">
-  <div class="countdown-item"><span id="days">0</span>Days</div>
-  <div class="countdown-item"><span id="hours">0</span>Hours</div>
-  <div class="countdown-item"><span id="minutes">0</span>Minutes</div>
-  <div class="countdown-item"><span id="seconds">0</span>Seconds</div>
-</div>
+    /* Countdown timer styling */
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+      font-size: 2em;
+      color: #00b4d8;
+      font-weight: bold;
+      flex-wrap: wrap;
+    }
 
-<style>
-.countdown {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 30px;
-  font-size: 2em;
-  color: #00b4d8;
-  font-weight: bold;
-  flex-wrap: wrap;
-}
+    .countdown-item {
+      text-align: center;
+      min-width: 60px; /* pastikan semua kotak cukup lebar */
+    }
 
-.countdown-item {
-  text-align: center;
-  min-width: 60px; /* pastikan semua kotak cukup lebar */
-}
+    .countdown-item span {
+      display: block;
+      font-size: 1.2em;
+      color: #00b4d8;
+      margin-bottom: 5px;
+    }
 
-.countdown-item span {
-  display: block;
-  font-size: 1.2em;
-  color: #00b4d8;
-  margin-bottom: 5px;
-}
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      section h2 {
+        font-size: 1.7em;
+      }
+      section p {
+        font-size: 1em;
+      }
+      .countdown {
+        font-size: 1.5em;
+        gap: 10px;
+      }
+      .countdown-item {
+        min-width: 50px;
+      }
+      .countdown-item span {
+        font-size: 1em;
+      }
+    }
 
-/* Responsif */
-@media (max-width: 480px) {
-  .countdown {
-    font-size: 1.5em;
-    gap: 10px;
-  }
-  .countdown-item {
-    min-width: 50px;
-  }
-  .countdown-item span {
-    font-size: 1em;
-  }
-}
-</style>
+    @media (max-width: 480px) {
+      section h2 {
+        font-size: 1.4em;
+      }
+      section p {
+        font-size: 0.95em;
+      }
+      .countdown {
+        font-size: 1.2em;
+        gap: 8px;
+      }
+      .countdown-item {
+        min-width: 45px;
+      }
+      .countdown-item span {
+        font-size: 0.95em;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- SIDEBAR -->
@@ -85,17 +102,17 @@
 
       <!-- Countdown Timer -->
       <div class="countdown" id="countdown">
-        <div><span id="days">0</span>Days</div>
-        <div><span id="hours">0</span>Hours</div>
-        <div><span id="minutes">0</span>Minutes</div>
-        <div><span id="seconds">0</span>Seconds</div>
+        <div class="countdown-item"><span id="days">0</span>Days</div>
+        <div class="countdown-item"><span id="hours">0</span>Hours</div>
+        <div class="countdown-item"><span id="minutes">0</span>Minutes</div>
+        <div class="countdown-item"><span id="seconds">0</span>Seconds</div>
       </div>
     </section>
   </div>
 
   <script src="script.js"></script>
   <script>
-    // Set tanggal rilis Countdown
+    // Set tanggal rilis Countdown (ubah sesuai jadwal)
     const launchDate = new Date("Dec 31, 2025 00:00:00").getTime();
 
     const countdownTimer = setInterval(() => {
