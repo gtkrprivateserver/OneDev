@@ -1,40 +1,46 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Layanan ONEDEV</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <aside class="sidebar open">
-    <div class="sidebar-logo">ONE<span>DEV</span></div>
+  <aside class="sidebar">
+    <h2 class="logo">ONE<span>DEV</span></h2>
     <nav>
-      <a href="index.html">Beranda</a>
-      <a href="about.html">Tentang</a>
-      <a href="services.html" class="active">Layanan</a>
-      <a href="contact.html">Kontak</a>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html" class="active">Services</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </aside>
 
-  <main class="content">
-    <section class="page fade-in">
+  <div class="main-content">
+    <header>
+      <button class="menu-btn">☰</button>
       <h1>Layanan Kami</h1>
+    </header>
+
+    <section>
       <div class="features-grid">
         <div class="feature-card">
-          <h3>Pengembangan Robotik</h3>
-          <p>Robot industri & personal dengan sistem AI adaptif.</p>
+          <h3>AI Automation</h3>
+          <p>Otomatisasi cerdas dengan teknologi kecerdasan buatan terkini.</p>
         </div>
         <div class="feature-card">
-          <h3>Integrasi Otomasi</h3>
-          <p>Sistem otomatisasi untuk bisnis & pabrik pintar.</p>
+          <h3>Robotics</h3>
+          <p>Robotika presisi tinggi untuk industri modern dan riset.</p>
         </div>
         <div class="feature-card">
-          <h3>Konsultasi AI</h3>
-          <p>Strategi & implementasi kecerdasan buatan di berbagai sektor.</p>
+          <h3>Data Solutions</h3>
+          <p>Manajemen data berbasis cloud dan pembelajaran mesin.</p>
         </div>
       </div>
     </section>
-  </main>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
