@@ -6,35 +6,42 @@
   <title>ONEDEV - Monitor Bot</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* SIDEBAR */
-    .sidebar {
-      position: fixed;
+    /* MENU BUTTON & HEADER */
+    header {
+      display: flex;
+      align-items: center;
+      padding: 1rem 5%;
+      position: sticky;
       top: 0;
-      left: 0;
-      width: 250px;
-      height: 100%;
-      background: #050510;
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
-      z-index: 999; /* pastikan paling atas */
-      padding-top: 2rem;
+      background: rgba(0,0,0,0.8);
+      z-index: 1000;
+      backdrop-filter: blur(10px);
     }
 
-    .sidebar.active {
-      transform: translateX(0);
-    }
-
-    /* MENU BUTTON */
     .menu-btn {
-      position: fixed; /* tetap di layar */
-      top: 1rem;
-      left: 1rem;
       font-size: 1.5rem;
       background: none;
       border: none;
       color: #00b4d8;
       cursor: pointer;
-      z-index: 1000; /* lebih tinggi dari sidebar */
+      margin-right: 1rem;
+      z-index: 1001;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 250px;
+      height: 100%;
+      background: #050510;
+      padding-top: 2rem;
+      transition: left 0.3s ease;
+      z-index: 999;
+    }
+    .sidebar.active {
+      left: 0;
     }
 
     /* MAIN CONTENT */
@@ -43,9 +50,10 @@
       transition: margin-left 0.3s ease;
       padding: 2rem 5%;
     }
-
-    .sidebar.active ~ .main-content {
-      margin-left: 250px;
+    @media(min-width: 768px) {
+      .sidebar.active ~ .main-content {
+        margin-left: 250px;
+      }
     }
 
     /* BOT GRID */
@@ -55,7 +63,6 @@
       gap: 1.5rem;
       margin-top: 50px;
     }
-
     .monitor-card {
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.1);
@@ -102,12 +109,10 @@
     <footer>© 2025 ONEDEV</footer>
   </aside>
 
-  <!-- MENU BUTTON -->
-  <button class="menu-btn" id="menuBtn">☰</button>
-
   <!-- MAIN CONTENT -->
   <div class="main-content">
     <header>
+      <button class="menu-btn" id="menuBtn">☰</button>
       <h1>System Monitor Bot</h1>
     </header>
 
