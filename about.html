@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ONEDEV — About</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="navbar" id="navbar">
+    <div class="logo">🤖 ONE<span>DEV</span></div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="about.html" class="active">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <button class="btn-primary">Get Started</button>
+  </header>
+
+  <section class="about fade-in">
+    <h2>Tentang ONEDEV</h2>
+    <p>
+      ONEDEV adalah startup teknologi yang berfokus pada inovasi robotik dan kecerdasan buatan.
+      Kami menciptakan solusi otonom yang membantu bisnis bertransformasi dengan efisiensi, presisi,
+      dan keamanan tingkat tinggi.
+    </p>
+  </section>
+
+  <footer class="footer">
+    <p>© 2025 ONEDEV — All Rights Reserved</p>
+  </footer>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      if (window.scrollY > 50) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    });
+  </script>
+</body>
+</html>
