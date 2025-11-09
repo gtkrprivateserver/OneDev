@@ -28,11 +28,12 @@
       margin-bottom: 5px;
     }
 
-    /* Status Bot */
+    /* Bot Status */
     .bot-status {
       margin-top: 40px;
       font-size: 1.2em;
       color: #ccc;
+      transition: all 0.3s;
     }
     .bot-status span {
       font-weight: bold;
@@ -118,7 +119,7 @@
 
       <!-- Bot Status -->
       <div class="bot-status offline" id="botStatus">
-        Status Bot: <span>Offline</span>
+        Status Bot: <span>Loading...</span>
       </div>
     </section>
   </div>
@@ -149,25 +150,33 @@
     }, 1000);
 
     // ===========================
-    // Bot Status (Simulasi)
+    // Fetch Bot Status via Discord API (Backend)
     // ===========================
-    // Nantinya bisa dihubungkan ke API Discord
-    function simulateBotStatus() {
+    async function fetchBotStatus() {
       const botStatus = document.getElementById("botStatus");
-      // Simulasi online/offline bergantian setiap 5 detik
-      setInterval(() => {
-        if (botStatus.classList.contains("offline")) {
+      try {
+        const res = await fetch("/bot-status"); // Pastikan backend /bot-status berjalan
+        const data = await res.json();
+
+        if (data.status === "online") {
           botStatus.classList.remove("offline");
           botStatus.classList.add("online");
-          botStatus.innerHTML = 'Status Bot: <span>Online ✅</span>';
+          botStatus.innerHTML = `Status Bot: <span>Online ✅</span>`;
         } else {
           botStatus.classList.remove("online");
           botStatus.classList.add("offline");
-          botStatus.innerHTML = 'Status Bot: <span>Offline ❌</span>';
+          botStatus.innerHTML = `Status Bot: <span>Offline ❌</span>`;
         }
-      }, 5000);
+      } catch (error) {
+        botStatus.classList.remove("online");
+        botStatus.classList.add("offline");
+        botStatus.innerHTML = `Status Bot: <span>Offline ❌</span>`;
+      }
     }
-    simulateBotStatus();
+
+    // Refresh status setiap 10 detik
+    fetchBotStatus();
+    setInterval(fetchBotStatus, 10000);
   </script>
 </body>
 </html>
