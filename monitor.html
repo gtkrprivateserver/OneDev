@@ -3,19 +3,82 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ONEDEV - Monitor Bot Dashboard</title>
+  <title>ONEDEV - Coming Soon</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="monitor.css"> <!-- style khusus monitor -->
+  <style>
+    /* Countdown timer styling */
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+      font-size: 2em;
+      color: #00b4d8;
+      font-weight: bold;
+      flex-wrap: wrap;
+    }
+
+    .countdown-item {
+      text-align: center;
+      min-width: 60px; /* pastikan semua kotak cukup lebar */
+    }
+
+    .countdown-item span {
+      display: block;
+      font-size: 1.2em;
+      color: #00b4d8;
+      margin-bottom: 5px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      section h2 {
+        font-size: 1.7em;
+      }
+      section p {
+        font-size: 1em;
+      }
+      .countdown {
+        font-size: 1.5em;
+        gap: 10px;
+      }
+      .countdown-item {
+        min-width: 50px;
+      }
+      .countdown-item span {
+        font-size: 1em;
+      }
+    }
+
+    @media (max-width: 480px) {
+      section h2 {
+        font-size: 1.4em;
+      }
+      section p {
+        font-size: 0.95em;
+      }
+      .countdown {
+        font-size: 1.2em;
+        gap: 8px;
+      }
+      .countdown-item {
+        min-width: 45px;
+      }
+      .countdown-item span {
+        font-size: 0.95em;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- SIDEBAR -->
-  <aside class="sidebar" id="sidebar">
+  <aside class="sidebar">
     <h2 class="logo">ONE<span>DEV</span></h2>
     <nav>
       <a href="index.html">🏠 Home</a>
+      <a href="monitor.html" class="active">⏳ Monitor</a>
       <a href="about.html">💡 About</a>
       <a href="services.html">⚙️ Services</a>
-      <a href="monitor.html" class="active">⏳ Monitor</a>
       <a href="contact.html">📩 Contact</a>
     </nav>
     <footer>© 2025 ONEDEV</footer>
@@ -25,89 +88,52 @@
   <div class="main-content">
     <header>
       <div class="header-left">
-        <button class="menu-btn" id="menuBtn">☰</button>
-        <h1>Monitor Bot Dashboard</h1>
+        <button class="menu-btn">☰</button>
+        <h1>Monitor Bot</h1>
       </div>
     </header>
 
-    <section class="monitor-section">
-      <h2>Realtime Status Discord Bot 🚀</h2>
-      <p>
-        Status bot realtime: 
-        <span class="status-online">Online ✅</span> | 
-        <span class="status-offline">Offline ❌</span> | 
-        <span class="status-disconnected">Disconnected ⚠️</span>
+    <section style="text-align:center; margin-top:80px; padding: 0 10px;">
+      <h2 style="font-size:2em; color:#00b4d8;">Coming Soon 🚀</h2>
+      <p style="margin-top:20px; color:#ccc; font-size:1.1em;">
+        Kami sedang dalam pengembangan.<br>
+        Silakan kunjungi kembali nanti!
       </p>
 
-      <div class="monitor-grid" id="monitorGrid"></div>
+      <!-- Countdown Timer -->
+      <div class="countdown" id="countdown">
+        <div class="countdown-item"><span id="days">0</span>Days</div>
+        <div class="countdown-item"><span id="hours">0</span>Hours</div>
+        <div class="countdown-item"><span id="minutes">0</span>Minutes</div>
+        <div class="countdown-item"><span id="seconds">0</span>Seconds</div>
+      </div>
     </section>
   </div>
 
+  <script src="script.js"></script>
   <script>
-    // Toggle sidebar
-    const menuBtn = document.getElementById('menuBtn');
-    const sidebar = document.getElementById('sidebar');
-    menuBtn.addEventListener('click', () => {
-      sidebar.classList.toggle('active');
-    });
+    // Set tanggal rilis Countdown (ubah sesuai jadwal)
+    const launchDate = new Date("Dec 31, 2025 00:00:00").getTime();
 
-    // Daftar bot contoh
-    const bots = [
-      { name: "Main Bot", id: "BOT_1" },
-      { name: "Helper Bot", id: "BOT_2" },
-      { name: "Music Bot", id: "BOT_3" },
-      { name: "Fun Bot", id: "BOT_4" },
-      { name: "Moderation Bot", id: "BOT_5" }
-    ];
+    const countdownTimer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = launchDate - now;
 
-    const monitorGrid = document.getElementById("monitorGrid");
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    function createCard(bot) {
-      const div = document.createElement("div");
-      div.classList.add("monitor-card", "disconnected");
-      div.innerHTML = `
-        <h3>${bot.name}</h3>
-        <p>Status: <span>Disconnected ⚠️</span></p>
-      `;
-      return div;
-    }
+      document.getElementById("days").innerText = days;
+      document.getElementById("hours").innerText = hours;
+      document.getElementById("minutes").innerText = minutes;
+      document.getElementById("seconds").innerText = seconds;
 
-    bots.forEach(bot => monitorGrid.appendChild(createCard(bot)));
-
-    // Update status realtime
-    async function updateBotStatus() {
-      try {
-        const res = await fetch("/bot-status");
-        const data = await res.json();
-
-        const cards = document.querySelectorAll(".monitor-card");
-        cards.forEach((card, i) => {
-          const botData = data[i];
-          card.classList.remove("online","offline","disconnected");
-
-          if(!botData) {
-            card.classList.add("disconnected");
-            card.querySelector("p span").innerText = "Disconnected ⚠️";
-          } else if(botData.status === "online") {
-            card.classList.add("online");
-            card.querySelector("p span").innerText = "Online ✅";
-          } else {
-            card.classList.add("offline");
-            card.querySelector("p span").innerText = "Offline ❌";
-          }
-        });
-      } catch (err) {
-        const cards = document.querySelectorAll(".monitor-card");
-        cards.forEach(card => {
-          card.classList.remove("online","offline");
-          card.classList.add("disconnected");
-          card.querySelector("p span").innerText = "Disconnected ⚠️";
-        });
+      if (distance < 0) {
+        clearInterval(countdownTimer);
+        document.getElementById("countdown").innerHTML = "<h3>🚀 Bot Telah Tersedia!</h3>";
       }
-    }
-
-    updateBotStatus();
-    setInterval(updateBotStatus, 10000);
+    }, 1000);
   </script>
 </body>
 </html>
