@@ -1,114 +1,37 @@
-/* HEADER */
+/* HEADER FIX UNTUK MONITOR.HTML */
 header {
-  display: flex; 
-  align-items: center; 
-  padding: 1.5rem 5%; 
-  position: fixed; 
-  width: 100%; 
-  top:0; 
-  z-index:1000; 
-  background: rgba(0,0,0,0.75); 
-  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: flex-start; /* tombol di kiri */
+  align-items: center;
+  padding: 1.5rem 5%;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(10px);
 }
 
-.header-left { display: flex; align-items: center; gap: 1rem; }
+.header-left {
+  display: flex;
+  align-items: center;
+}
 
 .menu-btn {
-  font-size: 1.7rem; 
-  background:none; 
-  border:none; 
-  color:#00b4d8; 
-  cursor:pointer; 
-  z-index:1001; 
-  transition:0.3s;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: #00b4d8;
+  cursor: pointer;
+  margin-right: 1rem; /* beri jarak dengan h1 */
+  z-index: 1001;      /* tombol selalu di atas h1 */
 }
 
-.header-left h1 { 
-  font-size:2rem; 
-  color:#00ffea; 
-  margin:0; 
-  text-shadow:0 0 10px #00b4d8; 
+.header-left h1 {
+  font-size: 1.8rem;
+  color: #fff;
+  margin: 0;
+  white-space: nowrap; /* jangan pecah ke baris baru */
+  overflow: hidden;    /* potong jika terlalu panjang */
+  text-overflow: ellipsis;
 }
-
-/* MONITOR SECTION */
-.monitor-section { text-align:center; margin-top:6rem; }
-.monitor-section h2 { font-size:2em; color:#00ffea; text-shadow:0 0 8px #00b4d8; }
-.monitor-section p { margin-top:10px; color:#ccc; font-size:1.1em; }
-
-/* MONITOR GRID */
-.monitor-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:1.5rem;
-  margin-top:30px;
-}
-
-.monitor-card {
-  background: rgba(0,0,0,0.6);
-  border:2px solid rgba(0,183,255,0.2);
-  border-radius:15px;
-  padding:1.5rem;
-  text-align:center;
-  min-height:140px;
-  transition: all 0.5s ease;
-  color:#fff;
-  backdrop-filter:blur(10px);
-  position: relative;
-}
-
-.monitor-card h3 {
-  font-size:1.3em;
-  color:#00ffea;
-  margin-bottom:10px;
-  text-shadow:0 0 5px #00b4d8;
-}
-
-.monitor-card p { font-size:1em; color:#ccc; margin:5px 0; }
-
-.monitor-card .details {
-  display:none;
-  font-size:0.9em;
-  margin-top:8px;
-  color:#aaa;
-}
-
-/* STATUS STYLING */
-.monitor-card.online {
-  border-color:#00ff85;
-  box-shadow: 0 0 25px #00ff85, 0 0 50px rgba(0,255,133,0.2);
-  animation: glowGreen 1.5s infinite alternate;
-}
-
-.monitor-card.offline {
-  border-color:#ff4c4c;
-  box-shadow: 0 0 25px #ff4c4c, 0 0 50px rgba(255,76,76,0.2);
-  animation: glowRed 1.5s infinite alternate;
-}
-
-.monitor-card.disconnected {
-  border-color:#ffb300;
-  box-shadow: 0 0 25px #ffb300, 0 0 50px rgba(255,179,0,0.2);
-  animation: glowYellow 1.5s infinite alternate;
-}
-
-/* Glow animations */
-@keyframes glowGreen {
-  0% { box-shadow: 0 0 15px #00ff85, 0 0 30px rgba(0,255,133,0.2);}
-  100% { box-shadow: 0 0 25px #00ff85, 0 0 50px rgba(0,255,133,0.4);}
-}
-@keyframes glowRed {
-  0% { box-shadow: 0 0 15px #ff4c4c, 0 0 30px rgba(255,76,76,0.2);}
-  100% { box-shadow: 0 0 25px #ff4c4c, 0 0 50px rgba(255,76,76,0.4);}
-}
-@keyframes glowYellow {
-  0% { box-shadow: 0 0 15px #ffb300, 0 0 30px rgba(255,179,0,0.2);}
-  100% { box-shadow: 0 0 25px #ffb300, 0 0 50px rgba(255,179,0,0.4);}
-}
-
-/* HOVER DETAILS */
-.monitor-card:hover .details { display:block; }
-
-@media(max-width:768px){
-  .header-left h1{font-size:1.5rem;}
-  .monitor-grid{grid-template-columns:repeat(auto-fit,minmax(160px,1fr));}
-                   }
