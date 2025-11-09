@@ -3,18 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ONEDEV - System Monitor Bot</title>
+  <title>ONEDEV - Monitor Bot</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* Monitor Grid */
+    /* Flex container untuk bot card */
     .monitor-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      display: flex;
+      flex-wrap: nowrap; /* tetap sejajar */
+      overflow-x: auto;   /* scroll horizontal jika layar sempit */
       gap: 1.5rem;
       margin-top: 50px;
       padding: 0 10px;
     }
+
+    /* Card Bot */
     .monitor-card {
+      flex: 0 0 250px; /* lebar tetap */
+      min-height: 120px;
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 12px;
@@ -22,6 +27,7 @@
       text-align: center;
       transition: 0.3s;
     }
+
     .monitor-card.online {
       border-color: #00ff85;
       box-shadow: 0 0 20px rgba(0,255,133,0.2);
@@ -30,6 +36,11 @@
       border-color: #ff4c4c;
       box-shadow: 0 0 20px rgba(255,76,76,0.2);
     }
+    .monitor-card.disconnected {
+      border-color: #ffb300;
+      box-shadow: 0 0 20px rgba(255,179,0,0.2);
+    }
+
     .monitor-card h3 {
       margin-bottom: 10px;
       font-size: 1.3em;
@@ -38,6 +49,25 @@
     .monitor-card p {
       color: #ccc;
       font-size: 1em;
+    }
+
+    /* Scroll bar styling */
+    .monitor-grid::-webkit-scrollbar {
+      height: 8px;
+    }
+    .monitor-grid::-webkit-scrollbar-thumb {
+      background: rgba(0,183,255,0.5);
+      border-radius: 4px;
+    }
+    .monitor-grid::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.02);
+    }
+
+    /* Responsive mobile: biar tetap scroll horizontal */
+    @media (max-width: 600px) {
+      .monitor-grid {
+        flex-wrap: nowrap;
+      }
     }
   </style>
 </head>
@@ -67,8 +97,10 @@
     <section style="text-align:center; margin-top:50px; padding:0 10px;">
       <h2 style="font-size:2em; color:#00b4d8;">Monitor Status Discord Bot 🚀</h2>
       <p style="margin-top:20px; color:#ccc; font-size:1.1em;">
-        Halaman ini menampilkan status realtime bot Discord.<br>
-        Mirip seperti UptimeRobot!
+        Status bot realtime: <br>
+        <span style="color:#00ff85;">Online ✅</span>, 
+        <span style="color:#ff4c4c;">Offline ❌</span>, 
+        <span style="color:#ffb300;">Disconnected ❌</span>
       </p>
 
       <!-- Monitor Grid -->
@@ -79,34 +111,64 @@
   <script>
     const monitorGrid = document.getElementById("monitorGrid");
 
-    // Render card awal
-    function renderBots(bots) {
-      monitorGrid.innerHTML = "";
-      bots.forEach(bot => {
-        const card = document.createElement("div");
-        card.classList.add("monitor-card", bot.status);
-        card.innerHTML = `
-          <h3>${bot.name}</h3>
-          <p>Status: <span>${bot.status === "online" ? "Online ✅" : "Offline ❌"}</span></p>
-        `;
-        monitorGrid.appendChild(card);
-      });
+    // Daftar bot
+    const bots = [
+      { name: "Main Bot", id: "BOT_ID_1" },
+      { name: "Helper Bot", id: "BOT_ID_2" },
+      { name: "Music Bot", id: "BOT_ID_3" },
+      { name: "Fun Bot", id: "BOT_ID_4" },
+      { name: "Moderation Bot", id: "BOT_ID_5" }
+    ];
+
+    // Membuat card awal sebagai disconnected
+    function createCard(bot) {
+      const div = document.createElement("div");
+      div.classList.add("monitor-card", "disconnected");
+      div.innerHTML = `
+        <h3>${bot.name}</h3>
+        <p>Status: <span>Disconnected ❌</span></p>
+      `;
+      return div;
     }
 
-    // Fetch status dari backend
-    async function fetchBotStatus() {
+    // Render card awal
+    bots.forEach(bot => monitorGrid.appendChild(createCard(bot)));
+
+    // Update status bot dari backend
+    async function updateBotStatus() {
       try {
         const res = await fetch("/bot-status");
         const data = await res.json();
-        renderBots(data);
-      } catch (error) {
-        console.error("Error fetching bot status", error);
+
+        const cards = document.querySelectorAll(".monitor-card");
+        cards.forEach((card, i) => {
+          const botData = data[i];
+          card.classList.remove("online","offline","disconnected");
+
+          if(!botData) {
+            card.classList.add("disconnected");
+            card.querySelector("p span").innerText = "Disconnected ❌";
+          } else if(botData.status === "online") {
+            card.classList.add("online");
+            card.querySelector("p span").innerText = "Online ✅";
+          } else {
+            card.classList.add("offline");
+            card.querySelector("p span").innerText = "Offline ❌";
+          }
+        });
+      } catch (err) {
+        const cards = document.querySelectorAll(".monitor-card");
+        cards.forEach(card => {
+          card.classList.remove("online","offline");
+          card.classList.add("disconnected");
+          card.querySelector("p span").innerText = "Disconnected ❌";
+        });
       }
     }
 
-    // Fetch pertama & interval setiap 10 detik
-    fetchBotStatus();
-    setInterval(fetchBotStatus, 10000);
+    // Refresh setiap 10 detik
+    updateBotStatus();
+    setInterval(updateBotStatus, 10000);
   </script>
 </body>
 </html>
