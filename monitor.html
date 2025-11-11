@@ -20,7 +20,7 @@
 
     .countdown-item {
       text-align: center;
-      min-width: 60px; /* pastikan semua kotak cukup lebar */
+      min-width: 60px;
     }
 
     .countdown-item span {
@@ -71,24 +71,10 @@
   </style>
 </head>
 <body>
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <h2 class="logo">ONE<span>DEV</span></h2>
-    <nav>
-      <a href="index.html">🏠 Home</a>
-      <a href="monitor.html" class="active">⏳ Monitor</a>
-      <a href="about.html">💡 About</a>
-      <a href="services.html">⚙️ Services</a>
-      <a href="contact.html">📩 Contact</a>
-    </nav>
-    <footer>© 2025 ONEDEV</footer>
-  </aside>
-
-  <!-- MAIN CONTENT -->
   <div class="main-content">
     <header>
       <div class="header-left">
-        <button class="menu-btn">☰</button>
+        <button id="menuBtn" class="menu-btn">☰</button>
         <h1>Monitor Bot</h1>
       </div>
     </header>
@@ -110,7 +96,9 @@
     </section>
   </div>
 
-  <script src="script.js"></script>
+  <!-- Sidebar otomatis dimasukkan oleh sidebar.js -->
+  <script src="sidebar.js"></script>
+
   <script>
     // Set tanggal rilis Countdown (ubah sesuai jadwal)
     const launchDate = new Date("Dec 31, 2025 00:00:00").getTime();
@@ -136,4 +124,4 @@
     }, 1000);
   </script>
 </body>
-  </html>
+</html>
