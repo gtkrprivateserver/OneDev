@@ -1,0 +1,11 @@
+.ads-banner {
+  background: linear-gradient(90deg, #00b4d8, #0077b6);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 10px;
+  margin: 1rem auto;
+  max-width: 1000px;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(0,180,216,0.3);
+}
