@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Top Up Game ONEDEV</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="topup-game.css">
+</head>
+<body>
+  <!-- Sidebar otomatis -->
+  <div class="sidebar"></div>
+
+  <div class="main-content">
+    <header>
+      <div class="header-left">
+        <button id="menuBtn" class="menu-btn">☰</button>
+        <h1>Top Up Game ONEDEV</h1>
+      </div>
+    </header>
+
+    <section class="topup-game-content">
+      <h2>Pilih Paket Top Up</h2>
+      <p>Isi saldo game dengan cepat dan aman.</p>
+
+      <div class="topup-game-container">
+        <div class="topup-card" data-amount="1000" data-price="Rp 10.000">
+          <h3>1000 Koin</h3>
+          <p>Harga: Rp 10.000</p>
+          <button class="btn-topup">Top Up</button>
+        </div>
+        <div class="topup-card" data-amount="5000" data-price="Rp 45.000">
+          <h3>5000 Koin</h3>
+          <p>Harga: Rp 45.000</p>
+          <button class="btn-topup">Top Up</button>
+        </div>
+        <div class="topup-card" data-amount="10000" data-price="Rp 85.000">
+          <h3>10000 Koin</h3>
+          <p>Harga: Rp 85.000</p>
+          <button class="btn-topup">Top Up</button>
+        </div>
+        <div class="topup-card" data-amount="25000" data-price="Rp 200.000">
+          <h3>25000 Koin</h3>
+          <p>Harga: Rp 200.000</p>
+          <button class="btn-topup">Top Up</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Popup Form -->
+  <div id="overlay"></div>
+  <div id="paymentForm">
+    <span id="closeForm">&times;</span>
+    <h3>Form Top Up Game</h3>
+    <form id="topupForm">
+      <label>Nama Pengguna</label>
+      <input type="text" id="username" placeholder="Masukkan nama pengguna" required>
+
+      <label>Jumlah Koin</label>
+      <input type="text" id="coinAmount" readonly>
+
+      <label>Harga</label>
+      <input type="text" id="coinPrice" readonly>
+
+      <label>Metode Pembayaran</label>
+      <select id="method" required>
+        <option value="">Pilih metode</option>
+        <option value="bank">Transfer Bank</option>
+        <option value="gopay">Gopay</option>
+        <option value="ovo">OVO</option>
+        <option value="dana">DANA</option>
+      </select>
+
+      <button type="submit">Top Up Sekarang</button>
+    </form>
+  </div>
+
+  <script src="sidebar.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const topupCards = document.querySelectorAll(".btn-topup");
+      const overlay = document.getElementById("overlay");
+      const paymentForm = document.getElementById("paymentForm");
+      const closeForm = document.getElementById("closeForm");
+      const topupForm = document.getElementById("topupForm");
+
+      const coinAmountInput = document.getElementById("coinAmount");
+      const coinPriceInput = document.getElementById("coinPrice");
+
+      topupCards.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const card = btn.closest(".topup-card");
+          const amount = card.dataset.amount;
+          const price = card.dataset.price;
+
+          coinAmountInput.value = amount + " Koin";
+          coinPriceInput.value = price;
+
+          overlay.style.display = "block";
+          paymentForm.style.display = "block";
+        });
+      });
+
+      closeForm.addEventListener("click", () => {
+        overlay.style.display = "none";
+        paymentForm.style.display = "none";
+      });
+
+      overlay.addEventListener("click", () => {
+        overlay.style.display = "none";
+        paymentForm.style.display = "none";
+      });
+
+      topupForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const username = document.getElementById("username").value;
+        const amount = coinAmountInput.value;
+        const price = coinPriceInput.value;
+        const method = document.getElementById("method").value;
+
+        const phoneNumber = "628123456789"; // ganti nomor admin / tujuan
+        const message = `Halo, saya ingin melakukan top up game.%0ANama Pengguna: ${username}%0AJumlah: ${amount}%0AHarga: ${price}%0AMetode: ${method}`;
+
+        window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
+
+        topupForm.reset();
+        overlay.style.display = "none";
+        paymentForm.style.display = "none";
+      });
+    });
+  </script>
+</body>
+</html>
