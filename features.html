@@ -1,71 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Features | OneDev</title>
+  <title>Features | ONEDEV</title>
+  <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="features.css">
-  <script defer src="sidebar.js"></script>
 </head>
 <body>
-  <!-- Struktur utama (sidebar & header akan dimuat otomatis lewat sidebar.js) -->
-  <div id="layout">
-    <div class="sidebar"></div>
+  <!-- Sidebar akan dimasukkan otomatis oleh sidebar.js -->
 
-    <div class="main-content">
-      <header>
-        <div class="header-left">
-          <button class="menu-btn" id="menu-toggle">☰</button>
-          <h1>Features</h1>
-        </div>
-      </header>
+  <div class="main-content">
+    <header>
+      <div class="header-left">
+        <button id="menuBtn" class="menu-btn">☰</button>
+        <h1>Features</h1>
+      </div>
+    </header>
 
-      <section class="features-hero">
-        <h2>Our Best Features</h2>
-        <p>
-          Explore all the professional tools and premium capabilities we offer to help you 
-          manage, monitor, and improve your Growtopia private server experience.
-        </p>
-      </section>
+    <section class="features-hero">
+      <h2>Our Best Features</h2>
+      <p>
+        Explore all the professional tools and premium capabilities we offer to help you 
+        manage, monitor, and improve your Growtopia private server experience.
+      </p>
+    </section>
 
-      <section class="features-grid">
-        <div class="feature-card">
-          <img src="assets/icons/speed.png" alt="Fast Performance">
-          <h3>Fast Performance</h3>
-          <p>Optimized architecture ensures your server runs smoothly with minimal downtime.</p>
-        </div>
+    <section class="features-grid">
+      <div class="feature-card">
+        <img src="assets/icons/speed.png" alt="Fast Performance">
+        <h3>Fast Performance</h3>
+        <p>Optimized architecture ensures your server runs smoothly with minimal downtime.</p>
+      </div>
 
-        <div class="feature-card">
-          <img src="assets/icons/security.png" alt="Security">
-          <h3>Enhanced Security</h3>
-          <p>Advanced protection and bot detection keep your players and data safe.</p>
-        </div>
+      <div class="feature-card">
+        <img src="assets/icons/security.png" alt="Security">
+        <h3>Enhanced Security</h3>
+        <p>Advanced protection and bot detection keep your players and data safe.</p>
+      </div>
 
-        <div class="feature-card">
-          <img src="assets/icons/dashboard.png" alt="Dashboard">
-          <h3>Control Dashboard</h3>
-          <p>Manage your server easily using a user-friendly dashboard interface.</p>
-        </div>
+      <div class="feature-card">
+        <img src="assets/icons/dashboard.png" alt="Dashboard">
+        <h3>Control Dashboard</h3>
+        <p>Manage your server easily using a user-friendly dashboard interface.</p>
+      </div>
 
-        <div class="feature-card">
-          <img src="assets/icons/support.png" alt="Support">
-          <h3>24/7 Support</h3>
-          <p>Our support team is always ready to assist you anytime you need help.</p>
-        </div>
-      </section>
-    </div>
+      <div class="feature-card">
+        <img src="assets/icons/support.png" alt="Support">
+        <h3>24/7 Support</h3>
+        <p>Our support team is always ready to assist you anytime you need help.</p>
+      </div>
+    </section>
   </div>
 
-  <script>
-    // === Sidebar Toggle ===
-    document.addEventListener('DOMContentLoaded', () => {
-      const menuToggle = document.getElementById('menu-toggle');
-      if (menuToggle) {
-        menuToggle.addEventListener('click', () => {
-          document.querySelector('.sidebar').classList.toggle('active');
-        });
-      }
-    });
-  </script>
+  <!-- Sidebar script -->
+  <script src="sidebar.js"></script>
 </body>
 </html>
