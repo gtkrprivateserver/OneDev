@@ -9,7 +9,8 @@
 </head>
 <body>
 
-  <!-- Sidebar akan dimasukkan otomatis oleh sidebar.js -->
+  <!-- Sidebar otomatis -->
+  <div class="sidebar"></div>
 
   <div class="main-content">
     <header>
@@ -57,18 +58,5 @@
   </div>
 
   <script src="sidebar.js"></script>
-
-  <script>
-    // === Sidebar Toggle ===
-    document.addEventListener('DOMContentLoaded', () => {
-      const menuBtn = document.getElementById('menuBtn');
-      const sidebar = document.querySelector('.sidebar');
-      if (menuBtn) {
-        menuBtn.addEventListener('click', () => {
-          sidebar.classList.toggle('active');
-        });
-      }
-    });
-  </script>
 </body>
 </html>
