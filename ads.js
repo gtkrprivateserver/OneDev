@@ -1,30 +1,34 @@
 document.addEventListener("DOMContentLoaded", () => {
   const adsContainer = document.getElementById("adsContainer");
-  if (!adsContainer) return;
 
+  if (!adsContainer) return; // jika halaman tidak ada adsContainer, skip
+
+  // Array banner (bisa ditambah banyak)
   const banners = [
-    { text: "🔥 Promo Top Up! Dapatkan bonus + event eksklusif hari ini!", link: "#topup" },
-    { text: "💎 Paket AI Premium diskon 20%! Buruan klaim sekarang!", link: "#topup" },
-    { text: "🎉 Kolaborasi GTKR x DonatSur: Event & reward spesial menunggu!", link: "#collab" },
-    { text: "🚀 Upgrade server Anda dengan paket Pro sekarang!", link: "#pricing" }
+    {
+      text: "Dapatkan Paket AI Terbaik ONEDEV Sekarang!",
+      link: "https://onedev.example.com/pricing"
+    },
+    {
+      text: "Top Up Saldo ONEDEV dengan Mudah!",
+      link: "https://onedev.example.com/topup"
+    },
+    {
+      text: "Kolaborasi Eksklusif: GTKR x DonatSur",
+      link: "https://onedev.example.com/collaboration"
+    }
   ];
 
-  let currentIndex = 0;
+  // Pilih banner random
+  const banner = banners[Math.floor(Math.random() * banners.length)];
 
-  const showBanner = (index) => {
-    adsContainer.innerHTML = "";
-    const banner = document.createElement("a");
-    banner.className = "ads-banner";
-    banner.href = banners[index].link;
-    banner.target = "_blank";
-    banner.textContent = banners[index].text;
-    adsContainer.appendChild(banner);
-  };
+  // Buat element
+  const bannerEl = document.createElement("a");
+  bannerEl.className = "ads-banner";
+  bannerEl.href = banner.link;
+  bannerEl.target = "_blank";
+  bannerEl.textContent = banner.text;
 
-  showBanner(currentIndex);
-
-  setInterval(() => {
-    currentIndex = (currentIndex + 1) % banners.length;
-    showBanner(currentIndex);
-  }, 5000);
+  // Tambahkan ke container
+  adsContainer.appendChild(bannerEl);
 });
