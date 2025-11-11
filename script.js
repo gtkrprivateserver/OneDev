@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
   `;
 
   // === Toggle tombol menu ===
-  const menuBtn = document.getElementById("menu-toggle");
+  const menuBtn = document.getElementById("menu-btn");
   if (menuBtn) {
     menuBtn.addEventListener("click", (e) => {
       e.stopPropagation(); // biar klik tombol nggak dianggap klik luar
