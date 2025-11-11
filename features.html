@@ -3,52 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ONEDEV — Features</title>
+  <title>ONEDEV - Features</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="features.css">
 </head>
 <body>
-  <header class="navbar" id="navbar">
-    <div class="logo">🤖 ONE<span>DEV</span></div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="features.html" class="active">Features</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-    <button class="btn-primary">Get Started</button>
-  </header>
-
-  <section class="features fade-in">
-    <h2>Teknologi Unggulan ONEDEV</h2>
-    <p>AI, sensor, dan edge computing yang berpadu untuk menciptakan kecerdasan sejati.</p>
-
-    <div class="features-grid">
-      <div class="feature-card">
-        <h3>AI Adaptif</h3>
-        <p>Robot yang belajar dari pengalaman dan beradaptasi dengan kondisi real-time.</p>
+  <div class="main-content">
+    <header>
+      <div class="header-left">
+        <button id="menuBtn" class="menu-btn">☰</button>
+        <h1>Fitur Unggulan ONEDEV</h1>
       </div>
-      <div class="feature-card">
-        <h3>Edge Intelligence</h3>
-        <p>Kinerja tinggi tanpa ketergantungan cloud dengan pemrosesan lokal cepat.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Kolaborasi Manusia-Robot</h3>
-        <p>Integrasi aman antara sistem otonom dan operator manusia.</p>
-      </div>
-    </div>
-  </section>
+    </header>
 
-  <footer class="footer">
-    <p>© 2025 ONEDEV — All Rights Reserved</p>
-  </footer>
+    <!-- HERO SECTION -->
+    <section class="features-hero">
+      <h2>Teknologi Pintar, Efisien, dan Aman</h2>
+      <p>Kami menghadirkan fitur-fitur modern yang meningkatkan performa server, keamanan, dan kemudahan Anda.</p>
+    </section>
 
-  <script>
-    window.addEventListener('scroll', () => {
-      const nav = document.getElementById('navbar');
-      if (window.scrollY > 50) nav.classList.add('scrolled');
-      else nav.classList.remove('scrolled');
-    });
-  </script>
+    <!-- FEATURES GRID -->
+    <section class="features-grid">
+      <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="AI Integration">
+        <h3>AI Integration</h3>
+        <p>Integrasi kecerdasan buatan untuk membantu mengelola dan mengotomatisasi proses di server Discord Anda.</p>
+      </div>
+
+      <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/649/649506.png" alt="Bot Monitoring">
+        <h3>Bot Monitoring</h3>
+        <p>Fitur pemantauan bot secara real-time dengan notifikasi status langsung dari dashboard.</p>
+      </div>
+
+      <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/992/992651.png" alt="Security System">
+        <h3>Security System</h3>
+        <p>Keamanan data tingkat tinggi dengan enkripsi dan autentikasi dua faktor untuk melindungi server Anda.</p>
+      </div>
+
+      <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828911.png" alt="Auto Backup">
+        <h3>Auto Backup</h3>
+        <p>Sistem pencadangan otomatis memastikan Anda tidak kehilangan data penting saat pembaruan bot dilakukan.</p>
+      </div>
+
+      <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="Customization">
+        <h3>Customization</h3>
+        <p>Sesuaikan fungsi dan tampilan bot sesuai kebutuhan komunitas Anda, tanpa batasan fitur.</p>
+      </div>
+
+      <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/992/992703.png" alt="Cloud Hosting">
+        <h3>Cloud Hosting</h3>
+        <p>Bot Anda dijalankan di server cloud 24/7 tanpa perlu khawatir tentang downtime atau koneksi lambat.</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="sidebar.js"></script>
 </body>
 </html>
