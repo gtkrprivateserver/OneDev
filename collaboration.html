@@ -24,7 +24,7 @@
       <p>Kami bekerja sama dengan berbagai mitra untuk menghadirkan solusi terbaik.</p>
 
       <div class="collab-grid" id="collabGrid">
-        <!-- Card akan dibuat otomatis oleh JS -->
+        <!-- Card otomatis akan dibuat oleh JS -->
       </div>
     </section>
   </div>
@@ -35,6 +35,7 @@
     <span id="closeModal">&times;</span>
     <h3 id="modalTitle"></h3>
     <p id="modalDesc"></p>
+    <a href="#" id="modalLink" class="btn-link" target="_blank">Kunjungi</a>
   </div>
 
   <script src="sidebar.js"></script>
@@ -45,6 +46,7 @@
     const detailModal = document.getElementById("detailModal");
     const modalTitle = document.getElementById("modalTitle");
     const modalDesc = document.getElementById("modalDesc");
+    const modalLink = document.getElementById("modalLink");
     const closeModal = document.getElementById("closeModal");
 
     // Array partner / kolaborasi
@@ -52,19 +54,21 @@
       {
         title: "GTKR x DonatSur",
         img: "partner1.jpg",
-        desc: "Event & Reward Menarik – Kolaborasi ini menghadirkan event khusus dan reward unik bagi komunitas GTKR dan Dukungan Komunitas & Layanan – Tim GTKR dan DonatSur siap memberikan bantuan cepat melalui chat dan forum komunitas."
+        desc: "Event & Reward Menarik – Kolaborasi ini menghadirkan event khusus dan reward unik bagi komunitas GTKR dan Dukungan Komunitas & Layanan – Tim GTKR dan DonatSur siap memberikan bantuan cepat melalui chat dan forum komunitas.",
+        link: "https://donatsur.com"
       },
       {
         title: "GTKR x ZB1 (News)",
         img: "partner2.jpg",
-        desc: "GTKR x ZB1 News – Kolaborasi ini menghadirkan informasi terbaru dan terpercaya seputar Growtopia Korea Private Server (GTKR) melalui platform ZB1 News. Pengguna dapat memperoleh berita real-time, update patch, event eksklusif, dan pengumuman penting langsung dari server GTKR."
+        desc: "GTKR x ZB1 News – Kolaborasi ini menghadirkan informasi terbaru dan terpercaya seputar Growtopia Korea Private Server (GTKR) melalui platform ZB1 News. Pengguna dapat memperoleh berita real-time, update patch, event eksklusif, dan pengumuman penting langsung dari server GTKR.",
+        link: "https://zb1news.com"
       },
       {
         title: "Coming Soon",
         img: "partner3.jpg",
-        desc: "Kolaborasi baru akan segera hadir."
+        desc: "Kolaborasi baru akan segera hadir.",
+        link: "#"
       }
-      // Bisa tambahkan partner baru di sini
     ];
 
     // Membuat card otomatis
@@ -74,20 +78,21 @@
       card.innerHTML = `
         <img src="${partner.img}" alt="${partner.title}">
         <h3>${partner.title}</h3>
-        <button class="btn-detail" data-title="${partner.title}" data-desc="${partner.desc}">Detail</button>
+        <button class="btn-detail" data-title="${partner.title}" data-desc="${partner.desc}" data-link="${partner.link}">Detail</button>
       `;
       collabGrid.appendChild(card);
     });
 
     // Event detail card
-    const detailButtons = document.querySelectorAll(".btn-detail");
-    detailButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
+    collabGrid.addEventListener("click", e => {
+      if (e.target.classList.contains("btn-detail")) {
+        const btn = e.target;
         modalTitle.textContent = btn.dataset.title;
         modalDesc.textContent = btn.dataset.desc;
+        modalLink.href = btn.dataset.link;
         overlay.style.display = "block";
         detailModal.style.display = "block";
-      });
+      }
     });
 
     // Tutup modal
