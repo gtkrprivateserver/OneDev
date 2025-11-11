@@ -1,23 +1,23 @@
-/* === STYLING PRICING === */
+/* === STYLING PRICING RESPONSIVE === */
 .pricing-container {
-  max-width: 1000px; /* lebih fleksibel untuk layar kecil */
+  max-width: 1000px;
   margin: 2rem auto;
   padding: 0 1rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* kolom minimal 220px */
+  grid-template-columns: repeat(3, 1fr); /* default desktop 3 card */
   gap: 1.5rem;
-  justify-items: center; /* card selalu di tengah */
+  justify-items: center;
 }
 
 .pricing-card {
   background: rgba(15, 15, 25, 0.9);
-  padding: 1.5rem; /* dikurangi agar lebih pas di layar kecil */
+  padding: 1.5rem;
   border-radius: 15px;
   text-align: center;
   box-shadow: 0 0 20px rgba(0, 180, 216, 0.2);
   transition: transform 0.3s;
-  width: 100%;        /* mengikuti kolom grid */
-  max-width: 280px;   /* card tidak terlalu lebar */
+  width: 100%;
+  max-width: 300px;  /* card tidak terlalu lebar */
 }
 
 .pricing-card:hover {
@@ -30,7 +30,7 @@
 }
 
 .price {
-  font-size: 1.8rem; /* sedikit lebih kecil agar pas layar kecil */
+  font-size: 1.8rem;
   font-weight: bold;
   color: #fff;
   margin-bottom: 1rem;
@@ -63,7 +63,7 @@
   transform: scale(1.03);
 }
 
-/* === POPUP FORM === */
+/* === POPUP & OVERLAY === */
 #paymentForm {
   display: none;
   position: fixed;
@@ -75,61 +75,10 @@
   border-radius: 15px;
   box-shadow: 0 0 30px rgba(0,180,216,0.3);
   z-index: 1000;
-  max-width: 90%;  /* responsive */
-  width: 400px;    /* lebar tetap tapi tidak melebar */
+  width: 90%;
+  max-width: 400px;
 }
 
-#paymentForm h3 {
-  color: #00b4d8;
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-#paymentForm label {
-  color: #ccc;
-  margin-bottom: 0.3rem;
-  display: block;
-  font-size: 0.95em;
-}
-
-#paymentForm input, #paymentForm textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 1rem;
-  border-radius: 10px;
-  border: none;
-  background: #1a1a2e;
-  color: #fff;
-  font-family: inherit;
-}
-
-#paymentForm button {
-  background: linear-gradient(90deg, #00b4d8, #0077b6);
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  padding: 12px;
-  cursor: pointer;
-  width: 100%;
-  font-size: 1em;
-  transition: 0.3s;
-}
-
-#paymentForm button:hover {
-  background: linear-gradient(90deg, #0096c7, #023e8a);
-  transform: scale(1.03);
-}
-
-#closeForm {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 1.2rem;
-  color: #fff;
-  cursor: pointer;
-}
-
-/* Overlay */
 #overlay {
   display: none;
   position: fixed;
@@ -141,9 +90,20 @@
   z-index: 900;
 }
 
-/* Responsif mobile */
-@media (max-width: 480px) {
+/* === RESPONSIVE === */
+@media (max-width: 1024px) {
+  .pricing-container {
+    grid-template-columns: repeat(2, 1fr); /* tablet 2 card */
+  }
+}
+
+@media (max-width: 767px) {
+  .pricing-container {
+    grid-template-columns: 1fr; /* HP 1 card */
+  }
+
   .pricing-card {
+    max-width: 90%;
     padding: 1rem;
   }
 
