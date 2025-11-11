@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { name: "💡 About", link: "about.html" },
     { name: "✨ Features", link: "features.html" },
     { name: "⏳ Monitor", link: "monitor.html" },
+    { name: "⚙️ Services", link: "services.html",
     { name: "💰 Pricing", link: "pricing.html" },
     { name: "📩 Contact", link: "contact.html" },
     { name: "🛒 Store", link: "store.html" }
