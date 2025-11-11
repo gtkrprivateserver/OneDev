@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ONEDEV Store - Teknologi & Bot AI</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="store.css">
+</head>
+<body>
+  <!-- Sidebar dan header otomatis -->
+  <div id="sidebar-container"></div>
+
+  <div class="main-content">
+    <div id="header-container"></div>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="hero-text">
+        <h2>Temukan Produk Digital & Bot AI Terbaik 🚀</h2>
+        <p>ONEDEV Store menyediakan berbagai layanan bot Discord, sistem AI, hingga plugin otomatisasi untuk kebutuhan server & bisnis Anda.</p>
+      </div>
+    </section>
+
+    <!-- STORE SECTION -->
+    <section class="store-container">
+      <div class="store-grid">
+        <!-- ITEM 1 -->
+        <div class="store-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="Discord Bot Pro">
+          <h3>Discord Bot Pro</h3>
+          <p>Bot Discord canggih dengan sistem verifikasi, economy, dan dashboard website.</p>
+          <div class="price">Rp150.000</div>
+          <button class="btn-buy" data-product="Discord Bot Pro" data-price="150000">Beli Sekarang</button>
+        </div>
+
+        <!-- ITEM 2 -->
+        <div class="store-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/4727/4727425.png" alt="AI Chat Assistant">
+          <h3>AI Chat Assistant</h3>
+          <p>Chatbot pintar berbasis OpenAI, cocok untuk bisnis dan komunitas online.</p>
+          <div class="price">Rp120.000</div>
+          <button class="btn-buy" data-product="AI Chat Assistant" data-price="120000">Beli Sekarang</button>
+        </div>
+
+        <!-- ITEM 3 -->
+        <div class="store-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/1055/1055646.png" alt="GTPS Panel Bot">
+          <h3>GTPS Panel Bot</h3>
+          <p>Bot Discord untuk server Growtopia Private, dengan fitur panel, log, dan manajemen otomatis.</p>
+          <div class="price">Rp90.000</div>
+          <button class="btn-buy" data-product="GTPS Panel Bot" data-price="90000">Beli Sekarang</button>
+        </div>
+
+        <!-- ITEM 4 -->
+        <div class="store-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/2920/2920201.png" alt="Automation Plugin">
+          <h3>Automation Plugin</h3>
+          <p>Plugin otomatis untuk mengatur event, role, dan sistem logging server Anda.</p>
+          <div class="price">Rp75.000</div>
+          <button class="btn-buy" data-product="Automation Plugin" data-price="75000">Beli Sekarang</button>
+        </div>
+
+        <!-- ITEM 5 -->
+        <div class="store-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/9776/9776747.png" alt="Custom Bot Service">
+          <h3>Custom Bot Service</h3>
+          <p>Buat bot Anda sendiri sesuai kebutuhan: AI, ekonomi, game, logging, dan banyak lagi!</p>
+          <div class="price">Mulai Rp200.000</div>
+          <button class="btn-buy" data-product="Custom Bot Service" data-price="200000">Pesan Sekarang</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAYMENT FORM -->
+    <section class="payment-form" id="paymentForm" style="display:none;">
+      <h2>🧾 Formulir Pembayaran</h2>
+      <p>Masukkan data Anda untuk melanjutkan pembelian.</p>
+      <form id="orderForm">
+        <label>Nama:</label>
+        <input type="text" id="name" required placeholder="Nama lengkap Anda">
+
+        <label>Nomor WhatsApp:</label>
+        <input type="text" id="whatsapp" required placeholder="08xxxxxxxxxx">
+
+        <label>Produk:</label>
+        <input type="text" id="product" readonly>
+
+        <label>Harga:</label>
+        <input type="text" id="price" readonly>
+
+        <button type="submit" class="btn-primary">Kirim Pesanan</button>
+        <button type="button" id="cancelForm" class="btn-secondary">Batal</button>
+      </form>
+    </section>
+  </div>
+
+  <script src="sidebar.js"></script>
+
+  <script>
+    // Buka form pembayaran
+    const buyButtons = document.querySelectorAll('.btn-buy');
+    const formSection = document.getElementById('paymentForm');
+    const productInput = document.getElementById('product');
+    const priceInput = document.getElementById('price');
+
+    buyButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        formSection.style.display = 'block';
+        productInput.value = button.dataset.product;
+        priceInput.value = 'Rp ' + new Intl.NumberFormat('id-ID').format(button.dataset.price);
+        window.scrollTo({ top: formSection.offsetTop, behavior: 'smooth' });
+      });
+    });
+
+    // Tutup form
+    document.getElementById('cancelForm').addEventListener('click', () => {
+      formSection.style.display = 'none';
+    });
+
+    // Kirim ke WhatsApp & Webhook Discord
+    document.getElementById('orderForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const whatsapp = document.getElementById('whatsapp').value;
+      const product = productInput.value;
+      const price = priceInput.value;
+
+      // Format pesan WhatsApp
+      const msg = `Halo, saya ingin memesan *${product}* seharga *${price}*.\nNama: ${name}\nNo WA: ${whatsapp}`;
+      const waUrl = `https://wa.me/6281234567890?text=${encodeURIComponent(msg)}`;
+      window.open(waUrl, '_blank');
+
+      // Kirim ke Discord Webhook
+      fetch("https://discord.com/api/webhooks/WEBHOOK_ID/WEBHOOK_TOKEN", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          content: `🛍️ **Pesanan Baru di ONEDEV Store**\n👤 Nama: ${name}\n📱 WhatsApp: ${whatsapp}\n💠 Produk: ${product}\n💰 Harga: ${price}`
+        })
+      });
+
+      formSection.style.display = 'none';
+      alert("Pesanan dikirim ke WhatsApp dan Discord!");
+    });
+  </script>
+</body>
+</html>
