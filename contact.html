@@ -6,7 +6,7 @@
   <title>Kontak ONEDEV</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* Form kontak tambahan */
+    /* === FORM KONTAK KHUSUS === */
     .contact-form {
       margin-top: 2rem;
       background: rgba(15, 15, 25, 0.9);
@@ -76,7 +76,7 @@
 
     <section class="contact">
       <h2>Kontak ONEDEV</h2>
-      <p>Kami siap membantu Anda. Hubungi kami:</p>
+      <p>Kami siap membantu Anda. Hubungi kami melalui form di bawah ini:</p>
 
       <!-- Form Kontak -->
       <form class="contact-form" id="contactForm">
@@ -97,15 +97,28 @@
 
   <script src="sidebar.js"></script>
   <script>
-    // Sidebar toggle
     document.addEventListener('DOMContentLoaded', () => {
       const menuBtn = document.getElementById('menuBtn');
       const sidebar = document.querySelector('.sidebar');
+
+      // Toggle sidebar
       if (menuBtn) {
         menuBtn.addEventListener('click', () => {
           sidebar.classList.toggle('active');
         });
       }
+
+      // Tutup sidebar jika klik luar (mobile)
+      document.addEventListener('click', (e) => {
+        if (
+          window.innerWidth <= 900 &&
+          sidebar.classList.contains('active') &&
+          !sidebar.contains(e.target) &&
+          !e.target.closest('#menuBtn')
+        ) {
+          sidebar.classList.remove('active');
+        }
+      });
 
       // Form kontak submit
       const form = document.getElementById('contactForm');
@@ -116,8 +129,8 @@
         const email = document.getElementById('email').value;
         const message = document.getElementById('message').value;
 
-        // Kirim ke WhatsApp (contoh)
-        const phoneNumber = "628123456789"; // ganti dengan nomor tujuan
+        // Kirim ke WhatsApp
+        const phoneNumber = "628123456789"; // Ganti dengan nomor tujuan
         const waMessage = `Halo, saya ${name} (${email}) ingin mengirim pesan:\n${message}`;
         window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(waMessage)}`, "_blank");
 
