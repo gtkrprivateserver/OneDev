@@ -1,34 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const adsContainer = document.getElementById("adsContainer");
-
-  if (!adsContainer) return; // jika halaman tidak ada adsContainer, skip
-
-  // Array banner (bisa ditambah banyak)
-  const banners = [
-    {
-      text: "Dapatkan Paket AI Terbaik ONEDEV Sekarang!",
-      link: "https://onedev.example.com/pricing"
-    },
-    {
-      text: "Top Up Saldo ONEDEV dengan Mudah!",
-      link: "https://onedev.example.com/topup"
-    },
-    {
-      text: "Kolaborasi Eksklusif: GTKR x DonatSur",
-      link: "https://onedev.example.com/collaboration"
-    }
+  const adsData = [
+    { text: "Promo Top Up 50%!", link: "#" },
+    { text: "Dapatkan Bonus Saldo AI", link: "#" },
+    { text: "Server Premium Diskon Hari Ini!", link: "#" }
   ];
 
-  // Pilih banner random
-  const banner = banners[Math.floor(Math.random() * banners.length)];
+  const adsContainer = document.getElementById("adsContainer");
+  const adsContainerBottom = document.getElementById("adsContainerBottom");
 
-  // Buat element
-  const bannerEl = document.createElement("a");
-  bannerEl.className = "ads-banner";
-  bannerEl.href = banner.link;
-  bannerEl.target = "_blank";
-  bannerEl.textContent = banner.text;
+  adsData.forEach(ad => {
+    const aTop = document.createElement("a");
+    aTop.href = ad.link;
+    aTop.className = "ads-banner";
+    aTop.textContent = ad.text;
+    adsContainer.appendChild(aTop);
 
-  // Tambahkan ke container
-  adsContainer.appendChild(bannerEl);
+    const aBottom = document.createElement("a");
+    aBottom.href = ad.link;
+    aBottom.className = "ads-banner";
+    aBottom.textContent = ad.text;
+    adsContainerBottom.appendChild(aBottom);
+  });
 });
