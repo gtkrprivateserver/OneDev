@@ -1,24 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const adsData = [
-    { text: "Promo Top Up 50%!", link: "#" },
-    { text: "Dapatkan Bonus Saldo AI", link: "#" },
-    { text: "Server Premium Diskon Hari Ini!", link: "#" }
-  ];
-
-  const adsContainer = document.getElementById("adsContainer");
+  const adsContainerTop = document.getElementById("adsContainer");
   const adsContainerBottom = document.getElementById("adsContainerBottom");
 
-  adsData.forEach(ad => {
-    const aTop = document.createElement("a");
-    aTop.href = ad.link;
-    aTop.className = "ads-banner";
-    aTop.textContent = ad.text;
-    adsContainer.appendChild(aTop);
+  const ads = [
+    "Promo AI Pack 50% OFF!",
+    "Top Up sekarang dan dapatkan bonus server!",
+    "Limited Offer: Pro Plan + Extra Support!"
+  ];
 
-    const aBottom = document.createElement("a");
-    aBottom.href = ad.link;
-    aBottom.className = "ads-banner";
-    aBottom.textContent = ad.text;
-    adsContainerBottom.appendChild(aBottom);
+  function createAdBanner(text) {
+    const a = document.createElement("a");
+    a.className = "ads-banner";
+    a.href = "#";
+    a.textContent = text;
+    return a;
+  }
+
+  ads.forEach(ad => {
+    adsContainerTop.appendChild(createAdBanner(ad));
+    adsContainerBottom.appendChild(createAdBanner(ad));
   });
 });
