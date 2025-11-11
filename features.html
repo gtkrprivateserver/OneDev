@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Features | ONEDEV</title>
+  <title>Features | OneDev</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="features.css">
 </head>
 <body>
   <!-- Sidebar akan dimasukkan otomatis oleh sidebar.js -->
+  <div class="sidebar"></div>
 
   <div class="main-content">
     <header>
       <div class="header-left">
-        <button id="menuBtn" class="menu-btn">☰</button>
+        <button class="menu-btn" id="menuBtn">☰</button>
         <h1>Features</h1>
       </div>
     </header>
@@ -53,7 +54,32 @@
     </section>
   </div>
 
-  <!-- Sidebar script -->
   <script src="sidebar.js"></script>
+
+  <script>
+    // === Sidebar Toggle for mobile ===
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuBtn = document.getElementById('menuBtn');
+      const sidebar = document.querySelector('.sidebar');
+
+      if (menuBtn) {
+        menuBtn.addEventListener('click', () => {
+          sidebar.classList.toggle('active');
+        });
+      }
+
+      // Tutup sidebar jika klik di luar (mobile)
+      document.addEventListener('click', (e) => {
+        if (
+          window.innerWidth <= 900 &&
+          sidebar.classList.contains('active') &&
+          !sidebar.contains(e.target) &&
+          !e.target.closest('#menuBtn')
+        ) {
+          sidebar.classList.remove('active');
+        }
+      });
+    });
+  </script>
 </body>
 </html>
