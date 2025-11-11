@@ -1,12 +1,11 @@
-/* === Container utama === */
-.topup-cards, .topup-content {
+/* === Top Up Cards === */
+.topup-cards {
   max-width: 1000px;
   margin: 2rem auto;
   padding: 0 1rem;
   text-align: center;
 }
 
-/* === Grid Card Paket === */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -16,13 +15,13 @@
 }
 
 .card {
-  background: rgba(15,15,25,0.9);
-  border-radius: 15px;
+  background: rgba(15, 15, 25, 0.9);
   padding: 1.5rem;
+  border-radius: 15px;
+  text-align: center;
   width: 100%;
   max-width: 300px;
-  box-shadow: 0 0 20px rgba(0,180,216,0.2);
-  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 180, 216, 0.2);
   transition: transform 0.3s;
 }
 
@@ -32,13 +31,14 @@
 
 .card h3 {
   color: #00b4d8;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
 }
 
-.card p.price {
-  font-size: 1.5rem;
+.card .price {
+  font-size: 1.8rem;
+  font-weight: bold;
   color: #fff;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .card ul {
@@ -49,7 +49,7 @@
 
 .card ul li {
   color: #ccc;
-  margin: 0.3rem 0;
+  margin: 0.4rem 0;
 }
 
 .btn-buy {
@@ -68,60 +68,56 @@
   transform: scale(1.03);
 }
 
-/* === Form Top Up === */
-.topup-form-container {
-  background: rgba(15,15,25,0.9);
+/* === Top Up Form === */
+.topup-content {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.topup-form-container form {
+  background: rgba(15, 15, 25, 0.95);
   padding: 1.5rem;
   border-radius: 15px;
-  box-shadow: 0 0 20px rgba(0,180,216,0.2);
-  margin-top: 1.5rem;
+  box-shadow: 0 0 20px rgba(0, 180, 216, 0.2);
 }
 
-.topup-form-container form label {
+.topup-form-container label {
   display: block;
-  text-align: left;
   color: #ccc;
-  margin-top: 0.8rem;
   margin-bottom: 0.3rem;
+  margin-top: 0.8rem;
 }
 
-.topup-form-container form input,
-.topup-form-container form select,
-.topup-form-container form button {
+.topup-form-container input,
+.topup-form-container select {
   width: 100%;
-  padding: 10px 12px;
-  margin-bottom: 0.8rem;
+  padding: 10px;
   border-radius: 10px;
-  border: none;
-  font-size: 1rem;
-}
-
-.topup-form-container form input,
-.topup-form-container form select {
-  background: rgba(0,0,0,0.2);
+  border: 1px solid #0077b6;
+  background: rgba(20, 20, 30, 0.9);
   color: #fff;
 }
 
-.topup-form-container form button {
+.topup-form-container button {
+  margin-top: 1rem;
   background: linear-gradient(90deg, #00b4d8, #0077b6);
   color: #fff;
-  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 20px;
   cursor: pointer;
+  font-size: 1em;
+  width: 100%;
   transition: 0.3s;
 }
 
-.topup-form-container form button:hover {
+.topup-form-container button:hover {
   background: linear-gradient(90deg, #0096c7, #023e8a);
   transform: scale(1.02);
 }
 
-/* === Banner Ads === */
-#adsContainer, #adsContainerBottom {
-  text-align: center;
-  margin: 1rem auto;
-}
-
-/* === RESPONSIVE === */
+/* === Responsive === */
 @media (max-width: 1024px) {
   .card-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -133,17 +129,23 @@
     grid-template-columns: 1fr;
   }
 
-  .card, .topup-form-container {
+  .card {
     max-width: 90%;
     margin: 0 auto;
   }
 
-  .card p.price {
-    font-size: 1.2rem;
+  .card .price {
+    font-size: 1.5rem;
   }
 
-  .btn-buy, .topup-form-container form button {
+  .btn-buy {
     padding: 8px 16px;
     font-size: 0.9em;
+  }
+
+  .topup-form-container input,
+  .topup-form-container select,
+  .topup-form-container button {
+    font-size: 0.95em;
   }
 }
