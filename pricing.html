@@ -5,147 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pricing | ONEDEV</title>
   <link rel="stylesheet" href="styles.css">
-  <style>
-    /* === STYLING PRICING === */
-    .pricing-container {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-
-    .pricing-card {
-      background: rgba(15, 15, 25, 0.9);
-      padding: 2rem;
-      border-radius: 15px;
-      text-align: center;
-      box-shadow: 0 0 20px rgba(0, 180, 216, 0.2);
-      transition: transform 0.3s;
-    }
-
-    .pricing-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .pricing-card h3 {
-      color: #00b4d8;
-      margin-bottom: 1rem;
-    }
-
-    .price {
-      font-size: 2rem;
-      font-weight: bold;
-      color: #fff;
-      margin-bottom: 1rem;
-    }
-
-    .pricing-card ul {
-      list-style: none;
-      padding: 0;
-      margin-bottom: 1.5rem;
-    }
-
-    .pricing-card ul li {
-      margin: 0.5rem 0;
-      color: #ccc;
-    }
-
-    .btn-buy {
-      background: linear-gradient(90deg, #00b4d8, #0077b6);
-      color: #fff;
-      border: none;
-      border-radius: 12px;
-      padding: 12px 24px;
-      cursor: pointer;
-      font-size: 1em;
-      transition: 0.3s;
-    }
-
-    .btn-buy:hover {
-      background: linear-gradient(90deg, #0096c7, #023e8a);
-      transform: scale(1.03);
-    }
-
-    /* === POPUP FORM === */
-    #paymentForm {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(15,15,25,0.95);
-      padding: 2rem;
-      border-radius: 15px;
-      box-shadow: 0 0 30px rgba(0,180,216,0.3);
-      z-index: 1000;
-      max-width: 400px;
-      width: 90%;
-    }
-
-    #paymentForm h3 {
-      color: #00b4d8;
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-
-    #paymentForm label {
-      color: #ccc;
-      margin-bottom: 0.3rem;
-      display: block;
-      font-size: 0.95em;
-    }
-
-    #paymentForm input, #paymentForm textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 1rem;
-      border-radius: 10px;
-      border: none;
-      background: #1a1a2e;
-      color: #fff;
-      font-family: inherit;
-    }
-
-    #paymentForm button {
-      background: linear-gradient(90deg, #00b4d8, #0077b6);
-      color: #fff;
-      border: none;
-      border-radius: 12px;
-      padding: 12px;
-      cursor: pointer;
-      width: 100%;
-      font-size: 1em;
-      transition: 0.3s;
-    }
-
-    #paymentForm button:hover {
-      background: linear-gradient(90deg, #0096c7, #023e8a);
-      transform: scale(1.03);
-    }
-
-    #closeForm {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 1.2rem;
-      color: #fff;
-      cursor: pointer;
-    }
-
-    /* Overlay */
-    #overlay {
-      display: none;
-      position: fixed;
-      top:0;
-      left:0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 900;
-    }
-  </style>
+  <link rel="stylesheet" href="pricing.css">
 </head>
 <body>
   <!-- Sidebar otomatis -->
@@ -200,28 +60,28 @@
     </section>
   </div>
 
-  <!-- Popup Form -->
+  <!-- Overlay & Popup Form -->
   <div id="overlay"></div>
   <div id="paymentForm">
     <span id="closeForm">&times;</span>
-    <h3>Form Pembelian</h3>
-    <form id="formPayment">
-      <label for="name">Nama Lengkap</label>
-      <input type="text" id="name" placeholder="Nama Anda" required>
+    <h3>Formulir Pembelian</h3>
+    <form id="orderForm">
+      <label>Nama Produk</label>
+      <input type="text" id="productName" readonly>
 
-      <label for="email">Email</label>
-      <input type="email" id="email" placeholder="email@example.com" required>
+      <label>Harga</label>
+      <input type="text" id="productPrice" readonly>
 
-      <label for="notes">Catatan</label>
-      <textarea id="notes" placeholder="Tulis catatan tambahan..." rows="3"></textarea>
+      <label>Nama Anda</label>
+      <input type="text" id="buyerName" placeholder="Masukkan nama Anda" required>
 
-      <label for="product">Produk</label>
-      <input type="text" id="product" readonly>
+      <label>Nomor WhatsApp</label>
+      <input type="tel" id="buyerPhone" placeholder="contoh: 628123456789" required>
 
-      <label for="price">Harga</label>
-      <input type="text" id="price" readonly>
+      <label>Catatan Tambahan</label>
+      <textarea id="buyerNote" rows="3" placeholder="Tambahkan catatan (opsional)"></textarea>
 
-      <button type="submit">Kirim via WhatsApp</button>
+      <button type="submit">Kirim ke WhatsApp</button>
     </form>
   </div>
 
@@ -229,59 +89,49 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const buyButtons = document.querySelectorAll(".btn-buy");
-      const paymentForm = document.getElementById("paymentForm");
       const overlay = document.getElementById("overlay");
+      const paymentForm = document.getElementById("paymentForm");
       const closeForm = document.getElementById("closeForm");
-      const productInput = document.getElementById("product");
-      const priceInput = document.getElementById("price");
-      const formPayment = document.getElementById("formPayment");
+      const orderForm = document.getElementById("orderForm");
 
-      // Tombol beli
       buyButtons.forEach(btn => {
         btn.addEventListener("click", () => {
           const card = btn.closest(".pricing-card");
           const productName = card.dataset.product;
           const productPrice = card.dataset.price;
 
-          // Isi otomatis
-          productInput.value = productName;
-          priceInput.value = productPrice;
+          document.getElementById("productName").value = productName;
+          document.getElementById("productPrice").value = productPrice;
 
-          // Tampilkan form
-          paymentForm.style.display = "block";
           overlay.style.display = "block";
-          paymentForm.scrollIntoView({ behavior: "smooth" });
+          paymentForm.style.display = "block";
         });
       });
 
-      // Tutup form
       closeForm.addEventListener("click", () => {
-        paymentForm.style.display = "none";
         overlay.style.display = "none";
+        paymentForm.style.display = "none";
       });
 
       overlay.addEventListener("click", () => {
-        paymentForm.style.display = "none";
         overlay.style.display = "none";
+        paymentForm.style.display = "none";
       });
 
-      // Submit form
-      formPayment.addEventListener("submit", (e) => {
+      orderForm.addEventListener("submit", e => {
         e.preventDefault();
+        const name = document.getElementById("buyerName").value;
+        const phone = document.getElementById("buyerPhone").value;
+        const note = document.getElementById("buyerNote").value;
+        const product = document.getElementById("productName").value;
+        const price = document.getElementById("productPrice").value;
 
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const notes = document.getElementById("notes").value;
-        const product = productInput.value;
-        const price = priceInput.value;
+        const message = `Halo, saya ${name} ingin membeli *${product}* (${price}).%0A%0ANomor WhatsApp: ${phone}%0A${note ? 'Catatan: ' + note : ''}`;
+        window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
 
-        const phoneNumber = "628123456789"; // ganti dengan nomor tujuan
-        const message = `Halo, saya ingin membeli ${product} seharga ${price}.\nNama: ${name}\nEmail: ${email}\nCatatan: ${notes}`;
-        window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, "_blank");
-
-        formPayment.reset();
-        paymentForm.style.display = "none";
         overlay.style.display = "none";
+        paymentForm.style.display = "none";
+        orderForm.reset();
       });
     });
   </script>
