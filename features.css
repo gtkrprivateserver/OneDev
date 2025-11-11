@@ -1,9 +1,22 @@
+/* Reset agar tidak keluar layar */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  overflow-x: hidden; /* Cegah scroll horizontal */
+  width: 100%;
+}
+
 /* HERO SECTION */
 .features-hero {
   text-align: center;
   margin-top: 60px;
   padding: 20px;
   color: #fff;
+  max-width: 100%;
 }
 
 .features-hero h2 {
@@ -17,14 +30,16 @@
   font-size: 1.1em;
   max-width: 700px;
   margin: 0 auto;
+  line-height: 1.5;
 }
 
 /* FEATURES GRID */
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 25px;
   padding: 40px 20px;
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -44,9 +59,10 @@
 }
 
 .feature-card img {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   margin-bottom: 15px;
+  object-fit: contain;
 }
 
 .feature-card h3 {
@@ -62,23 +78,41 @@
 }
 
 /* RESPONSIVE DESIGN */
+@media (max-width: 1024px) {
+  .features-grid {
+    padding: 30px 15px;
+  }
+}
+
 @media (max-width: 768px) {
   .features-hero h2 {
     font-size: 1.8em;
   }
 
-  .features-grid {
-    padding: 30px 10px;
+  .features-hero p {
+    font-size: 1em;
+  }
+
+  .feature-card {
+    padding: 20px;
   }
 }
 
 @media (max-width: 480px) {
+  .features-hero h2 {
+    font-size: 1.5em;
+  }
+
+  .features-hero p {
+    font-size: 0.9em;
+  }
+
   .feature-card {
-    padding: 20px 15px;
+    padding: 18px;
   }
 
   .feature-card img {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
   }
 }
