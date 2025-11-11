@@ -3,49 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hubungi ONEDEV</title>
+  <title>Kontak ONEDEV</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <aside class="sidebar">
-    <h2 class="logo">ONE<span>DEV</span></h2>
-    <nav>
-      <a href="index.html">🏠 Home</a>
-      <a href="monitor.html">⏳ Monitor</a>
-      <a href="about.html">💡 About</a>
-      <a href="services.html">⚙️ Services</a>
-      <a href="contact.html" class="active">📩 Contact</a>
-    </nav>
-    <footer>© 2025 ONEDEV</footer>
-  </aside>
-
   <div class="main-content">
     <header>
       <div class="header-left">
-        <button class="menu-btn">☰</button>
+        <button id="menuBtn" class="menu-btn">☰</button>
         <h1>Hubungi Kami</h1>
       </div>
     </header>
 
-    <section>
-      <h2>Kirim Pesan ke ONEDEV</h2>
-      <form class="contact-form" 
-            action="mailto:gtkrprivateserver@gmail.com" 
-            method="post" 
-            enctype="text/plain">
-        <input type="text" name="name" placeholder="Nama Lengkap" required>
-        <input type="email" name="email" placeholder="Alamat Email" required>
-        <textarea name="message" rows="5" placeholder="Pesan Anda..." required></textarea>
-        <button type="submit" class="btn-primary">Kirim</button>
-      </form>
-
-      <p style="margin-top: 15px; color: #aaa;">
-        Atau hubungi langsung: 
-        <a href="mailto:gtkrprivateserver@gmail.com" style="color: #00b4d8;">gtkrprivateserver@gmail.com [GTKRPS]</a>
-      </p>
+    <section class="contact">
+      <h2>Kontak ONEDEV</h2>
+      <p>Kami siap membantu Anda. Hubungi kami melalui:</p>
+      <ul>
+        <li>📧 Email: support@onedev.tech</li>
+        <li>💬 Discord: <a href="#">discord.gg/onedev</a></li>
+        <li>🌐 Website: <a href="https://onedevofficial.vercel.app">onedevofficial.vercel.app</a></li>
+      </ul>
     </section>
   </div>
 
-  <script src="script.js"></script>
+  <script src="sidebar.js"></script>
 </body>
 </html>
