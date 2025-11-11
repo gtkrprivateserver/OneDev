@@ -1,0 +1,122 @@
+.content {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.collab-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  justify-items: center;
+  margin-top: 2rem;
+}
+
+.collab-card {
+  background: rgba(15, 15, 25, 0.9);
+  border-radius: 15px;
+  padding: 1rem;
+  width: 100%;
+  max-width: 300px;
+  box-shadow: 0 0 15px rgba(0,180,216,0.2);
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.collab-card:hover {
+  transform: translateY(-5px);
+}
+
+.collab-card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+}
+
+.collab-card h3 {
+  color: #00b4d8;
+  margin-bottom: 0.5rem;
+}
+
+.btn-detail {
+  background: linear-gradient(90deg, #00b4d8, #0077b6);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: 0.3s;
+}
+
+.btn-detail:hover {
+  background: linear-gradient(90deg, #0096c7, #023e8a);
+  transform: scale(1.03);
+}
+
+/* === POPUP MODAL === */
+#detailModal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(15,15,25,0.95);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(0,180,216,0.3);
+  z-index: 1000;
+  max-width: 400px;
+  width: 90%;
+  text-align: left;
+}
+
+#detailModal h3 {
+  color: #00b4d8;
+  margin-bottom: 1rem;
+}
+
+#detailModal p {
+  color: #ccc;
+  margin-bottom: 1rem;
+}
+
+#closeModal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.2rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Overlay */
+#overlay {
+  display: none;
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 900;
+}
+
+/* === RESPONSIVE GRID === */
+@media (max-width: 1024px) {
+  .collab-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .collab-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .collab-card {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+}
