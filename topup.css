@@ -1,49 +1,149 @@
-.topup-content {
-  max-width: 600px;
+/* === Container utama === */
+.topup-cards, .topup-content {
+  max-width: 1000px;
   margin: 2rem auto;
   padding: 0 1rem;
   text-align: center;
 }
 
-.topup-form-container {
-  background: rgba(15, 15, 25, 0.95);
-  padding: 2rem;
+/* === Grid Card Paket === */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  justify-items: center;
+  margin-top: 1.5rem;
+}
+
+.card {
+  background: rgba(15,15,25,0.9);
   border-radius: 15px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 300px;
   box-shadow: 0 0 20px rgba(0,180,216,0.2);
-  margin-top: 1rem;
+  text-align: center;
+  transition: transform 0.3s;
 }
 
-.topup-form-container label {
-  display: block;
-  text-align: left;
-  margin-bottom: 0.3rem;
-  color: #ccc;
+.card:hover {
+  transform: translateY(-5px);
 }
 
-.topup-form-container input,
-.topup-form-container select {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 1rem;
-  border-radius: 10px;
-  border: none;
-  background: #1a1a2e;
+.card h3 {
+  color: #00b4d8;
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  font-size: 1.2rem;
   color: #fff;
+  margin-bottom: 0.5rem;
 }
 
-.topup-form-container button {
-  width: 100%;
-  padding: 12px;
-  font-size: 1em;
-  border: none;
-  border-radius: 12px;
+.card ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.card ul li {
+  color: #ccc;
+  margin: 0.3rem 0;
+}
+
+.btn-buy {
   background: linear-gradient(90deg, #00b4d8, #0077b6);
   color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 0.95em;
+  transition: 0.3s;
+}
+
+.btn-buy:hover {
+  background: linear-gradient(90deg, #0096c7, #023e8a);
+  transform: scale(1.03);
+}
+
+/* === Form Top Up === */
+.topup-form-container {
+  background: rgba(15,15,25,0.9);
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0,180,216,0.2);
+  margin-top: 1.5rem;
+}
+
+.topup-form-container form label {
+  display: block;
+  text-align: left;
+  color: #ccc;
+  margin-top: 0.8rem;
+  margin-bottom: 0.3rem;
+}
+
+.topup-form-container form input,
+.topup-form-container form select,
+.topup-form-container form button {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 0.8rem;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+}
+
+.topup-form-container form input,
+.topup-form-container form select {
+  background: rgba(0,0,0,0.2);
+  color: #fff;
+}
+
+.topup-form-container form button {
+  background: linear-gradient(90deg, #00b4d8, #0077b6);
+  color: #fff;
+  font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
 }
 
-.topup-form-container button:hover {
+.topup-form-container form button:hover {
   background: linear-gradient(90deg, #0096c7, #023e8a);
-  transform: scale(1.03);
+  transform: scale(1.02);
+}
+
+/* === Banner Ads === */
+#adsContainer, #adsContainerBottom {
+  text-align: center;
+  margin: 1rem auto;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 1024px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card, .topup-form-container {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  .card p {
+    font-size: 1rem;
+  }
+
+  .btn-buy, .topup-form-container form button {
+    padding: 8px 16px;
+    font-size: 0.9em;
+  }
 }
