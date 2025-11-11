@@ -23,12 +23,53 @@
     <!-- Banner Ads Otomatis (Atas Form) -->
     <div id="adsContainer"></div>
 
+    <!-- Card Top Paket -->
+    <section class="topup-cards">
+      <h2>Pilih Paket Top Up</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Paket Basic</h3>
+          <p>Rp 50.000</p>
+          <ul>
+            <li>Fitur Dasar</li>
+            <li>1 Server</li>
+          </ul>
+          <button class="btn-buy" data-product="Basic" data-price="Rp 50.000">Beli Sekarang</button>
+        </div>
+        <div class="card">
+          <h3>Paket Pro</h3>
+          <p>Rp 120.000</p>
+          <ul>
+            <li>Fitur Lanjutan</li>
+            <li>3 Server</li>
+          </ul>
+          <button class="btn-buy" data-product="Pro" data-price="Rp 120.000">Beli Sekarang</button>
+        </div>
+        <div class="card">
+          <h3>Paket Enterprise</h3>
+          <p>Rp 300.000</p>
+          <ul>
+            <li>Semua Fitur Premium</li>
+            <li>Server Unlimited</li>
+          </ul>
+          <button class="btn-buy" data-product="Enterprise" data-price="Rp 300.000">Beli Sekarang</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Form Top Up -->
     <section class="topup-content">
       <h2>Isi Saldo / Top Up</h2>
       <p>Top up saldo untuk membeli paket AI, server, atau layanan digital kami.</p>
 
       <div class="topup-form-container">
         <form id="topupForm">
+          <label>Nama Paket</label>
+          <input type="text" id="productName" readonly>
+
+          <label>Harga Paket</label>
+          <input type="text" id="productPrice" readonly>
+
           <label for="username">Nama Pengguna</label>
           <input type="text" id="username" placeholder="Masukkan nama pengguna" required>
 
@@ -58,20 +99,35 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const topupForm = document.getElementById("topupForm");
+      const productName = document.getElementById("productName");
+      const productPrice = document.getElementById("productPrice");
 
+      // Klik tombol "Beli Sekarang" di card top
+      const buyButtons = document.querySelectorAll(".btn-buy");
+      buyButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          productName.value = btn.dataset.product;
+          productPrice.value = btn.dataset.price;
+          // Scroll ke form
+          document.getElementById("topupForm").scrollIntoView({behavior: "smooth"});
+        });
+      });
+
+      // Submit form
       topupForm.addEventListener("submit", (e) => {
         e.preventDefault();
-
         const username = document.getElementById("username").value;
         const amount = document.getElementById("amount").value;
         const method = document.getElementById("method").value;
 
         const phoneNumber = "628123456789"; // ganti nomor admin / tujuan
-        const message = `Halo, saya ingin melakukan top up.%0ANama Pengguna: ${username}%0AJumlah: ${amount}%0AMetode: ${method}`;
+        const message = `Halo, saya ingin melakukan top up.%0ANama Paket: ${productName.value}%0AHarga Paket: ${productPrice.value}%0ANama Pengguna: ${username}%0AJumlah: ${amount}%0AMetode: ${method}`;
 
         window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
 
         topupForm.reset();
+        productName.value = "";
+        productPrice.value = "";
         alert("Form top up berhasil dikirim via WhatsApp!");
       });
     });
