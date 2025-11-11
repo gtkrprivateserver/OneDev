@@ -5,8 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kontak ONEDEV</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Form kontak tambahan */
+    .contact-form {
+      margin-top: 2rem;
+      background: rgba(15, 15, 25, 0.9);
+      border-radius: 15px;
+      padding: 2rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 0 20px rgba(0, 180, 216, 0.2);
+    }
+
+    .contact-form h3 {
+      color: #00b4d8;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .contact-form label {
+      display: block;
+      color: #ccc;
+      margin-bottom: 0.4rem;
+      font-size: 0.95em;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      background: #1a1a2e;
+      color: #fff;
+      margin-bottom: 1rem;
+      font-family: inherit;
+      font-size: 1em;
+    }
+
+    .contact-form button {
+      background: linear-gradient(90deg, #00b4d8, #0077b6);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 12px;
+      width: 100%;
+      cursor: pointer;
+      font-size: 1em;
+      transition: 0.3s;
+    }
+
+    .contact-form button:hover {
+      background: linear-gradient(90deg, #0096c7, #023e8a);
+      transform: scale(1.03);
+    }
+  </style>
 </head>
 <body>
+  <!-- Sidebar otomatis -->
+  <div class="sidebar"></div>
+
   <div class="main-content">
     <header>
       <div class="header-left">
@@ -23,9 +82,54 @@
         <li>💬 Discord: <a href="#">discord.gg/onedev</a></li>
         <li>🌐 Website: <a href="https://onedevofficial.vercel.app">onedevofficial.vercel.app</a></li>
       </ul>
+
+      <!-- Form Kontak -->
+      <form class="contact-form" id="contactForm">
+        <h3>Form Kontak</h3>
+        <label for="name">Nama Lengkap</label>
+        <input type="text" id="name" placeholder="Nama Anda" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="email@example.com" required>
+
+        <label for="message">Pesan</label>
+        <textarea id="message" placeholder="Tulis pesan Anda..." rows="5" required></textarea>
+
+        <button type="submit">Kirim Pesan</button>
+      </form>
     </section>
   </div>
 
   <script src="sidebar.js"></script>
+  <script>
+    // Sidebar toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuBtn = document.getElementById('menuBtn');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuBtn) {
+        menuBtn.addEventListener('click', () => {
+          sidebar.classList.toggle('active');
+        });
+      }
+
+      // Form kontak submit
+      const form = document.getElementById('contactForm');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+
+        // Kirim ke WhatsApp (contoh)
+        const phoneNumber = "628123456789"; // ganti dengan nomor tujuan
+        const waMessage = `Halo, saya ${name} (${email}) ingin mengirim pesan:\n${message}`;
+        window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(waMessage)}`, "_blank");
+
+        form.reset();
+        alert("Pesan telah dikirim via WhatsApp!");
+      });
+    });
+  </script>
 </body>
 </html>
