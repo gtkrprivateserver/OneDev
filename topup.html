@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Top Up | ONEDEV</title>
+  <title>Top Up ONEDEV</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="topup.css">
 </head>
@@ -19,112 +19,58 @@
       </div>
     </header>
 
-    <section class="topup-content">
-      <h2>Paket Top Up</h2>
-      <p>Pilih paket saldo sesuai kebutuhanmu dan top up langsung via WhatsApp.</p>
+    <!-- Banner Otomatis -->
+    <div id="adsContainer"></div>
 
-      <div class="topup-grid" id="topupGrid">
-        <!-- Paket otomatis dibuat via JS -->
+    <section class="topup-content">
+      <h2>Isi Saldo / Top Up</h2>
+      <p>Top up saldo untuk membeli paket AI, server, atau layanan digital kami.</p>
+
+      <div class="topup-form-container">
+        <form id="topupForm">
+          <label for="username">Nama Pengguna</label>
+          <input type="text" id="username" placeholder="Masukkan nama pengguna" required>
+
+          <label for="amount">Jumlah Top Up</label>
+          <input type="number" id="amount" placeholder="Masukkan nominal" required>
+
+          <label for="method">Metode Pembayaran</label>
+          <select id="method" required>
+            <option value="">Pilih metode</option>
+            <option value="bank">Transfer Bank</option>
+            <option value="gopay">Gopay</option>
+            <option value="ovo">OVO</option>
+            <option value="dana">DANA</option>
+          </select>
+
+          <button type="submit">Top Up Sekarang</button>
+        </form>
       </div>
     </section>
   </div>
 
-  <!-- Overlay & Form Popup -->
-  <div id="overlay"></div>
-  <div id="topupForm">
-    <span id="closeForm">&times;</span>
-    <h3>Form Top Up</h3>
-    <form id="orderForm">
-      <label>Nama Paket</label>
-      <input type="text" id="productName" readonly>
-
-      <label>Harga</label>
-      <input type="text" id="productPrice" readonly>
-
-      <label>Nama Anda</label>
-      <input type="text" id="buyerName" placeholder="Masukkan nama Anda" required>
-
-      <label>Nomor WhatsApp</label>
-      <input type="tel" id="buyerPhone" placeholder="contoh: 628123456789" required>
-
-      <label>Catatan Tambahan</label>
-      <textarea id="buyerNote" rows="3" placeholder="Tambahkan catatan (opsional)"></textarea>
-
-      <button type="submit">Kirim ke WhatsApp</button>
-    </form>
-  </div>
-
   <script src="sidebar.js"></script>
+  <script src="ads.js"></script>
   <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const topupGrid = document.getElementById("topupGrid");
-    const overlay = document.getElementById("overlay");
-    const topupForm = document.getElementById("topupForm");
-    const closeForm = document.getElementById("closeForm");
-    const orderForm = document.getElementById("orderForm");
+    document.addEventListener("DOMContentLoaded", () => {
+      const topupForm = document.getElementById("topupForm");
 
-    // Array paket top-up
-    const topups = [
-      { name: "Basic 50K", price: "Rp 50.000", desc: "Paket saldo awal 50 ribu" },
-      { name: "Pro 100K", price: "Rp 100.000", desc: "Paket saldo 100 ribu" },
-      { name: "Elite 200K", price: "Rp 200.000", desc: "Paket saldo 200 ribu" },
-      { name: "Mega 500K", price: "Rp 500.000", desc: "Paket saldo 500 ribu" }
-    ];
+      topupForm.addEventListener("submit", (e) => {
+        e.preventDefault();
 
-    // Membuat card otomatis
-    topups.forEach(t => {
-      const card = document.createElement("div");
-      card.className = "topup-card";
-      card.innerHTML = `
-        <h3>${t.name}</h3>
-        <div class="price">${t.price}</div>
-        <p>${t.desc}</p>
-        <button class="btn-topup" data-name="${t.name}" data-price="${t.price}">Top Up Sekarang</button>
-      `;
-      topupGrid.appendChild(card);
+        const username = document.getElementById("username").value;
+        const amount = document.getElementById("amount").value;
+        const method = document.getElementById("method").value;
+
+        const phoneNumber = "628123456789"; // ganti nomor admin / tujuan
+        const message = `Halo, saya ingin melakukan top up.%0ANama Pengguna: ${username}%0AJumlah: ${amount}%0AMetode: ${method}`;
+
+        window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
+
+        topupForm.reset();
+        alert("Form top up berhasil dikirim via WhatsApp!");
+      });
     });
-
-    // Tombol Top Up membuka form popup
-    topupGrid.addEventListener("click", e => {
-      if(e.target.classList.contains("btn-topup")){
-        const name = e.target.dataset.name;
-        const price = e.target.dataset.price;
-
-        document.getElementById("productName").value = name;
-        document.getElementById("productPrice").value = price;
-
-        overlay.style.display = "block";
-        topupForm.style.display = "block";
-      }
-    });
-
-    // Tutup form
-    closeForm.addEventListener("click", () => {
-      overlay.style.display = "none";
-      topupForm.style.display = "none";
-    });
-    overlay.addEventListener("click", () => {
-      overlay.style.display = "none";
-      topupForm.style.display = "none";
-    });
-
-    // Submit form
-    orderForm.addEventListener("submit", e => {
-      e.preventDefault();
-      const name = document.getElementById("buyerName").value;
-      const phone = document.getElementById("buyerPhone").value;
-      const note = document.getElementById("buyerNote").value;
-      const product = document.getElementById("productName").value;
-      const price = document.getElementById("productPrice").value;
-
-      const message = `Halo, saya ${name} ingin melakukan top up *${product}* (${price}).%0A%0ANomor WhatsApp: ${phone}%0A${note ? 'Catatan: ' + note : ''}`;
-      window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
-
-      overlay.style.display = "none";
-      topupForm.style.display = "none";
-      orderForm.reset();
-    });
-  });
   </script>
 </body>
 </html>
