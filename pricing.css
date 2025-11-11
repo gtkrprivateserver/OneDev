@@ -1,0 +1,142 @@
+/* === STYLING PRICING === */
+.pricing-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  justify-items: center; /* card selalu di tengah */
+}
+
+.pricing-card {
+  background: rgba(15, 15, 25, 0.9);
+  padding: 2rem;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 180, 216, 0.2);
+  transition: transform 0.3s;
+  width: 100%;       /* mengikuti kolom grid */
+  max-width: 320px;  /* card tidak terlalu lebar */
+}
+
+.pricing-card:hover {
+  transform: translateY(-5px);
+}
+
+.pricing-card h3 {
+  color: #00b4d8;
+  margin-bottom: 1rem;
+}
+
+.price {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.pricing-card ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.pricing-card ul li {
+  margin: 0.5rem 0;
+  color: #ccc;
+}
+
+.btn-buy {
+  background: linear-gradient(90deg, #00b4d8, #0077b6);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: 0.3s;
+}
+
+.btn-buy:hover {
+  background: linear-gradient(90deg, #0096c7, #023e8a);
+  transform: scale(1.03);
+}
+
+/* === POPUP FORM === */
+#paymentForm {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(15,15,25,0.95);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(0,180,216,0.3);
+  z-index: 1000;
+  max-width: 400px;
+  width: 90%;
+}
+
+#paymentForm h3 {
+  color: #00b4d8;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+#paymentForm label {
+  color: #ccc;
+  margin-bottom: 0.3rem;
+  display: block;
+  font-size: 0.95em;
+}
+
+#paymentForm input, #paymentForm textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  border: none;
+  background: #1a1a2e;
+  color: #fff;
+  font-family: inherit;
+}
+
+#paymentForm button {
+  background: linear-gradient(90deg, #00b4d8, #0077b6);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1em;
+  transition: 0.3s;
+}
+
+#paymentForm button:hover {
+  background: linear-gradient(90deg, #0096c7, #023e8a);
+  transform: scale(1.03);
+}
+
+#closeForm {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.2rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Overlay */
+#overlay {
+  display: none;
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 900;
+}
