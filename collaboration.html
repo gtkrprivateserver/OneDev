@@ -5,130 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Collaboration | ONEDEV</title>
   <link rel="stylesheet" href="styles.css">
-  <style>
-    .content {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-      text-align: center;
-    }
-
-    .collab-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      justify-items: center;
-      margin-top: 2rem;
-    }
-
-    .collab-card {
-      background: rgba(15, 15, 25, 0.9);
-      border-radius: 15px;
-      padding: 1rem;
-      width: 100%;
-      max-width: 300px;
-      box-shadow: 0 0 15px rgba(0,180,216,0.2);
-      text-align: center;
-      transition: transform 0.3s;
-    }
-
-    .collab-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .collab-card img {
-      width: 100%;
-      border-radius: 10px;
-      margin-bottom: 0.5rem;
-    }
-
-    .collab-card h3 {
-      color: #00b4d8;
-      margin-bottom: 0.5rem;
-    }
-
-    .btn-detail {
-      background: linear-gradient(90deg, #00b4d8, #0077b6);
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      padding: 8px 16px;
-      cursor: pointer;
-      font-size: 0.9em;
-      transition: 0.3s;
-    }
-
-    .btn-detail:hover {
-      background: linear-gradient(90deg, #0096c7, #023e8a);
-      transform: scale(1.03);
-    }
-
-    /* === POPUP MODAL === */
-    #detailModal {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(15,15,25,0.95);
-      padding: 2rem;
-      border-radius: 15px;
-      box-shadow: 0 0 30px rgba(0,180,216,0.3);
-      z-index: 1000;
-      max-width: 400px;
-      width: 90%;
-      text-align: left;
-    }
-
-    #detailModal h3 {
-      color: #00b4d8;
-      margin-bottom: 1rem;
-    }
-
-    #detailModal p {
-      color: #ccc;
-      margin-bottom: 1rem;
-    }
-
-    #closeModal {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 1.2rem;
-      color: #fff;
-      cursor: pointer;
-    }
-
-    /* Overlay */
-    #overlay {
-      display: none;
-      position: fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 900;
-    }
-
-    /* === RESPONSIVE GRID === */
-    @media (max-width: 1024px) {
-      .collab-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 767px) {
-      .collab-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .collab-card {
-        max-width: 90%;
-        margin: 0 auto;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="collab.css">
 </head>
 <body>
   <!-- Sidebar -->
@@ -146,39 +23,11 @@
       <h2>Kolaborasi Kami</h2>
       <p>Kami bekerja sama dengan berbagai mitra untuk menghadirkan solusi terbaik.</p>
 
-      <div class="collab-grid">
-        <div class="collab-card">
-          <img src="partner1.jpg" alt="GTKR x DonatSur">
-          <h3>GTKR x DonatSur</h3>
-          <button class="btn-detail" data-title="Partner 1" data-desc="Event & Reward Menarik – Kolaborasi ini menghadirkan event khusus dan reward unik bagi komunitas GTKR dan Dukungan Komunitas & Layanan – Tim GTKR dan DonatSur siap memberikan bantuan cepat melalui chat dan forum komunitas">Detail</button>
-        </div>
-
-        <div class="collab-card">
-          <img src="partner2.jpg" alt="Partner 2">
-          <h3>GTKR x ZB1 (news)</h3>
-          <button class="btn-detail" data-title="GTKR x ZB1 (news)" data-desc="GTKR x ZB1 News
-Kolaborasi ini menghadirkan informasi terbaru dan terpercaya seputar Growtopia Korea Private Server (GTKR) melalui platform ZB1 News. Pengguna dapat memperoleh berita real-time, update patch, event eksklusif, dan pengumuman penting langsung dari server GTKR. Selain itu, komunitas dapat berdiskusi, berbagi tips, dan mengikuti tutorial resmi GTKR dengan lebih mudah melalui fitur forum dan notifikasi eksklusif dari ZB1 News">Detail</button>
-        </div>
-
-        <div class="collab-card">
-          <img src="partner3.jpg" alt="Partner 3">
-          <h3>Coming Soon</h3>
-          <button class="btn-detail" data-title="Coming Soon" data-desc="unavailable">Detail</button>
-        </div>
+      <div class="collab-grid" id="collabGrid">
+        <!-- Card akan dibuat otomatis oleh JS -->
       </div>
     </section>
   </div>
-
-<div class="collab-card">
-          <img src="partner3.jpg" alt="Partner 4">
-          <h3>Coming Soon</h3>
-          <button class="btn-detail" data-title="Coming Soon" data-desc="unavailable">Detail</button>
-        </div>
-      </div>
-    </section>
-  </div>
-
-
 
   <!-- Overlay & Modal -->
   <div id="overlay"></div>
@@ -190,33 +39,68 @@ Kolaborasi ini menghadirkan informasi terbaru dan terpercaya seputar Growtopia K
 
   <script src="sidebar.js"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const overlay = document.getElementById("overlay");
-      const detailModal = document.getElementById("detailModal");
-      const modalTitle = document.getElementById("modalTitle");
-      const modalDesc = document.getElementById("modalDesc");
-      const closeModal = document.getElementById("closeModal");
+  document.addEventListener("DOMContentLoaded", () => {
+    const collabGrid = document.getElementById("collabGrid");
+    const overlay = document.getElementById("overlay");
+    const detailModal = document.getElementById("detailModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalDesc = document.getElementById("modalDesc");
+    const closeModal = document.getElementById("closeModal");
 
-      const detailButtons = document.querySelectorAll(".btn-detail");
-      detailButtons.forEach(btn => {
-        btn.addEventListener("click", () => {
-          modalTitle.textContent = btn.dataset.title;
-          modalDesc.textContent = btn.dataset.desc;
-          overlay.style.display = "block";
-          detailModal.style.display = "block";
-        });
-      });
+    // Array partner / kolaborasi
+    const partners = [
+      {
+        title: "GTKR x DonatSur",
+        img: "partner1.jpg",
+        desc: "Event & Reward Menarik – Kolaborasi ini menghadirkan event khusus dan reward unik bagi komunitas GTKR dan Dukungan Komunitas & Layanan – Tim GTKR dan DonatSur siap memberikan bantuan cepat melalui chat dan forum komunitas."
+      },
+      {
+        title: "GTKR x ZB1 (News)",
+        img: "partner2.jpg",
+        desc: "GTKR x ZB1 News – Kolaborasi ini menghadirkan informasi terbaru dan terpercaya seputar Growtopia Korea Private Server (GTKR) melalui platform ZB1 News. Pengguna dapat memperoleh berita real-time, update patch, event eksklusif, dan pengumuman penting langsung dari server GTKR."
+      },
+      {
+        title: "Coming Soon",
+        img: "partner3.jpg",
+        desc: "Kolaborasi baru akan segera hadir."
+      }
+      // Bisa tambahkan partner baru di sini
+    ];
 
-      closeModal.addEventListener("click", () => {
-        detailModal.style.display = "none";
-        overlay.style.display = "none";
-      });
+    // Membuat card otomatis
+    partners.forEach(partner => {
+      const card = document.createElement("div");
+      card.className = "collab-card";
+      card.innerHTML = `
+        <img src="${partner.img}" alt="${partner.title}">
+        <h3>${partner.title}</h3>
+        <button class="btn-detail" data-title="${partner.title}" data-desc="${partner.desc}">Detail</button>
+      `;
+      collabGrid.appendChild(card);
+    });
 
-      overlay.addEventListener("click", () => {
-        detailModal.style.display = "none";
-        overlay.style.display = "none";
+    // Event detail card
+    const detailButtons = document.querySelectorAll(".btn-detail");
+    detailButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        modalTitle.textContent = btn.dataset.title;
+        modalDesc.textContent = btn.dataset.desc;
+        overlay.style.display = "block";
+        detailModal.style.display = "block";
       });
     });
+
+    // Tutup modal
+    closeModal.addEventListener("click", () => {
+      detailModal.style.display = "none";
+      overlay.style.display = "none";
+    });
+
+    overlay.addEventListener("click", () => {
+      detailModal.style.display = "none";
+      overlay.style.display = "none";
+    });
+  });
   </script>
 </body>
 </html>
