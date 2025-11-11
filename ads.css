@@ -1,11 +1,24 @@
+#adsContainer, #adsContainerBottom {
+  text-align: center;
+  margin: 1rem auto;
+}
+
 .ads-banner {
+  display: inline-block;
   background: linear-gradient(90deg, #00b4d8, #0077b6);
   color: #fff;
   padding: 12px 20px;
   border-radius: 10px;
-  margin: 1rem auto;
+  margin: 0.5rem auto;
   max-width: 1000px;
   text-align: center;
   font-weight: bold;
   box-shadow: 0 0 15px rgba(0,180,216,0.3);
+  transition: transform 0.3s, background 0.3s;
+  text-decoration: none;
+}
+
+.ads-banner:hover {
+  transform: scale(1.02);
+  background: linear-gradient(90deg, #0096c7, #023e8a);
 }
