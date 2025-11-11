@@ -1,79 +1,16 @@
-/* === GLOBAL RESET === */
+/* === FEATURES PAGE STYLING === */
+
+/* Reset & Base */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 body {
-  background-color: #0d1117;
-  color: #fff;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-/* === SIDEBAR === */
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 240px;
-  height: 100vh;
-  background: #161b22;
-  padding: 25px 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: left 0.3s ease;
-  z-index: 10;
-}
-
-.sidebar .logo {
-  text-align: center;
-  font-size: 1.6em;
-  font-weight: 700;
-  color: #fff;
-}
-
-.sidebar .logo span {
-  color: #00b4d8;
-}
-
-.sidebar nav {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 40px;
-}
-
-.sidebar nav a {
-  color: #ccc;
-  text-decoration: none;
-  padding: 10px 15px;
-  border-radius: 8px;
-  transition: all 0.3s;
-}
-
-.sidebar nav a:hover,
-.sidebar nav a.active {
-  background-color: #00b4d8;
-  color: #fff;
-}
-
-.sidebar footer {
-  text-align: center;
-  color: #777;
-  font-size: 0.85em;
-}
-
-/* === MAIN CONTENT === */
-.main-content {
-  margin-left: 240px;
-  padding: 20px;
   background: #0d1117;
-  min-height: 100vh;
-  transition: margin-left 0.3s ease;
+  color: white;
   overflow-x: hidden;
 }
 
@@ -83,11 +20,12 @@ header {
   align-items: center;
   justify-content: space-between;
   background: #0d1117;
+  color: white;
   padding: 15px 20px;
   border-bottom: 1px solid #1f2a37;
   position: sticky;
   top: 0;
-  z-index: 5;
+  z-index: 998;
 }
 
 .header-left {
@@ -102,7 +40,7 @@ header {
   color: #00b4d8;
   font-size: 1.6em;
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: 0.3s;
 }
 
 .menu-btn:hover {
@@ -112,29 +50,39 @@ header {
 header h1 {
   font-size: 1.8em;
   color: #00b4d8;
+  margin: 0;
   font-weight: 600;
-  line-height: 1.3;
-  white-space: nowrap;
 }
 
-/* === HERO === */
+/* === MAIN CONTENT === */
+.main-content {
+  margin-left: 250px; /* sama seperti styles.css */
+  padding: 40px 25px;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar.active ~ .main-content {
+  margin-left: 0;
+}
+
+/* === HERO SECTION === */
 .features-hero {
   text-align: center;
-  margin-top: 50px;
+  margin-top: 40px;
   color: #fff;
-  padding: 0 20px;
-  max-width: 100%;
+  padding: 0 15px;
 }
 
 .features-hero h2 {
   font-size: 2em;
   color: #00b4d8;
+  margin-bottom: 10px;
 }
 
 .features-hero p {
   color: #ccc;
   max-width: 700px;
-  margin: 10px auto;
+  margin: 0 auto;
   line-height: 1.6;
 }
 
@@ -143,11 +91,9 @@ header h1 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 25px;
-  margin: 40px auto;
-  padding: 0 20px;
-  width: 100%;
+  margin: 50px auto;
   max-width: 1100px;
-  overflow-x: hidden;
+  padding: 0 20px;
 }
 
 .feature-card {
@@ -166,7 +112,6 @@ header h1 {
 
 .feature-card img {
   width: 70px;
-  height: auto;
   margin-bottom: 15px;
 }
 
@@ -182,25 +127,15 @@ header h1 {
   line-height: 1.6;
 }
 
-/* === RESPONSIVE === */
-@media (max-width: 992px) {
+/* === RESPONSIVE FIX === */
+@media (max-width: 900px) {
   .main-content {
     margin-left: 0;
-    padding: 15px;
+    padding: 20px;
   }
 
-  .sidebar {
-    left: -240px;
-  }
-
-  .sidebar.active {
-    left: 0;
-  }
-}
-
-@media (max-width: 768px) {
   header h1 {
-    font-size: 1.4em;
+    font-size: 1.5em;
   }
 
   .features-hero h2 {
@@ -208,25 +143,25 @@ header h1 {
   }
 
   .features-grid {
-    padding: 0 10px;
     gap: 20px;
-  }
-
-  .feature-card {
-    padding: 20px;
+    padding: 0 10px;
   }
 }
 
-@media (max-width: 480px) {
-  .menu-btn {
-    font-size: 1.4em;
-  }
-
+@media (max-width: 500px) {
   header h1 {
-    font-size: 1.2em;
+    font-size: 1.3em;
   }
 
   .features-hero h2 {
     font-size: 1.4em;
+  }
+
+  .feature-card img {
+    width: 55px;
+  }
+
+  .feature-card h3 {
+    font-size: 1.1em;
   }
 }
