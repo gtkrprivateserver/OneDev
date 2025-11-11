@@ -3,53 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Features | OneDev</title>
+  <title>ONEDEV - Features</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="features.css">
 </head>
 <body>
+
   <!-- Sidebar akan dimasukkan otomatis oleh sidebar.js -->
-  <div class="sidebar"></div>
 
   <div class="main-content">
     <header>
       <div class="header-left">
-        <button class="menu-btn" id="menuBtn">☰</button>
+        <button id="menuBtn" class="menu-btn">☰</button>
         <h1>Features</h1>
       </div>
     </header>
 
-    <section class="features-hero">
-      <h2>Our Best Features</h2>
-      <p>
-        Explore all the professional tools and premium capabilities we offer to help you 
-        manage, monitor, and improve your Growtopia private server experience.
-      </p>
+    <section class="hero">
+      <div class="hero-text">
+        <h2>Fitur Unggulan dari <span>ONEDEV</span></h2>
+        <p>Temukan berbagai fitur profesional yang membantu Anda mengelola, memantau, dan mengoptimalkan server serta proyek Anda dengan mudah dan efisien.</p>
+      </div>
+      <div class="hero-visual">
+        <div class="robot-sphere"></div>
+      </div>
     </section>
 
     <section class="features-grid">
       <div class="feature-card">
         <img src="assets/icons/speed.png" alt="Fast Performance">
-        <h3>Fast Performance</h3>
-        <p>Optimized architecture ensures your server runs smoothly with minimal downtime.</p>
+        <h3>Performa Cepat</h3>
+        <p>Struktur sistem yang dioptimalkan memastikan kinerja tinggi dengan waktu respon minimal.</p>
       </div>
 
       <div class="feature-card">
         <img src="assets/icons/security.png" alt="Security">
-        <h3>Enhanced Security</h3>
-        <p>Advanced protection and bot detection keep your players and data safe.</p>
+        <h3>Keamanan Tinggi</h3>
+        <p>Perlindungan lanjutan dengan sistem deteksi bot dan keamanan server yang kuat.</p>
       </div>
 
       <div class="feature-card">
         <img src="assets/icons/dashboard.png" alt="Dashboard">
-        <h3>Control Dashboard</h3>
-        <p>Manage your server easily using a user-friendly dashboard interface.</p>
+        <h3>Dashboard Canggih</h3>
+        <p>Kelola semua layanan Anda dengan mudah melalui antarmuka dashboard yang intuitif.</p>
       </div>
 
       <div class="feature-card">
         <img src="assets/icons/support.png" alt="Support">
-        <h3>24/7 Support</h3>
-        <p>Our support team is always ready to assist you anytime you need help.</p>
+        <h3>Dukungan 24/7</h3>
+        <p>Tim dukungan kami selalu siap membantu kapan pun Anda memerlukan bantuan.</p>
       </div>
     </section>
   </div>
@@ -57,28 +59,15 @@
   <script src="sidebar.js"></script>
 
   <script>
-    // === Sidebar Toggle for mobile ===
+    // === Sidebar Toggle ===
     document.addEventListener('DOMContentLoaded', () => {
       const menuBtn = document.getElementById('menuBtn');
       const sidebar = document.querySelector('.sidebar');
-
       if (menuBtn) {
         menuBtn.addEventListener('click', () => {
           sidebar.classList.toggle('active');
         });
       }
-
-      // Tutup sidebar jika klik di luar (mobile)
-      document.addEventListener('click', (e) => {
-        if (
-          window.innerWidth <= 900 &&
-          sidebar.classList.contains('active') &&
-          !sidebar.contains(e.target) &&
-          !e.target.closest('#menuBtn')
-        ) {
-          sidebar.classList.remove('active');
-        }
-      });
     });
   </script>
 </body>
