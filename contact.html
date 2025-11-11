@@ -63,7 +63,7 @@
   </style>
 </head>
 <body>
-  <!-- Sidebar otomatis -->
+  <!-- Sidebar otomatis dari sidebar.js -->
   <div class="sidebar"></div>
 
   <div class="main-content">
@@ -98,30 +98,9 @@
   <script src="sidebar.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const menuBtn = document.getElementById('menuBtn');
-      const sidebar = document.querySelector('.sidebar');
-
-      // Toggle sidebar
-      if (menuBtn) {
-        menuBtn.addEventListener('click', () => {
-          sidebar.classList.toggle('active');
-        });
-      }
-
-      // Tutup sidebar jika klik luar (mobile)
-      document.addEventListener('click', (e) => {
-        if (
-          window.innerWidth <= 900 &&
-          sidebar.classList.contains('active') &&
-          !sidebar.contains(e.target) &&
-          !e.target.closest('#menuBtn')
-        ) {
-          sidebar.classList.remove('active');
-        }
-      });
+      const form = document.getElementById('contactForm');
 
       // Form kontak submit
-      const form = document.getElementById('contactForm');
       form.addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -130,7 +109,7 @@
         const message = document.getElementById('message').value;
 
         // Kirim ke WhatsApp
-        const phoneNumber = "628123456789"; // Ganti dengan nomor tujuan
+        const phoneNumber = "628123456789"; // Ganti nomor tujuan
         const waMessage = `Halo, saya ${name} (${email}) ingin mengirim pesan:\n${message}`;
         window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(waMessage)}`, "_blank");
 
