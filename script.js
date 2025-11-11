@@ -33,22 +33,22 @@ document.addEventListener("DOMContentLoaded", () => {
     </footer>
   `;
 
-  // === Toggle tombol menu ===
-  const menuBtn = document.getElementById("menu-btn");
+  // === Toggle tombol menu (sesuai menu-btn) ===
+  const menuBtn = document.querySelector(".menu-btn"); // pake class menu-btn
   if (menuBtn) {
     menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation(); // biar klik tombol nggak dianggap klik luar
+      e.stopPropagation();
       sidebar.classList.toggle("active");
     });
   }
 
-  // Tutup sidebar jika klik area luar (hanya untuk mobile)
+  // Tutup sidebar jika klik luar (mobile)
   document.addEventListener("click", (e) => {
     if (
-      window.innerWidth <= 900 && // biar cuma di HP
+      window.innerWidth <= 900 &&
       sidebar.classList.contains("active") &&
       !sidebar.contains(e.target) &&
-      !e.target.closest("#menu-toggle")
+      !e.target.closest(".menu-btn")
     ) {
       sidebar.classList.remove("active");
     }
