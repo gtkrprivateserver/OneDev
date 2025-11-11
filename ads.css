@@ -1,8 +1,4 @@
-#adsContainer, #adsContainerBottom {
-  text-align: center;
-  margin: 1rem auto;
-}
-
+/* === Banner Ads === */
 .ads-banner {
   display: inline-block;
   background: linear-gradient(90deg, #00b4d8, #0077b6);
