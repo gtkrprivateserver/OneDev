@@ -1,87 +1,67 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ONEDEV - Features</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Features | OneDev</title>
   <link rel="stylesheet" href="features.css">
+  <script defer src="sidebar.js"></script>
 </head>
 <body>
-  <!-- Sidebar (otomatis dimuat dari sidebar.js) -->
-  <div id="sidebar-container"></div>
+  <!-- Sidebar (otomatis diisi via sidebar.js) -->
+  <div class="sidebar"></div>
 
-  <div class="main-content">
-    <header>
-      <div class="header-left">
-        <button id="menuBtn" class="menu-btn">☰</button>
-        <h1>Fitur Unggulan ONEDEV</h1>
-      </div>
-    </header>
+  <!-- Header -->
+  <header>
+    <div class="header-left">
+      <button class="menu-btn" id="menu-toggle">☰</button>
+      <h1>Features</h1>
+    </div>
+  </header>
 
-    <!-- HERO SECTION -->
+  <!-- Main Content -->
+  <main class="main-content">
     <section class="features-hero">
-      <h2>Teknologi Pintar, Efisien, dan Aman</h2>
-      <p>Kami menghadirkan fitur-fitur modern yang meningkatkan performa server, keamanan, dan kemudahan Anda.</p>
+      <h2>Our Best Features</h2>
+      <p>
+        Explore all the professional tools and premium capabilities we offer to help you 
+        manage, monitor, and improve your Growtopia private server experience.
+      </p>
     </section>
 
-    <!-- FEATURES GRID -->
     <section class="features-grid">
       <div class="feature-card">
-        <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="AI Integration">
-        <h3>AI Integration</h3>
-        <p>Integrasi kecerdasan buatan untuk membantu mengelola dan mengotomatisasi proses di server Discord Anda.</p>
+        <img src="assets/icons/speed.png" alt="Fast Performance">
+        <h3>Fast Performance</h3>
+        <p>Optimized architecture ensures your server runs smoothly with minimal downtime.</p>
       </div>
 
       <div class="feature-card">
-        <img src="https://cdn-icons-png.flaticon.com/512/649/649506.png" alt="Bot Monitoring">
-        <h3>Bot Monitoring</h3>
-        <p>Fitur pemantauan bot secara real-time dengan notifikasi status langsung dari dashboard.</p>
+        <img src="assets/icons/security.png" alt="Security">
+        <h3>Enhanced Security</h3>
+        <p>Advanced protection and bot detection keep your players and data safe.</p>
       </div>
 
       <div class="feature-card">
-        <img src="https://cdn-icons-png.flaticon.com/512/992/992651.png" alt="Security System">
-        <h3>Security System</h3>
-        <p>Keamanan data tingkat tinggi dengan enkripsi dan autentikasi dua faktor untuk melindungi server Anda.</p>
+        <img src="assets/icons/dashboard.png" alt="Dashboard">
+        <h3>Control Dashboard</h3>
+        <p>Manage your server easily using a user-friendly dashboard interface.</p>
       </div>
 
       <div class="feature-card">
-        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828911.png" alt="Auto Backup">
-        <h3>Auto Backup</h3>
-        <p>Sistem pencadangan otomatis memastikan Anda tidak kehilangan data penting saat pembaruan bot dilakukan.</p>
-      </div>
-
-      <div class="feature-card">
-        <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="Customization">
-        <h3>Customization</h3>
-        <p>Sesuaikan fungsi dan tampilan bot sesuai kebutuhan komunitas Anda, tanpa batasan fitur.</p>
-      </div>
-
-      <div class="feature-card">
-        <img src="https://cdn-icons-png.flaticon.com/512/992/992703.png" alt="Cloud Hosting">
-        <h3>Cloud Hosting</h3>
-        <p>Bot Anda dijalankan di server cloud 24/7 tanpa perlu khawatir tentang downtime atau koneksi lambat.</p>
+        <img src="assets/icons/support.png" alt="Support">
+        <h3>24/7 Support</h3>
+        <p>Our support team is always ready to assist you anytime you need help.</p>
       </div>
     </section>
-  </div>
+  </main>
 
-  <!-- Sidebar script -->
-  <script src="sidebar.js"></script>
-
-  <!-- Animasi scroll -->
   <script>
-    const cards = document.querySelectorAll('.feature-card');
-    function revealCards() {
-      const trigger = window.innerHeight * 0.9;
-      cards.forEach(card => {
-        const top = card.getBoundingClientRect().top;
-        if (top < trigger) {
-          card.classList.add('visible');
-        }
-      });
-    }
-    window.addEventListener('scroll', revealCards);
-    window.addEventListener('load', revealCards);
+    // === Sidebar Toggle ===
+    const menuToggle = document.getElementById('menu-toggle');
+    menuToggle.addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.toggle('active');
+    });
   </script>
 </body>
 </html>
