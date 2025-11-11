@@ -1,3 +1,4 @@
+/* === COLLAB PAGE === */
 .content {
   max-width: 1200px;
   margin: 2rem auto;
@@ -80,6 +81,25 @@
 #detailModal p {
   color: #ccc;
   margin-bottom: 1rem;
+}
+
+/* Tombol Kunjungi di modal */
+#detailModal .btn-link {
+  display: inline-block;
+  background: linear-gradient(90deg, #00b4d8, #0077b6);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 12px;
+  padding: 10px 20px;
+  font-size: 0.95em;
+  margin-top: 1rem;
+  text-align: center;
+  transition: 0.3s;
+}
+
+#detailModal .btn-link:hover {
+  background: linear-gradient(90deg, #0096c7, #023e8a);
+  transform: scale(1.03);
 }
 
 #closeModal {
