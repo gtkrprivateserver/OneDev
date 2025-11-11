@@ -3,132 +3,128 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Top Up Game ONEDEV</title>
+  <title>Top Up | ONEDEV</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="topup.css">
 </head>
 <body>
-  <!-- Sidebar otomatis -->
+  <!-- Sidebar -->
   <div class="sidebar"></div>
 
   <div class="main-content">
     <header>
       <div class="header-left">
         <button id="menuBtn" class="menu-btn">☰</button>
-        <h1>Top Up Game ONEDEV</h1>
+        <h1>Top Up ONEDEV</h1>
       </div>
     </header>
 
-    <section class="topup-game-content">
-      <h2>Pilih Paket Top Up</h2>
-      <p>Isi saldo game dengan cepat dan aman.</p>
+    <section class="topup-content">
+      <h2>Paket Top Up</h2>
+      <p>Pilih paket saldo sesuai kebutuhanmu dan top up langsung via WhatsApp.</p>
 
-      <div class="topup-game-container">
-        <div class="topup-card" data-amount="1000" data-price="Rp 10.000">
-          <h3>1000 Koin</h3>
-          <p>Harga: Rp 10.000</p>
-          <button class="btn-topup">Top Up</button>
-        </div>
-        <div class="topup-card" data-amount="5000" data-price="Rp 45.000">
-          <h3>5000 Koin</h3>
-          <p>Harga: Rp 45.000</p>
-          <button class="btn-topup">Top Up</button>
-        </div>
-        <div class="topup-card" data-amount="10000" data-price="Rp 85.000">
-          <h3>10000 Koin</h3>
-          <p>Harga: Rp 85.000</p>
-          <button class="btn-topup">Top Up</button>
-        </div>
-        <div class="topup-card" data-amount="25000" data-price="Rp 200.000">
-          <h3>25000 Koin</h3>
-          <p>Harga: Rp 200.000</p>
-          <button class="btn-topup">Top Up</button>
-        </div>
+      <div class="topup-grid" id="topupGrid">
+        <!-- Paket otomatis dibuat via JS -->
       </div>
     </section>
   </div>
 
-  <!-- Popup Form -->
+  <!-- Overlay & Form Popup -->
   <div id="overlay"></div>
-  <div id="paymentForm">
+  <div id="topupForm">
     <span id="closeForm">&times;</span>
-    <h3>Form Top Up Game</h3>
-    <form id="topupForm">
-      <label>Nama Pengguna</label>
-      <input type="text" id="username" placeholder="Masukkan nama pengguna" required>
-
-      <label>Jumlah Koin</label>
-      <input type="text" id="coinAmount" readonly>
+    <h3>Form Top Up</h3>
+    <form id="orderForm">
+      <label>Nama Paket</label>
+      <input type="text" id="productName" readonly>
 
       <label>Harga</label>
-      <input type="text" id="coinPrice" readonly>
+      <input type="text" id="productPrice" readonly>
 
-      <label>Metode Pembayaran</label>
-      <select id="method" required>
-        <option value="">Pilih metode</option>
-        <option value="bank">Transfer Bank</option>
-        <option value="gopay">Gopay</option>
-        <option value="ovo">OVO</option>
-        <option value="dana">DANA</option>
-      </select>
+      <label>Nama Anda</label>
+      <input type="text" id="buyerName" placeholder="Masukkan nama Anda" required>
 
-      <button type="submit">Top Up Sekarang</button>
+      <label>Nomor WhatsApp</label>
+      <input type="tel" id="buyerPhone" placeholder="contoh: 628123456789" required>
+
+      <label>Catatan Tambahan</label>
+      <textarea id="buyerNote" rows="3" placeholder="Tambahkan catatan (opsional)"></textarea>
+
+      <button type="submit">Kirim ke WhatsApp</button>
     </form>
   </div>
 
   <script src="sidebar.js"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const topupCards = document.querySelectorAll(".btn-topup");
-      const overlay = document.getElementById("overlay");
-      const paymentForm = document.getElementById("paymentForm");
-      const closeForm = document.getElementById("closeForm");
-      const topupForm = document.getElementById("topupForm");
+  document.addEventListener("DOMContentLoaded", () => {
+    const topupGrid = document.getElementById("topupGrid");
+    const overlay = document.getElementById("overlay");
+    const topupForm = document.getElementById("topupForm");
+    const closeForm = document.getElementById("closeForm");
+    const orderForm = document.getElementById("orderForm");
 
-      const coinAmountInput = document.getElementById("coinAmount");
-      const coinPriceInput = document.getElementById("coinPrice");
+    // Array paket top-up
+    const topups = [
+      { name: "Basic 50K", price: "Rp 50.000", desc: "Paket saldo awal 50 ribu" },
+      { name: "Pro 100K", price: "Rp 100.000", desc: "Paket saldo 100 ribu" },
+      { name: "Elite 200K", price: "Rp 200.000", desc: "Paket saldo 200 ribu" },
+      { name: "Mega 500K", price: "Rp 500.000", desc: "Paket saldo 500 ribu" }
+    ];
 
-      topupCards.forEach(btn => {
-        btn.addEventListener("click", () => {
-          const card = btn.closest(".topup-card");
-          const amount = card.dataset.amount;
-          const price = card.dataset.price;
-
-          coinAmountInput.value = amount + " Koin";
-          coinPriceInput.value = price;
-
-          overlay.style.display = "block";
-          paymentForm.style.display = "block";
-        });
-      });
-
-      closeForm.addEventListener("click", () => {
-        overlay.style.display = "none";
-        paymentForm.style.display = "none";
-      });
-
-      overlay.addEventListener("click", () => {
-        overlay.style.display = "none";
-        paymentForm.style.display = "none";
-      });
-
-      topupForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const username = document.getElementById("username").value;
-        const amount = coinAmountInput.value;
-        const price = coinPriceInput.value;
-        const method = document.getElementById("method").value;
-
-        const phoneNumber = "628123456789"; // ganti nomor admin / tujuan
-        const message = `Halo, saya ingin melakukan top up game.%0ANama Pengguna: ${username}%0AJumlah: ${amount}%0AHarga: ${price}%0AMetode: ${method}`;
-
-        window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
-
-        topupForm.reset();
-        overlay.style.display = "none";
-        paymentForm.style.display = "none";
-      });
+    // Membuat card otomatis
+    topups.forEach(t => {
+      const card = document.createElement("div");
+      card.className = "topup-card";
+      card.innerHTML = `
+        <h3>${t.name}</h3>
+        <div class="price">${t.price}</div>
+        <p>${t.desc}</p>
+        <button class="btn-topup" data-name="${t.name}" data-price="${t.price}">Top Up Sekarang</button>
+      `;
+      topupGrid.appendChild(card);
     });
+
+    // Tombol Top Up membuka form popup
+    topupGrid.addEventListener("click", e => {
+      if(e.target.classList.contains("btn-topup")){
+        const name = e.target.dataset.name;
+        const price = e.target.dataset.price;
+
+        document.getElementById("productName").value = name;
+        document.getElementById("productPrice").value = price;
+
+        overlay.style.display = "block";
+        topupForm.style.display = "block";
+      }
+    });
+
+    // Tutup form
+    closeForm.addEventListener("click", () => {
+      overlay.style.display = "none";
+      topupForm.style.display = "none";
+    });
+    overlay.addEventListener("click", () => {
+      overlay.style.display = "none";
+      topupForm.style.display = "none";
+    });
+
+    // Submit form
+    orderForm.addEventListener("submit", e => {
+      e.preventDefault();
+      const name = document.getElementById("buyerName").value;
+      const phone = document.getElementById("buyerPhone").value;
+      const note = document.getElementById("buyerNote").value;
+      const product = document.getElementById("productName").value;
+      const price = document.getElementById("productPrice").value;
+
+      const message = `Halo, saya ${name} ingin melakukan top up *${product}* (${price}).%0A%0ANomor WhatsApp: ${phone}%0A${note ? 'Catatan: ' + note : ''}`;
+      window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+
+      overlay.style.display = "none";
+      topupForm.style.display = "none";
+      orderForm.reset();
+    });
+  });
   </script>
 </body>
 </html>
