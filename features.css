@@ -1,104 +1,117 @@
-/* Reset agar tidak keluar layar */
+/* RESET DASAR */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 html, body {
-  overflow-x: hidden; /* Cegah scroll horizontal */
   width: 100%;
+  overflow-x: hidden; /* cegah keluar layar */
+  background-color: #0d1117;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
 }
 
 /* HERO SECTION */
 .features-hero {
   text-align: center;
-  margin-top: 60px;
-  padding: 20px;
+  margin-top: 80px;
+  padding: 0 15px;
   color: #fff;
   max-width: 100%;
 }
 
 .features-hero h2 {
-  color: #00b4d8;
   font-size: 2.2em;
+  color: #00b4d8;
   margin-bottom: 10px;
+  word-wrap: break-word;
 }
 
 .features-hero p {
-  color: #bbb;
+  color: #b0b0b0;
   font-size: 1.1em;
   max-width: 700px;
   margin: 0 auto;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
-/* FEATURES GRID */
+/* GRID FITUR */
 .features-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 25px;
   padding: 40px 20px;
-  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .feature-card {
-  background: #1e1e2f;
+  background: #1a1f2e;
   border-radius: 15px;
   text-align: center;
   padding: 25px 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
 }
 
 .feature-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 6px 16px rgba(0, 180, 216, 0.3);
+  transform: translateY(-6px);
+  box-shadow: 0 6px 18px rgba(0, 180, 216, 0.4);
 }
 
 .feature-card img {
   width: 70px;
   height: 70px;
-  margin-bottom: 15px;
   object-fit: contain;
+  margin-bottom: 15px;
 }
 
 .feature-card h3 {
   color: #00b4d8;
-  font-size: 1.3em;
-  margin-bottom: 10px;
+  font-size: 1.2em;
+  margin-bottom: 8px;
 }
 
 .feature-card p {
   color: #ccc;
   font-size: 0.95em;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
-/* RESPONSIVE DESIGN */
+/* RESPONSIVE */
 @media (max-width: 1024px) {
-  .features-grid {
-    padding: 30px 15px;
+  .features-hero h2 {
+    font-size: 2em;
+  }
+  .features-hero p {
+    font-size: 1em;
   }
 }
 
 @media (max-width: 768px) {
-  .features-hero h2 {
-    font-size: 1.8em;
-  }
-
-  .features-hero p {
-    font-size: 1em;
+  .features-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    padding: 30px 15px;
   }
 
   .feature-card {
     padding: 20px;
   }
+
+  .features-hero h2 {
+    font-size: 1.8em;
+  }
 }
 
 @media (max-width: 480px) {
+  .features-hero {
+    margin-top: 60px;
+  }
+
   .features-hero h2 {
     font-size: 1.5em;
   }
@@ -107,12 +120,21 @@ html, body {
     font-size: 0.9em;
   }
 
-  .feature-card {
-    padding: 18px;
+  .features-grid {
+    padding: 20px 10px;
+    gap: 20px;
   }
 
   .feature-card img {
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
+  }
+
+  .feature-card h3 {
+    font-size: 1em;
+  }
+
+  .feature-card p {
+    font-size: 0.9em;
   }
 }
