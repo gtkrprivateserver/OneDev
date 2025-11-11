@@ -64,6 +64,17 @@
 }
 
 /* === POPUP & OVERLAY === */
+#overlay {
+  display: none;
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 900;
+}
+
 #paymentForm {
   display: none;
   position: fixed;
@@ -77,17 +88,59 @@
   z-index: 1000;
   width: 90%;
   max-width: 400px;
+  box-sizing: border-box;
 }
 
-#overlay {
-  display: none;
-  position: fixed;
-  top:0;
-  left:0;
+#paymentForm h3 {
+  color: #00b4d8;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+#paymentForm label {
+  color: #ccc;
+  margin-bottom: 0.3rem;
+  display: block;
+  font-size: 0.95em;
+}
+
+#paymentForm input,
+#paymentForm textarea {
   width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-  z-index: 900;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  border: none;
+  background: #1a1a2e;
+  color: #fff;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+#paymentForm button {
+  background: linear-gradient(90deg, #00b4d8, #0077b6);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1em;
+  transition: 0.3s;
+}
+
+#paymentForm button:hover {
+  background: linear-gradient(90deg, #0096c7, #023e8a);
+  transform: scale(1.03);
+}
+
+#closeForm {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.2rem;
+  color: #fff;
+  cursor: pointer;
 }
 
 /* === RESPONSIVE === */
