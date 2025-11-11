@@ -6,6 +6,71 @@
   <title>ONEDEV - Store</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="store.css">
+  <style>
+    /* Popup overlay */
+    .form-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .form-overlay form {
+      background: #161b22;
+      padding: 2rem;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 500px;
+      position: relative;
+      box-shadow: 0 0 25px rgba(0,180,216,0.2);
+    }
+
+    .form-overlay form #closeForm {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.4em;
+      cursor: pointer;
+    }
+
+    .form-overlay form input,
+    .form-overlay form textarea {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 1rem;
+      border-radius: 10px;
+      border: none;
+      background: #1a1a2e;
+      color: #fff;
+      font-family: inherit;
+    }
+
+    .form-overlay form button[type="submit"] {
+      width: 100%;
+      padding: 12px 0;
+      background: linear-gradient(90deg, #00b4d8, #0077b6);
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 1em;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .form-overlay form button[type="submit"]:hover {
+      background: linear-gradient(90deg, #0096c7, #023e8a);
+      transform: scale(1.03);
+    }
+  </style>
 </head>
 <body>
   <!-- Sidebar akan dimasukkan otomatis oleh sidebar.js -->
@@ -47,30 +112,32 @@
           <button class="btn-buy">Beli Sekarang</button>
         </div>
       </div>
-
-      <!-- Form pembayaran -->
-      <form class="payment-form" id="paymentForm" style="display:none;">
-        <button type="button" id="closeForm" style="float:right; background:none; border:none; font-size:1.2em; cursor:pointer;">✖</button>
-        <h3>Form Pembayaran</h3>
-
-        <label for="name">Nama Lengkap</label>
-        <input type="text" id="name" placeholder="Nama Anda" required>
-
-        <label for="product">Produk</label>
-        <input type="text" id="product" readonly>
-
-        <label for="price">Harga</label>
-        <input type="text" id="price" readonly>
-
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="email@example.com" required>
-
-        <label for="notes">Catatan Tambahan</label>
-        <textarea id="notes" placeholder="Catatan tambahan (opsional)"></textarea>
-
-        <button type="submit">Bayar Sekarang</button>
-      </form>
     </section>
+  </div>
+
+  <!-- Popup Form -->
+  <div class="form-overlay" id="formOverlay">
+    <form id="paymentForm">
+      <button type="button" id="closeForm">✖</button>
+      <h3>Form Pembayaran</h3>
+
+      <label for="name">Nama Lengkap</label>
+      <input type="text" id="name" placeholder="Nama Anda" required>
+
+      <label for="product">Produk</label>
+      <input type="text" id="product" readonly>
+
+      <label for="price">Harga</label>
+      <input type="text" id="price" readonly>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="email@example.com" required>
+
+      <label for="notes">Catatan Tambahan</label>
+      <textarea id="notes" placeholder="Catatan tambahan (opsional)"></textarea>
+
+      <button type="submit">Bayar Sekarang</button>
+    </form>
   </div>
 
   <script src="sidebar.js"></script>
