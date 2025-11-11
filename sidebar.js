@@ -1,8 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const sidebar = document.querySelector(".sidebar");
-  if (!sidebar) return;
+  // Cari elemen sidebar, buat jika belum ada
+  let sidebar = document.querySelector(".sidebar");
+  if (!sidebar) {
+    sidebar = document.createElement("div");
+    sidebar.classList.add("sidebar");
+    document.body.prepend(sidebar);
+  }
 
-  // === Daftar halaman ===
+  // Daftar halaman
   const pages = [
     { name: "🏠 Home", link: "index.html" },
     { name: "💡 About", link: "about.html" },
@@ -13,18 +18,11 @@ document.addEventListener("DOMContentLoaded", () => {
     { name: "🛒 Store", link: "store.html" }
   ];
 
-  // === Struktur Sidebar ===
+  // Bangun sidebar
   sidebar.innerHTML = `
     <h2 class="logo">ONE<span>DEV</span></h2>
     <nav>
-      ${pages
-        .map(
-          (p) =>
-            `<a href="${p.link}" class="${
-              window.location.pathname.includes(p.link) ? "active" : ""
-            }">${p.name}</a>`
-        )
-        .join("")}
+      ${pages.map(p => `<a href="${p.link}" class="${window.location.pathname.includes(p.link) ? "active" : ""}">${p.name}</a>`).join("")}
     </nav>
     <footer class="sidebar-footer">
       <hr class="footer-divider" />
@@ -33,8 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
     </footer>
   `;
 
-  // === Toggle sidebar pakai tombol .menu-btn ===
-  const menuBtn = document.querySelector(".menu-btn");
+  // Tombol toggle sidebar
+  const menuBtn = document.getElementById("menuBtn");
   if (menuBtn) {
     menuBtn.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -42,14 +40,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // === Tutup sidebar jika klik area luar (mobile) ===
+  // Tutup sidebar jika klik luar di mobile
   document.addEventListener("click", (e) => {
-    if (
-      window.innerWidth <= 900 &&
-      sidebar.classList.contains("active") &&
-      !sidebar.contains(e.target) &&
-      !e.target.closest(".menu-btn")
-    ) {
+    if (window.innerWidth <= 900 &&
+        sidebar.classList.contains("active") &&
+        !sidebar.contains(e.target) &&
+        !e.target.closest("#menuBtn")) {
       sidebar.classList.remove("active");
     }
   });
