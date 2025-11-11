@@ -1,23 +1,23 @@
 /* === STYLING PRICING === */
 .pricing-container {
-  max-width: 1200px;
+  max-width: 1000px; /* lebih fleksibel untuk layar kecil */
   margin: 2rem auto;
   padding: 0 1rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* kolom minimal 220px */
+  gap: 1.5rem;
   justify-items: center; /* card selalu di tengah */
 }
 
 .pricing-card {
   background: rgba(15, 15, 25, 0.9);
-  padding: 2rem;
+  padding: 1.5rem; /* dikurangi agar lebih pas di layar kecil */
   border-radius: 15px;
   text-align: center;
   box-shadow: 0 0 20px rgba(0, 180, 216, 0.2);
   transition: transform 0.3s;
-  width: 100%;       /* mengikuti kolom grid */
-  max-width: 320px;  /* card tidak terlalu lebar */
+  width: 100%;        /* mengikuti kolom grid */
+  max-width: 280px;   /* card tidak terlalu lebar */
 }
 
 .pricing-card:hover {
@@ -26,11 +26,11 @@
 
 .pricing-card h3 {
   color: #00b4d8;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
 }
 
 .price {
-  font-size: 2rem;
+  font-size: 1.8rem; /* sedikit lebih kecil agar pas layar kecil */
   font-weight: bold;
   color: #fff;
   margin-bottom: 1rem;
@@ -39,11 +39,11 @@
 .pricing-card ul {
   list-style: none;
   padding: 0;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .pricing-card ul li {
-  margin: 0.5rem 0;
+  margin: 0.4rem 0;
   color: #ccc;
 }
 
@@ -52,9 +52,9 @@
   color: #fff;
   border: none;
   border-radius: 12px;
-  padding: 12px 24px;
+  padding: 10px 20px;
   cursor: pointer;
-  font-size: 1em;
+  font-size: 0.95em;
   transition: 0.3s;
 }
 
@@ -75,8 +75,8 @@
   border-radius: 15px;
   box-shadow: 0 0 30px rgba(0,180,216,0.3);
   z-index: 1000;
-  max-width: 400px;
-  width: 90%;
+  max-width: 90%;  /* responsive */
+  width: 400px;    /* lebar tetap tapi tidak melebar */
 }
 
 #paymentForm h3 {
@@ -139,4 +139,20 @@
   height: 100%;
   background: rgba(0,0,0,0.5);
   z-index: 900;
+}
+
+/* Responsif mobile */
+@media (max-width: 480px) {
+  .pricing-card {
+    padding: 1rem;
+  }
+
+  .price {
+    font-size: 1.5rem;
+  }
+
+  .btn-buy {
+    padding: 8px 16px;
+    font-size: 0.9em;
+  }
 }
