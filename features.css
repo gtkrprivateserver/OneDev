@@ -8,10 +8,12 @@
   font-family: 'Poppins', sans-serif;
 }
 
-body {
+html, body {
+  width: 100%;
+  height: 100%;
   background: #0d1117;
   color: white;
-  overflow-x: hidden;
+  overflow-x: hidden; /* cegah keluar layar */
 }
 
 /* === HEADER === */
@@ -25,7 +27,7 @@ header {
   border-bottom: 1px solid #1f2a37;
   position: sticky;
   top: 0;
-  z-index: 998;
+  z-index: 997;
 }
 
 .header-left {
@@ -54,15 +56,38 @@ header h1 {
   font-weight: 600;
 }
 
+/* === SIDEBAR FIX === */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 250px;
+  background: #161b22;
+  border-right: 1px solid #1f2a37;
+  padding-top: 60px;
+  transition: all 0.3s ease;
+  z-index: 998;
+}
+
+.sidebar.active {
+  left: -250px;
+}
+
 /* === MAIN CONTENT === */
 .main-content {
-  margin-left: 250px; /* sama seperti styles.css */
+  margin-left: 250px; /* sejajar dengan sidebar */
   padding: 40px 25px;
   transition: margin-left 0.3s ease;
+  width: calc(100% - 250px);
+  min-height: 100vh;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .sidebar.active ~ .main-content {
   margin-left: 0;
+  width: 100%;
 }
 
 /* === HERO SECTION === */
@@ -71,6 +96,8 @@ header h1 {
   margin-top: 40px;
   color: #fff;
   padding: 0 15px;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .features-hero h2 {
@@ -94,6 +121,8 @@ header h1 {
   margin: 50px auto;
   max-width: 1100px;
   padding: 0 20px;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .feature-card {
@@ -128,10 +157,19 @@ header h1 {
 }
 
 /* === RESPONSIVE FIX === */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .main-content {
     margin-left: 0;
-    padding: 20px;
+    width: 100%;
+    padding: 25px;
+  }
+
+  .sidebar {
+    left: -250px;
+  }
+
+  .sidebar.active {
+    left: 0;
   }
 
   header h1 {
@@ -139,16 +177,11 @@ header h1 {
   }
 
   .features-hero h2 {
-    font-size: 1.6em;
-  }
-
-  .features-grid {
-    gap: 20px;
-    padding: 0 10px;
+    font-size: 1.7em;
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   header h1 {
     font-size: 1.3em;
   }
@@ -163,5 +196,10 @@ header h1 {
 
   .feature-card h3 {
     font-size: 1.1em;
+  }
+
+  .features-grid {
+    gap: 15px;
+    padding: 0 10px;
   }
 }
