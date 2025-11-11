@@ -23,8 +23,7 @@
       <p>Pilih produk terbaik dari ONEDEV. Semua produk tersedia dengan harga terbaik dan kualitas terjamin.</p>
 
       <div class="store-grid">
-        <!-- Contoh produk -->
-        <div class="store-card">
+        <div class="store-card" data-product="Robot AI Model X" data-price="Rp 5.000.000">
           <img src="img/product1.png" alt="Produk 1">
           <h3>Robot AI Model X</h3>
           <p>Robot canggih dengan AI terbaru untuk otomasi industri.</p>
@@ -32,7 +31,7 @@
           <button class="btn-buy">Beli Sekarang</button>
         </div>
 
-        <div class="store-card">
+        <div class="store-card" data-product="Drone Pintar" data-price="Rp 3.200.000">
           <img src="img/product2.png" alt="Produk 2">
           <h3>Drone Pintar</h3>
           <p>Drone dengan navigasi AI untuk pengiriman cepat dan efisien.</p>
@@ -40,7 +39,7 @@
           <button class="btn-buy">Beli Sekarang</button>
         </div>
 
-        <div class="store-card">
+        <div class="store-card" data-product="AI Assistant" data-price="Rp 1.800.000">
           <img src="img/product3.png" alt="Produk 3">
           <h3>AI Assistant</h3>
           <p>Software AI untuk meningkatkan produktivitas perusahaan Anda.</p>
@@ -49,19 +48,19 @@
         </div>
       </div>
 
-      <!-- Contoh form pembayaran -->
-      <form class="payment-form">
+      <!-- Form pembayaran -->
+      <form class="payment-form" id="paymentForm" style="display:none;">
+        <button type="button" id="closeForm" style="float:right; background:none; border:none; font-size:1.2em; cursor:pointer;">✖</button>
         <h3>Form Pembayaran</h3>
+
         <label for="name">Nama Lengkap</label>
         <input type="text" id="name" placeholder="Nama Anda" required>
 
-        <label for="product">Pilih Produk</label>
-        <select id="product" required>
-          <option value="">-- Pilih Produk --</option>
-          <option value="Robot AI Model X">Robot AI Model X</option>
-          <option value="Drone Pintar">Drone Pintar</option>
-          <option value="AI Assistant">AI Assistant</option>
-        </select>
+        <label for="product">Produk</label>
+        <input type="text" id="product" readonly>
+
+        <label for="price">Harga</label>
+        <input type="text" id="price" readonly>
 
         <label for="email">Email</label>
         <input type="email" id="email" placeholder="email@example.com" required>
@@ -75,5 +74,6 @@
   </div>
 
   <script src="sidebar.js"></script>
+  <script src="store.js"></script>
 </body>
 </html>
