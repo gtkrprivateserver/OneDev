@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="features.css">
 </head>
 <body>
+  <!-- Sidebar (otomatis dimuat dari sidebar.js) -->
+  <div id="sidebar-container"></div>
+
   <div class="main-content">
     <header>
       <div class="header-left">
@@ -62,6 +65,23 @@
     </section>
   </div>
 
+  <!-- Sidebar script -->
   <script src="sidebar.js"></script>
+
+  <!-- Animasi scroll -->
+  <script>
+    const cards = document.querySelectorAll('.feature-card');
+    function revealCards() {
+      const trigger = window.innerHeight * 0.9;
+      cards.forEach(card => {
+        const top = card.getBoundingClientRect().top;
+        if (top < trigger) {
+          card.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', revealCards);
+    window.addEventListener('load', revealCards);
+  </script>
 </body>
-</html> 
+</html>
