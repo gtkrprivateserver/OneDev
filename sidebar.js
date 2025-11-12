@@ -12,12 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
     { name: "🏠 Home", link: "index.html" },
     { name: "💡 About", link: "about.html" },
     { name: "✨ Features", link: "features.html" },
-    { name: "⏳ Monitor", link: "/bot/monitor.html" },
+    { name: "⏳ Monitor", link: "monitor.html" },
     { name: "⚙️ Services", link: "services.html" },
-    { name: "💰 Pricing", link: "price/pricing.html" },
+    { name: "💰 Pricing", link: "pricing.html" },
     { name: "📩 Contact", link: "contact.html" },
     { name: "🛒 Store", link: "store.html" },
-    { name: "🎮 Top Up", link: "/game/topup.html" },
+    { name: "🎮 Top Up", link: "topup.html" },
     { name: "☄️ Collaboration", link: "collaboration.html" }
   ];
 
