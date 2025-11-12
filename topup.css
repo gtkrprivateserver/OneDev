@@ -1,113 +1,101 @@
-.topup-content {
-  text-align: center;
-  padding: 2rem;
+/* topup.css - desain top up game, popup kecil agar tidak menutupi layar */
+:root{
+  --accent: #00b4d8;
+  --bg: #0d1117;
+  --card: #11121a;
+  --muted: #9aa6b2;
 }
+
+body { background: var(--bg); color: #eaeaea; font-family: 'Poppins', sans-serif; }
+
+.main-content { margin-left: 240px; padding: 20px; min-height: 100vh; box-sizing: border-box; }
+
+.topup-content { max-width: 1100px; margin: 0 auto; padding: 10px; }
+
+.topup-content h2 { color: var(--accent); margin-bottom: 6px; }
+.topup-content p { color: #cfd8dd; margin-bottom: 16px; }
 
 .topup-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
 }
 
+/* card */
 .topup-card {
-  background: #101820;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.03);
+  padding: 14px;
   border-radius: 12px;
-  color: #fff;
-  padding: 1.5rem;
-  width: 220px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
-  transition: transform 0.3s;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
-.topup-card:hover {
-  transform: scale(1.05);
-}
+.topup-card:hover { transform: translateY(-6px); box-shadow: 0 10px 30px rgba(0,0,0,0.7); }
+
+.topup-card h3 { color: var(--accent); margin-bottom: 8px; font-size: 1.05rem; }
+.card-price { color: #fff; font-weight: 700; margin-bottom: 12px; }
 
 .btn-buy {
-  background: linear-gradient(90deg,#00b4d8,#0077b6);
+  background: linear-gradient(90deg, var(--accent), #0077b6);
   color: #fff;
   border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
+  border-radius: 10px;
+  padding: 8px 12px;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 600;
+  transition: transform 0.12s;
 }
 
-.btn-buy:hover {
-  background: linear-gradient(90deg,#0096c7,#023e8a);
-}
+.btn-buy:active { transform: scale(0.98); }
 
-/* Overlay dan Modal */
+/* overlay & modal */
+.hidden { display: none; }
 #overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.5);
-  display: none;
-  z-index: 10;
+  position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 900;
 }
 
 .modal {
   position: fixed;
-  top: 50%;
+  z-index: 1000;
   left: 50%;
-  transform: translate(-50%,-50%);
-  background: #1e1e2f;
-  padding: 1.2rem;
+  top: 52%;
+  transform: translate(-50%, -50%);
+  background: #0f1116;
   border-radius: 10px;
-  width: 90%;
-  max-width: 360px;
-  color: #fff;
-  box-shadow: 0 0 25px rgba(0,0,0,0.4);
-  z-index: 20;
+  padding: 16px;
+  width: 420px;
+  max-width: 92%;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.7);
+  border: 1px solid rgba(0,180,216,0.06);
 }
 
-.modal h3 {
-  margin-bottom: 1rem;
-  text-align: center;
-  color: #00b4d8;
+.modal h3 { color: var(--accent); margin-bottom: 10px; }
+.modal label { display:block; color: var(--muted); margin-top: 8px; font-size: 0.9rem; }
+.modal input, .modal textarea {
+  width: 100%; padding: 8px 10px; margin-top:6px; border-radius: 8px;
+  border: none; background:#12131a; color: #fff; font-family: inherit;
 }
 
-.modal-close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 22px;
-  cursor: pointer;
+.modal .modal-close {
+  position: absolute; right: 10px; top: 8px; background: none; border: none; color: #fff;
+  font-size: 1.4rem; cursor: pointer;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
+/* submit button & status */
+#submitOrder {
+  margin-top: 12px;
+  background: linear-gradient(90deg, var(--accent), #0077b6);
+  color: #fff; border: none; padding: 10px; border-radius: 8px; width: 100%; font-weight:600;
 }
 
-input, textarea {
-  padding: 8px;
-  border-radius: 6px;
-  border: none;
-  background: #2a2a3b;
-  color: #fff;
-}
+.muted { color: var(--muted); margin-top: 10px; }
+.small { font-size: 0.9rem; }
 
-button#submitOrder {
-  background: linear-gradient(90deg,#00b4d8,#0077b6);
-  padding: 10px;
-  border: none;
-  border-radius: 6px;
-  color: #fff;
-  cursor: pointer;
-  margin-top: 1rem;
-}
-
-.hidden { display: none; }
-
-#statusText {
-  text-align: center;
-  color: #ccc;
-  font-size: 0.9rem;
+/* responsive tweaks */
+@media (max-width: 900px) {
+  .main-content { margin-left: 0; padding: 14px; }
+  .modal { width: 92%; top: 50%; }
+  .topup-grid { gap: 12px; }
 }
