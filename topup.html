@@ -4,18 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Top Up Game - ONEDEV</title>
-  <link rel="stylesheet" href="topup.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <h2>ONEDEV</h2>
-    <ul>
-      <li><a href="index.html">🏠 Dashboard</a></li>
-      <li><a href="topup.html" class="active">💎 Top Up Game</a></li>
-      <li><a href="status.html">📊 Status</a></li>
-    </ul>
-  </div>
+  <!-- Sidebar otomatis dari sidebar.js -->
+  <div class="sidebar"></div>
 
   <div class="main-content">
     <header>
@@ -27,7 +20,7 @@
 
     <section class="topup-content">
       <h2>Pilih Paket Top Up</h2>
-      <p>Silakan pilih paket top up Growtopia GTKR lalu isi data.</p>
+      <p>Silakan pilih paket top up Growtopia GTKR lalu isi data dengan benar.</p>
 
       <div class="topup-grid">
         <div class="topup-card" data-product="50 Diamond" data-price="Rp 10.000">
@@ -77,7 +70,13 @@
     </form>
   </div>
 
+  <script src="sidebar.js"></script>
+
   <script>
+    // === Ambil Secret dari Railway (Server Environment) ===
+    const BOT_API_URL = "/api/topup"; // endpoint backend bot (akan kita buat di server.js)
+
+    // === Popup & Card Logic ===
     const overlay = document.getElementById("overlay");
     const modal = document.getElementById("orderModal");
     const closeModal = document.getElementById("closeModal");
@@ -100,7 +99,7 @@
       overlay.classList.add("hidden");
     });
 
-    // === Submit Form ===
+    // === Form Submit ke API Backend ===
     document.getElementById("orderForm").addEventListener("submit", async e => {
       e.preventDefault();
       const buyerName = document.getElementById("buyerName").value;
@@ -109,21 +108,72 @@
       const product = productInput.value;
       const price = priceInput.value;
 
-      statusText.textContent = "Please wait... processing your order.";
+      statusText.textContent = "Please be patient, your order is being processed...";
 
-      const res = await fetch("/notify", {
+      const res = await fetch(BOT_API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ buyerName, discordName, growID, product, price })
       });
 
-      if (res.ok) {
+      const data = await res.json();
+      if (data.success) {
         statusText.textContent = "✅ Pesanan berhasil dikirim! Tunggu admin memproses.";
-        e.target.reset();
       } else {
-        statusText.textContent = "❌ Gagal mengirim pesanan, coba lagi.";
+        statusText.textContent = "❌ Gagal mengirim pesanan. Coba lagi.";
       }
+
+      e.target.reset();
     });
   </script>
+
+  <style>
+    /* Styling form agar tidak menutupi layar dan responsif */
+    .modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      padding: 20px;
+      width: 90%;
+      max-width: 400px;
+      z-index: 1001;
+    }
+
+    .modal h3 { text-align: center; margin-bottom: 15px; }
+    .modal label { font-weight: 600; margin-top: 10px; display: block; }
+    .modal input { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #ccc; }
+    .modal button { margin-top: 15px; width: 100%; background: #0077b6; color: white; border: none; padding: 10px; border-radius: 6px; }
+    .modal button:hover { background: #005f8a; }
+
+    #overlay {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 1000;
+    }
+
+    .hidden { display: none; }
+
+    .topup-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .topup-card {
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .topup-card:hover { transform: translateY(-5px); }
+    .card-price { color: #0077b6; font-weight: bold; }
+  </style>
 </body>
-</html
+</html>
