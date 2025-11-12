@@ -1,142 +1,91 @@
-/* Grid Top Up Produk */
+/* === Grid Produk === */
 .topup-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
+  justify-content: center;
   margin-top: 2rem;
 }
 
-/* Card Produk */
 .topup-card {
-  background: #fff;
-  padding: 12px;
-  border-radius: 10px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  background: rgba(15,15,25,0.9);
+  color: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  width: 200px;
   text-align: center;
-  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 15px rgba(0,180,216,0.3);
+  transition: transform 0.3s;
 }
 
 .topup-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-}
-
-.topup-card h3 {
-  font-size: 1rem;
-  color: #0077b6;
-  margin-bottom: 5px;
+  transform: translateY(-5px);
 }
 
 .card-price {
-  font-weight: bold;
+  margin: 0.5rem 0;
   color: #00b4d8;
-  font-size: 0.9rem;
-  margin-bottom: 10px;
-}
-
-/* Tombol Beli */
-.btn-buy {
-  background: linear-gradient(90deg,#00b4d8,#0077b6);
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 6px 0;
-  width: 100%;
   font-weight: bold;
-  cursor: pointer;
-  transition: 0.2s;
 }
 
-.btn-buy:hover {
-  transform: scale(1.03);
-  background: linear-gradient(90deg,#0096c7,#005f8a);
-}
-
-/* Overlay */
-#overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.35);
-  display: none;
-  z-index: 1000;
-}
-
-/* Modal Form */
+/* === Popup Modal === */
 .modal {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
-  background: #fff;
-  padding: 15px;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 320px; /* kecil & tidak menutupi layar */
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  transform: translate(-50%, -50%);
+  background: rgba(20,20,30,0.95);
+  padding: 1.5rem;
+  border-radius: 12px;
+  width: 320px;
+  max-width: 90%;
+  box-shadow: 0 0 25px rgba(0,180,216,0.4);
+  z-index: 1000;
+}
+
+.hidden {
   display: none;
-  z-index: 1001;
 }
 
-.modal h3 {
-  text-align: center;
-  color: #0077b6;
-  margin-bottom: 12px;
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 1.4rem;
+  background: none;
+  border: none;
+  color: #00b4d8;
+  cursor: pointer;
 }
 
-.modal label {
-  font-weight: 600;
-  display: block;
-  margin-top: 8px;
-}
-
-.modal input {
+.modal input,
+.modal textarea,
+.modal select,
+.modal button {
   width: 100%;
-  padding: 6px;
-  margin-top: 4px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
+  padding: 8px 10px;
+  margin: 6px 0;
+  border-radius: 8px;
+  border: 1px solid #0077b6;
+  background: #111;
+  color: #fff;
 }
 
 .modal button {
-  margin-top: 10px;
-  width: 100%;
-  padding: 8px;
-  border: none;
-  border-radius: 5px;
   background: linear-gradient(90deg,#00b4d8,#0077b6);
+  border: none;
   color: #fff;
   font-weight: bold;
   cursor: pointer;
-  transition: 0.2s;
+  transition: transform 0.2s;
 }
 
 .modal button:hover {
-  background: linear-gradient(90deg,#0096c7,#005f8a);
-  transform: scale(1.02);
+  transform: scale(1.03);
 }
 
-/* Tombol Close */
-.modal-close {
-  position: absolute;
-  top: 5px;
-  right: 8px;
-  font-size: 1.2rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #0077b6;
-}
-
-/* Responsif */
-@media(max-width: 600px){
-  .topup-grid{
-    grid-template-columns: 1fr;
-  }
-
-  .modal {
-    max-width: 90%;
-    padding: 10px;
-  }
+.muted {
+  font-size: 0.85rem;
+  color: #ccc;
+  margin-top: 6px;
 }
