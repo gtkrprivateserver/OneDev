@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { name: "💰 Pricing", link: "pricing.html" },
     { name: "📩 Contact", link: "contact.html" },
     { name: "🛒 Store", link: "store.html" },
-    { name: "🎮 Top Up", link: "public/topup.html" },
+    { name: "🎮 Top Up", link: "game/topup.html" },
     { name: "☄️ Collaboration", link: "collaboration.html" }
   ];
 
