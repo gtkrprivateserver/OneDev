@@ -1,15 +1,11 @@
 {
   "name": "onedev-website",
   "version": "1.0.0",
-  "description": "Website ONEDEV dengan Top Up Game dan Banner Ads",
-  "main": "index.html",
+  "description": "Website ONEDEV Top Up Game",
   "scripts": {
     "start": "vercel dev",
-    "build": "echo 'Static site, no build required'"
+    "build": "echo 'static site, no build required'"
   },
-  "keywords": ["onedev", "website", "topup", "game", "html", "css", "js"],
-  "author": "ONEDEV",
-  "license": "MIT",
   "devDependencies": {
     "vercel": "^28.0.0"
   }
