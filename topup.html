@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Top Up Game - ONEDEV</title>
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="topup.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Top Up Game - ONEDEV</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="TopUp.css">
 </head>
 <body>
-  <!-- Sidebar dari sidebar.js -->
+  <!-- Sidebar -->
   <div class="sidebar"></div>
 
   <div class="main-content">
@@ -29,11 +29,13 @@
           <p class="card-price">Rp 10.000</p>
           <button class="btn-buy">Beli</button>
         </div>
+
         <div class="topup-card" data-product="120 Diamond" data-price="Rp 20.000">
           <h3>120 Diamond</h3>
           <p class="card-price">Rp 20.000</p>
           <button class="btn-buy">Beli</button>
         </div>
+
         <div class="topup-card" data-product="300 Diamond" data-price="Rp 45.000">
           <h3>300 Diamond</h3>
           <p class="card-price">Rp 45.000</p>
@@ -43,9 +45,9 @@
     </section>
   </div>
 
-  <!-- Overlay & Modal -->
-  <div id="overlay"></div>
-  <div id="orderModal" class="modal">
+  <!-- Overlay / Popup -->
+  <div id="overlay" class="hidden"></div>
+  <div id="orderModal" class="modal hidden">
     <button id="closeModal" class="modal-close">&times;</button>
     <h3>Form Pembelian</h3>
     <form id="orderForm">
@@ -64,96 +66,104 @@
       <label>GrowID GTKR</label>
       <input type="text" id="growID" placeholder="GrowID Anda" required>
 
-      <button type="submit">Kirim Pesanan</button>
-      <p id="statusText"></p>
+      <button type="submit" id="submitOrder">Kirim Pesanan</button>
+      <p id="statusText" class="muted"></p>
     </form>
   </div>
 
-<script src="sidebar.js"></script>
-<script>
-const BOT_ADMIN_TOKEN = "RAILWAY_SECRET_ADMIN_BOT_TOKEN";
-const ADMIN_ID = "RAILWAY_SECRET_ADMIN_ID";
-const WEBHOOK_URL = "RAILWAY_SECRET_WEBHOOK_URL";
+  <script src="sidebar.js"></script>
+  <script>
+    // === Variabel Token & Webhook ===
+    const BOT_ADMIN_TOKEN = "YOUR_ADMIN_BOT_TOKEN"; // isi dengan token bot admin
+    const ADMIN_ID = "YOUR_ADMIN_DISCORD_ID";       // isi ID admin
+    const WEBHOOK_URL = "YOUR_DISCORD_WEBHOOK_URL"; // isi webhook channel
 
-const overlay = document.getElementById("overlay");
-const modal = document.getElementById("orderModal");
-const closeModal = document.getElementById("closeModal");
-const productInput = document.getElementById("product");
-const priceInput = document.getElementById("price");
-const statusText = document.getElementById("statusText");
+    // === Popup & Card Logic ===
+    const overlay = document.getElementById("overlay");
+    const modal = document.getElementById("orderModal");
+    const closeModal = document.getElementById("closeModal");
+    const productInput = document.getElementById("product");
+    const priceInput = document.getElementById("price");
+    const statusText = document.getElementById("statusText");
 
-document.querySelectorAll(".btn-buy").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const card = btn.closest(".topup-card");
-    productInput.value = card.dataset.product;
-    priceInput.value = card.dataset.price;
-    modal.style.display = "block";
-    overlay.style.display = "block";
-  });
-});
+    document.querySelectorAll(".btn-buy").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const card = btn.closest(".topup-card");
+        productInput.value = card.dataset.product;
+        priceInput.value = card.dataset.price;
+        modal.classList.remove("hidden");
+        overlay.classList.remove("hidden");
+      });
+    });
 
-closeModal.addEventListener("click", () => {
-  modal.style.display = "none";
-  overlay.style.display = "none";
-});
+    closeModal.addEventListener("click", () => {
+      modal.classList.add("hidden");
+      overlay.classList.add("hidden");
+    });
 
-overlay.addEventListener("click", () => {
-  modal.style.display = "none";
-  overlay.style.display = "none";
-});
+    // === Form Submit ===
+    document.getElementById("orderForm").addEventListener("submit", async e => {
+      e.preventDefault();
+      const buyerName = document.getElementById("buyerName").value;
+      const discordName = document.getElementById("discordName").value;
+      const growID = document.getElementById("growID").value;
+      const product = productInput.value;
+      const price = priceInput.value;
 
-document.getElementById("orderForm").addEventListener("submit", async e => {
-  e.preventDefault();
-  const buyerName = document.getElementById("buyerName").value;
-  const discordName = document.getElementById("discordName").value;
-  const growID = document.getElementById("growID").value;
-  const product = productInput.value;
-  const price = priceInput.value;
+      statusText.textContent = "Please wait, your order is being processed...";
 
-  statusText.textContent = "Please be patient, your order is being processed...";
+      // === Kirim ke Webhook Channel ===
+      await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          username: "OneDev TopUp",
+          embeds: [{
+            title: "🛒 New Order",
+            description: `**Nama:** ${buyerName}\n**Discord:** ${discordName}\n**GrowID:** ${growID}\n**Produk:** ${product}\n**Harga:** ${price}`,
+            color: 5814783,
+            footer: { text: "OneDev TopUp System" }
+          }]
+        })
+      });
 
-  // Kirim ke webhook
-  await fetch(WEBHOOK_URL,{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body: JSON.stringify({
-      username:"OneDev TopUp",
-      embeds:[{
-        title:"🛒 New Order",
-        description:`**Nama:** ${buyerName}\n**Discord:** ${discordName}\n**GrowID:** ${growID}\n**Produk:** ${product}\n**Harga:** ${price}`,
-        color:5814783,
-        footer:{text:"OneDev TopUp System"}
-      }]
-    })
-  });
-
-  // Kirim ke admin bot
-  fetch(`https://discord.com/api/v10/users/${ADMIN_ID}/messages`,{
-    method:"POST",
-    headers:{
-      "Authorization":`Bot ${BOT_ADMIN_TOKEN}`,
-      "Content-Type":"application/json"
-    },
-    body:JSON.stringify({
-      content:`📢 **Pesanan Baru!**
+      // === Kirim ke Admin Bot ===
+      fetch(`https://discord.com/api/v10/users/${ADMIN_ID}/messages`, {
+        method: "POST",
+        headers: {
+          "Authorization": `Bot ${BOT_ADMIN_TOKEN}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          content: `📢 **Pesanan Baru!**
 **Nama:** ${buyerName}
 **Discord:** ${discordName}
 **GrowID:** ${growID}
 **Produk:** ${product}
 **Harga:** ${price}`,
-      components:[{
-        type:1,
-        components:[
-          {type:2,label:"✅ Setuju",style:3,custom_id:"approve_order"},
-          {type:2,label:"❌ Tolak",style:4,custom_id:"reject_order"}
-        ]
-      }]
-    })
-  });
+          components: [{
+            type: 1,
+            components: [
+              {
+                type: 2,
+                label: "✅ Setuju",
+                style: 3,
+                custom_id: "approve_order"
+              },
+              {
+                type: 2,
+                label: "❌ Tolak",
+                style: 4,
+                custom_id: "reject_order"
+              }
+            ]
+          }]
+        })
+      });
 
-  statusText.textContent = "✅ Pesanan berhasil dikirim! Tunggu admin memproses.";
-  e.target.reset();
-});
-</script>
+      statusText.textContent = "✅ Pesanan berhasil dikirim! Tunggu admin memproses.";
+      e.target.reset();
+    });
+  </script>
 </body>
 </html>
