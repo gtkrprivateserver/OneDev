@@ -1,12 +1,22 @@
 {
   "name": "onedev-website",
   "version": "1.0.0",
-  "description": "Website ONEDEV Top Up Game",
+  "description": "Website ONEDEV - AI, Top Up, Collaboration",
+  "main": "index.html",
   "scripts": {
     "start": "vercel dev",
-    "build": "echo 'static site, no build required'"
+    "deploy": "vercel --prod"
   },
+  "keywords": [
+    "ONEDEV",
+    "website",
+    "topup",
+    "AI",
+    "collaboration"
+  ],
+  "author": "ONEDEV",
+  "license": "MIT",
   "devDependencies": {
-    "vercel": "^28.0.0"
+    "vercel": "^29.0.0"
   }
 }
