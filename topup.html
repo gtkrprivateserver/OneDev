@@ -3,75 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Top Up Game - ONEDEV</title>
+  <title>ONEDEV - Maintenance</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="TopUp.css">
+  <style>
+    body {
+      background: #0f0f19;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+      flex-direction: column;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #00b4d8;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #ccc;
+      margin-bottom: 2rem;
+    }
+
+    .btn-home {
+      background: linear-gradient(90deg, #00b4d8, #0077b6);
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .btn-home:hover {
+      transform: scale(1.05);
+      background: linear-gradient(90deg, #0096c7, #023e8a);
+    }
+  </style>
 </head>
 <body>
-  <!-- Sidebar -->
-  <div class="sidebar"></div>
-
-  <div class="main-content">
-    <header>
-      <div class="header-left">
-        <button id="menuBtn" class="menu-btn">☰</button>
-        <h1>Top Up Game</h1>
-      </div>
-    </header>
-
-    <section class="topup-content">
-      <h2>Pilih Paket Top Up</h2>
-      <p>Silakan pilih paket top up Growtopia GTKR lalu isi data.</p>
-
-      <div class="topup-grid">
-        <div class="topup-card" data-product="50 Diamond" data-price="Rp 10.000">
-          <h3>50 Diamond</h3>
-          <p class="card-price">Rp 10.000</p>
-          <button class="btn-buy">Beli</button>
-        </div>
-
-        <div class="topup-card" data-product="120 Diamond" data-price="Rp 20.000">
-          <h3>120 Diamond</h3>
-          <p class="card-price">Rp 20.000</p>
-          <button class="btn-buy">Beli</button>
-        </div>
-
-        <div class="topup-card" data-product="300 Diamond" data-price="Rp 45.000">
-          <h3>300 Diamond</h3>
-          <p class="card-price">Rp 45.000</p>
-          <button class="btn-buy">Beli</button>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- Overlay / Popup -->
-  <div id="overlay" class="hidden"></div>
-  <div id="orderModal" class="modal hidden">
-    <button id="closeModal" class="modal-close">×</button>
-    <h3>Form Pembelian</h3>
-    <form id="orderForm">
-      <label>Produk</label>
-      <input type="text" id="product" readonly>
-
-      <label>Harga</label>
-      <input type="text" id="price" readonly>
-
-      <label>Nama</label>
-      <input type="text" id="buyerName" placeholder="Nama Anda" required>
-
-      <label>Nama Discord</label>
-      <input type="text" id="discordName" placeholder="Contoh: OneDev#1234" required>
-
-      <label>GrowID GTKR</label>
-      <input type="text" id="growID" placeholder="GrowID Anda" required>
-
-      <button type="submit" id="submitOrder">Kirim Pesanan</button>
-      <p id="statusText" class="muted"></p>
-    </form>
-  </div>
-
-  <script src="sidebar.js"></script>
-  <script src="TopUp.js"></script>
+  <h1>🚧 Sedang dalam Perbaikan 🚧</h1>
+  <p>Website ONEDEV sedang dalam maintenance untuk peningkatan sistem. Mohon kembali beberapa saat lagi.</p>
+  <a href="index.html" class="btn-home">Kembali ke Home</a>
 </body>
 </html>
