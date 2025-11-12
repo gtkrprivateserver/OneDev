@@ -18,7 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
     { name: "📩 Contact", link: "contact.html" },
     { name: "🛒 Store", link: "store.html" },
     { name: "🎮 Top Up", link: "topup.html" },
-    { name: "☄️ Collaboration", link: "collaboration.html" }
+    { name: "☄️ Collaboration", link: "collaboration.html" },
+    { name: "💎 Exchange", link: "exchange.html" }
   ];
 
   // Bangun sidebar
