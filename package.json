@@ -1,0 +1,16 @@
+{
+  "name": "onedev-website",
+  "version": "1.0.0",
+  "description": "Website ONEDEV - Top Up Game, Collab, AI Services",
+  "main": "index.js",
+  "scripts": {
+    "start": "vercel dev",
+    "build": "echo \"Static site, no build needed\"",
+    "deploy": "vercel --prod"
+  },
+  "author": "ONEDEV",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
