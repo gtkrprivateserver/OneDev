@@ -1,76 +1,17 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ONEDEV - Top Up Game</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    /* Countdown timer styling */
-    .countdown {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 30px;
-      font-size: 2em;
-      color: #00b4d8;
-      font-weight: bold;
-      flex-wrap: wrap;
-    }
-
-    .countdown-item {
-      text-align: center;
-      min-width: 60px;
-    }
-
-    .countdown-item span {
-      display: block;
-      font-size: 1.2em;
-      color: #00b4d8;
-      margin-bottom: 5px;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      section h2 {
-        font-size: 1.7em;
-      }
-      section p {
-        font-size: 1em;
-      }
-      .countdown {
-        font-size: 1.5em;
-        gap: 10px;
-      }
-      .countdown-item {
-        min-width: 50px;
-      }
-      .countdown-item span {
-        font-size: 1em;
-      }
-    }
-
-    @media (max-width: 480px) {
-      section h2 {
-        font-size: 1.4em;
-      }
-      section p {
-        font-size: 0.95em;
-      }
-      .countdown {
-        font-size: 1.2em;
-        gap: 8px;
-      }
-      .countdown-item {
-        min-width: 45px;
-      }
-      .countdown-item span {
-        font-size: 0.95em;
-      }
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Top Up Game | ONEDEV</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="topup.css" />
 </head>
+
 <body>
+  <!-- Sidebar -->
+  <div class="sidebar"></div>
+
   <div class="main-content">
     <header>
       <div class="header-left">
@@ -79,49 +20,113 @@
       </div>
     </header>
 
-    <section style="text-align:center; margin-top:80px; padding: 0 10px;">
-      <h2 style="font-size:2em; color:#00b4d8;">Coming Soon 🚀</h2>
-      <p style="margin-top:20px; color:#ccc; font-size:1.1em;">
-        Kami sedang dalam pengembangan.<br>
-        Silakan kunjungi kembali nanti!
-      </p>
+    <section class="topup-section">
+      <div class="hero-banner">
+        <img src="banner-topup.jpg" alt="Top Up Banner" class="banner-img" />
+        <div class="banner-overlay">
+          <h2>Top Up Game Favorit Kamu!</h2>
+          <p>Pilih game, masukkan ID, dan nikmati transaksi cepat & aman.</p>
+        </div>
+      </div>
 
-      <!-- Countdown Timer -->
-      <div class="countdown" id="countdown">
-        <div class="countdown-item"><span id="days">0</span>Days</div>
-        <div class="countdown-item"><span id="hours">0</span>Hours</div>
-        <div class="countdown-item"><span id="minutes">0</span>Minutes</div>
-        <div class="countdown-item"><span id="seconds">0</span>Seconds</div>
+      <div class="game-list">
+        <div class="game-card" data-game="Growtopia">
+          <img src="growtopia.jpg" alt="Growtopia" />
+          <h3>Growtopia</h3>
+        </div>
+
+        <div class="game-card" data-game="Mobile Legends">
+          <img src="mlbb.jpg" alt="Mobile Legends" />
+          <h3>Mobile Legends</h3>
+        </div>
+
+        <div class="game-card" data-game="Free Fire">
+          <img src="ff.jpg" alt="Free Fire" />
+          <h3>Free Fire</h3>
+        </div>
+
+        <div class="game-card" data-game="Valorant">
+          <img src="valorant.jpg" alt="Valorant" />
+          <h3>Valorant</h3>
+        </div>
+
+        <div class="game-card" data-game="Genshin Impact">
+          <img src="genshin.jpg" alt="Genshin Impact" />
+          <h3>Genshin Impact</h3>
+        </div>
+      </div>
+
+      <div class="topup-form-container" id="formContainer">
+        <h2 id="gameTitle">Pilih Game Terlebih Dahulu</h2>
+        <form id="topupForm" style="display: none;">
+          <label for="userId">ID Pemain</label>
+          <input type="text" id="userId" placeholder="Masukkan ID / UID kamu" required />
+
+          <label for="serverId">Server (jika ada)</label>
+          <input type="text" id="serverId" placeholder="Contoh: 1234 (opsional)" />
+
+          <label for="package">Pilih Paket</label>
+          <select id="package" required>
+            <option value="">-- Pilih Paket --</option>
+            <option value="60 Diamonds">60 Diamonds - Rp 15.000</option>
+            <option value="170 Diamonds">170 Diamonds - Rp 40.000</option>
+            <option value="355 Diamonds">355 Diamonds - Rp 75.000</option>
+            <option value="720 Diamonds">720 Diamonds - Rp 145.000</option>
+          </select>
+
+          <label for="method">Metode Pembayaran</label>
+          <select id="method" required>
+            <option value="">-- Pilih Metode --</option>
+            <option value="Dana">Dana</option>
+            <option value="Gopay">Gopay</option>
+            <option value="Ovo">Ovo</option>
+            <option value="QRIS">QRIS</option>
+          </select>
+
+          <button type="submit">Top Up Sekarang</button>
+        </form>
       </div>
     </section>
   </div>
 
-  <!-- Sidebar otomatis dimasukkan oleh sidebar.js -->
   <script src="sidebar.js"></script>
-
   <script>
-    // Set tanggal rilis Countdown (ubah sesuai jadwal)
-    const launchDate = new Date("Dec 31, 2025 00:00:00").getTime();
+    document.addEventListener("DOMContentLoaded", () => {
+      const gameCards = document.querySelectorAll(".game-card");
+      const form = document.getElementById("topupForm");
+      const gameTitle = document.getElementById("gameTitle");
+      const formContainer = document.getElementById("formContainer");
 
-    const countdownTimer = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = launchDate - now;
+      let selectedGame = "";
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      gameCards.forEach(card => {
+        card.addEventListener("click", () => {
+          selectedGame = card.dataset.game;
+          gameTitle.textContent = `Top Up ${selectedGame}`;
+          form.style.display = "block";
+          formContainer.scrollIntoView({ behavior: "smooth" });
+        });
+      });
 
-      document.getElementById("days").innerText = days;
-      document.getElementById("hours").innerText = hours;
-      document.getElementById("minutes").innerText = minutes;
-      document.getElementById("seconds").innerText = seconds;
+      form.addEventListener("submit", e => {
+        e.preventDefault();
 
-      if (distance < 0) {
-        clearInterval(countdownTimer);
-        document.getElementById("countdown").innerHTML = "<h3>🚀 Bot Telah Tersedia!</h3>";
-      }
-    }, 1000);
+        const userId = document.getElementById("userId").value;
+        const serverId = document.getElementById("serverId").value;
+        const packageName = document.getElementById("package").value;
+        const payment = document.getElementById("method").value;
+
+        const adminNumber = "628123456789";
+        const message = `Halo, saya ingin melakukan top up game *${selectedGame}*.%0A
+        🎮 ID: ${userId} ${serverId ? `(Server: ${serverId})` : ""}%0A
+        💎 Paket: ${packageName}%0A
+        💰 Metode Pembayaran: ${payment}`;
+
+        window.open(`https://wa.me/${adminNumber}?text=${message}`, "_blank");
+        alert("Data top up dikirim ke WhatsApp admin.");
+        form.reset();
+      });
+    });
   </script>
 </body>
 </html>
