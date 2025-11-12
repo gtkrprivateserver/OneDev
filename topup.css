@@ -1,92 +1,104 @@
-/* === Top Up Cards === */
-.topup-cards {
-  max-width: 1000px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-  text-align: center;
+.topup-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  color: #fff;
 }
 
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  justify-items: center;
-  margin-top: 1.5rem;
+/* Hero Banner */
+.hero-banner {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 2rem;
 }
 
-.card {
-  background: rgba(15, 15, 25, 0.9);
-  padding: 1.5rem;
-  border-radius: 15px;
-  text-align: center;
+.banner-img {
   width: 100%;
-  max-width: 300px;
-  box-shadow: 0 0 20px rgba(0, 180, 216, 0.2);
-  transition: transform 0.3s;
+  height: 280px;
+  object-fit: cover;
+  filter: brightness(0.6);
 }
 
-.card:hover {
-  transform: translateY(-5px);
+.banner-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
 
-.card h3 {
+.banner-overlay h2 {
+  font-size: 2rem;
   color: #00b4d8;
-  margin-bottom: 0.8rem;
+  text-shadow: 0 0 10px #000;
 }
 
-.card .price {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #fff;
-  margin-bottom: 1rem;
+.banner-overlay p {
+  color: #eee;
+  margin-top: 0.5rem;
 }
 
-.card ul {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 1rem;
+/* Game List */
+.game-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
-.card ul li {
-  color: #ccc;
-  margin: 0.4rem 0;
-}
-
-.btn-buy {
-  background: linear-gradient(90deg, #00b4d8, #0077b6);
-  color: #fff;
-  border: none;
+.game-card {
+  background: rgba(15, 15, 25, 0.9);
   border-radius: 12px;
-  padding: 10px 20px;
+  padding: 0.8rem;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0, 180, 216, 0.2);
   cursor: pointer;
-  font-size: 0.95em;
   transition: 0.3s;
 }
 
-.btn-buy:hover {
-  background: linear-gradient(90deg, #0096c7, #023e8a);
-  transform: scale(1.03);
+.game-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(0, 180, 216, 0.5);
 }
 
-/* === Top Up Form === */
-.topup-content {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 0 1rem;
+.game-card img {
+  width: 100%;
+  border-radius: 10px;
+  height: 120px;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+
+.game-card h3 {
+  color: #00b4d8;
+  font-size: 1.1rem;
+}
+
+/* Top Up Form */
+.topup-form-container {
+  background: rgba(15, 15, 25, 0.95);
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 0 25px rgba(0, 180, 216, 0.3);
+}
+
+.topup-form-container h2 {
+  text-align: center;
+  color: #00b4d8;
+  margin-bottom: 1rem;
 }
 
 .topup-form-container form {
-  background: rgba(15, 15, 25, 0.95);
-  padding: 1.5rem;
-  border-radius: 15px;
-  box-shadow: 0 0 20px rgba(0, 180, 216, 0.2);
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .topup-form-container label {
   display: block;
   color: #ccc;
+  margin-top: 1rem;
   margin-bottom: 0.3rem;
-  margin-top: 0.8rem;
 }
 
 .topup-form-container input,
@@ -100,52 +112,29 @@
 }
 
 .topup-form-container button {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  width: 100%;
   background: linear-gradient(90deg, #00b4d8, #0077b6);
   color: #fff;
   border: none;
   border-radius: 12px;
-  padding: 10px 20px;
+  padding: 10px;
   cursor: pointer;
-  font-size: 1em;
-  width: 100%;
+  font-size: 1rem;
   transition: 0.3s;
 }
 
 .topup-form-container button:hover {
+  transform: scale(1.03);
   background: linear-gradient(90deg, #0096c7, #023e8a);
-  transform: scale(1.02);
 }
 
-/* === Responsive === */
-@media (max-width: 1024px) {
-  .card-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 767px) {
-  .card-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .card {
-    max-width: 90%;
-    margin: 0 auto;
-  }
-
-  .card .price {
+/* Responsive */
+@media (max-width: 768px) {
+  .banner-overlay h2 {
     font-size: 1.5rem;
   }
-
-  .btn-buy {
-    padding: 8px 16px;
-    font-size: 0.9em;
-  }
-
-  .topup-form-container input,
-  .topup-form-container select,
-  .topup-form-container button {
-    font-size: 0.95em;
+  .banner-img {
+    height: 200px;
   }
 }
