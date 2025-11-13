@@ -19,7 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
     { name: "🛒 Store", link: "store.html" },
     { name: "🎮 Top Up", link: "topup.html" },
     { name: "☄️ Collaboration", link: "collaboration.html" },
-    { name: "💎 Exchange", link: "exchange.html" }
+    { name: "💎 Exchange", link: "exchange.html" },
+    { name: "🕹️ GTKR", link: "https://gtkr.vercel.app" }
   ];
 
   // Bangun sidebar
