@@ -1,6 +1,48 @@
-/* ===========================
-   POPUP STYLE
-=========================== */
+/* ------------------------
+   HEADER BUTTONS
+------------------------ */
+.btn-small {
+  background: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+}
+
+/* ------------------------
+   ACCOUNT MENU (SIDEDOWN)
+------------------------ */
+.account-menu {
+  position: absolute;
+  top: 35px;
+  right: 0;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.account-menu button {
+  padding: 8px 15px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.account-menu button:hover {
+  background: #f0f0f0;
+}
+
+.hidden { display: none; }
+
+/* ------------------------
+   POPUPS
+------------------------ */
 .popup {
   position: fixed;
   top:0; left:0; right:0; bottom:0;
@@ -10,8 +52,6 @@
   align-items: center;
   z-index: 5000;
 }
-
-.popup.hidden { display: none; }
 
 .popup-content {
   background: #fff;
@@ -48,9 +88,9 @@
   color: #fff;
 }
 
-/* ===========================
+/* ------------------------
    VIDEO GRID
-=========================== */
+------------------------ */
 .videos-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -83,9 +123,9 @@
   margin: 5px 0;
 }
 
-/* ===========================
+/* ------------------------
    PLAYER OVERLAY
-=========================== */
+------------------------ */
 .player-box video {
   width: 100%;
   max-height: 400px;
