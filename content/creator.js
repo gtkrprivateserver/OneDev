@@ -1,8 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  // ============================
-  // ACCOUNTS
-  // ============================
   const accounts = [
     { username: "admin", password: "admin123" },
     { username: "creator", password: "creator123" }
@@ -11,9 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let isLogin = false;
   let currentUser = null;
 
-  // ============================
-  // ELEMENTS
-  // ============================
   const loginBtn = document.getElementById("loginBtn");
   const accountDropdown = document.getElementById("accountDropdown");
   const accountBtn = document.getElementById("accountBtn");
@@ -30,9 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const videosContainer = document.getElementById("videosContainer");
 
-  // ============================
-  // LOAD VIDEOS FROM STORAGE
-  // ============================
+  // LOAD VIDEO DARI LOCALSTORAGE
   function loadVideos() {
     const data = JSON.parse(localStorage.getItem("videos") || "[]");
     videosContainer.innerHTML = "";
@@ -53,9 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   loadVideos();
 
-  // ============================
   // LOGIN POPUP
-  // ============================
   loginBtn.addEventListener("click", () => {
     if (!isLogin) loginPopup.classList.remove("hidden");
   });
@@ -63,7 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
   doLogin.addEventListener("click", () => {
     const username = document.getElementById("loginUser").value.trim();
     const password = document.getElementById("loginPass").value.trim();
-
     const account = accounts.find(acc => acc.username === username && acc.password === password);
 
     if (account) {
@@ -79,16 +68,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ============================
   // DROPDOWN TOGGLE
-  // ============================
   accountBtn.addEventListener("click", () => {
     dropdownContent.classList.toggle("hidden");
   });
 
-  // ============================
   // LOGOUT
-  // ============================
   logoutBtn.addEventListener("click", () => {
     isLogin = false;
     currentUser = null;
@@ -97,18 +82,14 @@ document.addEventListener("DOMContentLoaded", () => {
     dropdownContent.classList.add("hidden");
   });
 
-  // ============================
   // OPEN UPLOAD POPUP
-  // ============================
   openUpload.addEventListener("click", () => {
     if (!isLogin) return alert("Anda harus login terlebih dahulu!");
     uploadPopup.classList.remove("hidden");
     dropdownContent.classList.add("hidden");
   });
 
-  // ============================
-  // CLOSE POPUPS
-  // ============================
+  // CLOSE POPUP
   closePopups.forEach(btn => {
     btn.addEventListener("click", () => {
       loginPopup.classList.add("hidden");
@@ -116,9 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ============================
   // UPLOAD VIDEO
-  // ============================
   uploadVideoBtn.addEventListener("click", () => {
     const title = document.getElementById("videoTitle").value.trim();
     const thumbFile = document.getElementById("thumbnailInput").files[0];
@@ -157,9 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
     readerThumb.readAsDataURL(thumbFile);
   });
 
-  // ============================
-  // CLOSE DROPDOWN WHEN CLICK OUTSIDE
-  // ============================
+  // CLOSE DROPDOWN KETIKA KLIK DI LUAR
   document.addEventListener("click", e => {
     if (!accountDropdown.contains(e.target)) dropdownContent.classList.add("hidden");
   });
