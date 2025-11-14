@@ -24,16 +24,21 @@
     </div>
 
     <div class="header-right">
-      <button id="loginBtn" class="btn-sec">Login</button>
+      <div class="account-wrapper">
+        <button id="loginBtn" class="btn-sec">Login</button>
+        <div id="accountDropdown" class="dropdown hidden">
+          <ul>
+            <li id="menuSetting">Setting</li>
+            <li id="menuUpload">Upload</li>
+            <li id="menuProfile">Profil</li>
+            <li id="menuLogout">Logout</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </header>
 
   <!-- Upload Section -->
-  <section class="upload-section">
-    <h2>Upload Video Baru</h2>
-    <button id="openUploadPopup" class="btn-primary">Upload Video</button>
-  </section>
-
   <section class="video-list">
     <h2>Video Anda</h2>
     <div id="videosContainer" class="videos-grid"></div>
