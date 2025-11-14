@@ -8,8 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentUser = null;
 
   const loginBtn = document.getElementById("loginBtn");
-  const accountDropdown = document.getElementById("accountDropdown");
-  const dropdownContent = accountDropdown.querySelector(".dropdown-content");
   const loginPopup = document.getElementById("loginPopup");
   const uploadPopup = document.getElementById("uploadPopup");
   const videosContainer = document.getElementById("videosContainer");
@@ -18,7 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const doLogin = document.getElementById("doLogin");
   const logoutBtn = document.getElementById("logoutBtn");
   const openUpload = document.getElementById("openUpload");
-  const uploadBtn = document.getElementById("uploadBtn");
+
+  const accountDropdown = document.getElementById("accountDropdown");
+  const accountBtn = document.getElementById("accountBtn");
+  const dropdownContent = document.getElementById("dropdownContent");
 
   // LOAD VIDEO STORAGE
   let videos = JSON.parse(localStorage.getItem("videos") || "[]");
@@ -42,11 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // LOGIN BUTTON CLICK
   loginBtn.addEventListener("click", ()=>{
-    if(isLogin){
-      dropdownContent.classList.toggle("hidden");
-    } else {
-      loginPopup.classList.remove("hidden");
-    }
+    loginPopup.classList.remove("hidden");
   });
 
   // CLOSE POPUP
@@ -64,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const found = accounts.find(a=>a.username===user && a.password===pass);
     if(found){
       isLogin=true;
-      currentUser = user;
+      currentUser=user;
       loginPopup.classList.add("hidden");
       loginBtn.classList.add("hidden");
       accountDropdown.classList.remove("hidden");
@@ -73,22 +70,29 @@ document.addEventListener("DOMContentLoaded", () => {
     } else alert("Username/password salah!");
   });
 
+  // TOGGLE DROPDOWN
+  accountBtn.addEventListener("click", ()=>{
+    dropdownContent.classList.toggle("hidden");
+  });
+
   // LOGOUT
   logoutBtn.addEventListener("click", ()=>{
     isLogin=false;
     currentUser=null;
     accountDropdown.classList.add("hidden");
     loginBtn.classList.remove("hidden");
+    dropdownContent.classList.add("hidden");
     alert("Logout berhasil!");
   });
 
   // OPEN UPLOAD
   openUpload.addEventListener("click", ()=>{
-    if(!isLogin){ alert("Login dulu!"); return;}
     uploadPopup.classList.remove("hidden");
+    dropdownContent.classList.add("hidden");
   });
 
   // UPLOAD VIDEO
+  const uploadBtn = document.getElementById("uploadBtn");
   uploadBtn.addEventListener("click", ()=>{
     const title = document.getElementById("videoTitle").value;
     const thumbFile = document.getElementById("thumbnailInput").files[0];
@@ -115,4 +119,5 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     readerThumb.readAsDataURL(thumbFile);
   });
+
 });
