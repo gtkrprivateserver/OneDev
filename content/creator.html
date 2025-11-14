@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ONEDEV - Creator Panel</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ONEDEV Creator Panel</title>
 
-  <!-- Styles global -->
-  <link rel="stylesheet" href="../styles.css">
-  <!-- Styles khusus creator -->
-  <link rel="stylesheet" href="creator.css">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="creator.css">
+
 </head>
 <body>
 
 <!-- Banner otomatis -->
 <div id="adsContainer"></div>
 
-<!-- Sidebar otomatis dari sidebar.js -->
+<!-- Sidebar otomatis -->
 <div class="main-content">
+
   <header>
     <div class="header-left">
       <button id="menuBtn" class="menu-btn">☰</button>
@@ -24,53 +24,55 @@
     </div>
 
     <div class="header-right">
-      <div class="account-wrapper">
-        <button id="loginBtn" class="btn-sec">Login</button>
-        <div id="accountDropdown" class="dropdown hidden">
-          <ul>
-            <li id="menuSetting">Setting</li>
-            <li id="menuUpload">Upload</li>
-            <li id="menuProfile">Profil</li>
-            <li id="menuLogout">Logout</li>
-          </ul>
+      <button id="loginBtn" class="btn-sec">Login</button>
+
+      <!-- Dropdown menu muncul setelah login -->
+      <div id="userDropdown" class="dropdown hidden">
+        <button class="drop-btn" id="dropdownBtn">Account ▼</button>
+        <div class="dropdown-content hidden">
+          <button id="openUploadPopup">Upload Video</button>
+          <button id="openSettings">Settings</button>
+          <button id="openProfile">Profile</button>
+          <button id="doLogout">Logout</button>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Upload Section -->
+  <!-- Upload Popup -->
+  <div id="uploadPopup" class="popup hidden">
+    <div class="popup-content">
+      <h2>Upload Video Baru</h2>
+      <label>Judul Video</label>
+      <input type="text" id="videoTitle" placeholder="Masukkan judul video...">
+      <label>Thumbnail Video</label>
+      <input type="file" id="thumbnailInput" accept="image/*">
+      <label>File Video</label>
+      <input type="file" id="videoInput" accept="video/mp4,video/webm,video/mkv">
+      <button id="uploadBtn" class="btn-primary">Upload</button>
+      <button class="closePopup btn-sec">Tutup</button>
+    </div>
+  </div>
+
+  <!-- Login Popup -->
+  <div id="loginPopup" class="popup hidden">
+    <div class="popup-content">
+      <h2>Login Creator</h2>
+      <label>Username</label>
+      <input type="text" id="loginUser" placeholder="Masukkan username...">
+      <label>Password</label>
+      <input type="password" id="loginPass" placeholder="Masukkan password...">
+      <button id="doLogin" class="btn-primary">Login</button>
+      <button class="closePopup btn-sec">Tutup</button>
+    </div>
+  </div>
+
+  <!-- Video Grid -->
   <section class="video-list">
     <h2>Video Anda</h2>
     <div id="videosContainer" class="videos-grid"></div>
   </section>
-</div>
 
-<!-- LOGIN POPUP -->
-<div id="loginPopup" class="popup hidden">
-  <div class="popup-content">
-    <h2>Login Creator</h2>
-    <label>Username</label>
-    <input type="text" id="loginUser" placeholder="Masukkan username...">
-    <label>Password</label>
-    <input type="password" id="loginPass" placeholder="Masukkan password...">
-    <button id="doLogin" class="btn-primary">Login</button>
-    <button class="closePopup btn-sec">Tutup</button>
-  </div>
-</div>
-
-<!-- UPLOAD POPUP -->
-<div id="uploadPopup" class="popup hidden">
-  <div class="popup-content">
-    <h2>Upload Video Baru</h2>
-    <label>Judul Video</label>
-    <input type="text" id="videoTitle" placeholder="Masukkan judul video...">
-    <label>Thumbnail Video</label>
-    <input type="file" id="thumbnailInput" accept="image/*">
-    <label>File Video</label>
-    <input type="file" id="videoInput" accept="video/mp4,video/mkv,video/webm">
-    <button id="uploadBtn" class="btn-primary">Upload</button>
-    <button class="closePopup btn-sec">Batal</button>
-  </div>
 </div>
 
 <script src="../sidebar.js"></script>
