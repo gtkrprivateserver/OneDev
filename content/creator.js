@@ -22,20 +22,15 @@ document.addEventListener('DOMContentLoaded', () => {
     { username: 'user', password: 'user123' }
   ];
 
-  // ===== Ban akun =====
   const bannedAccounts = ['bannedUser'];
-
-  // ===== Kata/unsur 18+ untuk ban video =====
   const bannedKeywords = ['18+', 'dewasa', 'nsfw'];
 
-  // ===== Array untuk simpan video permanen =====
-  // Setiap video menyimpan {title, thumbnail, video, owner}
+  // ===== Video list =====
+  // Setiap video: {title, thumbnail, video, owner, views, likes}
   let videoList = JSON.parse(localStorage.getItem('videoList')) || [];
 
   // ===== Login =====
-  loginBtn.addEventListener('click', () => {
-    loginPopup.classList.remove('hidden');
-  });
+  loginBtn.addEventListener('click', () => loginPopup.classList.remove('hidden'));
 
   doLoginBtn.addEventListener('click', () => {
     const username = document.getElementById('loginUser').value;
@@ -58,26 +53,17 @@ document.addEventListener('DOMContentLoaded', () => {
     loginBtn.classList.add('hidden');
     accountWrapper.classList.remove('hidden');
 
-    // Render semua video permanen
     renderVideos();
   });
 
   // ===== Account dropdown =====
-  accountBtn.addEventListener('click', () => {
-    dropdownContent.classList.toggle('hidden');
-  });
+  accountBtn.addEventListener('click', () => dropdownContent.classList.toggle('hidden'));
 
   // ===== Open Upload Popup =====
-  openUploadBtn.addEventListener('click', () => {
-    uploadPopup.classList.remove('hidden');
-  });
+  openUploadBtn.addEventListener('click', () => uploadPopup.classList.remove('hidden'));
 
   // ===== Close Popup =====
-  closePopupBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      btn.closest('.popup').classList.add('hidden');
-    });
-  });
+  closePopupBtns.forEach(btn => btn.addEventListener('click', () => btn.closest('.popup').classList.add('hidden')));
 
   // ===== Upload Video =====
   uploadBtn.addEventListener('click', () => {
@@ -90,47 +76,62 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Cek kata/unsur 18+
+    // Cek konten terlarang
     const isBanned = bannedKeywords.some(keyword => title.toLowerCase().includes(keyword));
     if (isBanned) {
       alert('Video mengandung konten terlarang (18+)!');
       return;
     }
 
-    // Simpan video dengan owner
-    videoList.push({ title, thumbnail, video, owner: currentUser });
+    videoList.push({ title, thumbnail, video, owner: currentUser, views: 0, likes: 0 });
     localStorage.setItem('videoList', JSON.stringify(videoList));
-
-    // Render video
     renderVideos();
 
-    // Reset form dan tutup popup
     document.getElementById('videoTitle').value = '';
     document.getElementById('thumbnailInput').value = '';
     document.getElementById('videoInput').value = '';
     uploadPopup.classList.add('hidden');
   });
 
-  // ===== Fungsi render video =====
+  // ===== Render Videos =====
   function renderVideos() {
     videosContainer.innerHTML = '';
+
     videoList.forEach((vid, index) => {
       const videoCard = document.createElement('div');
       videoCard.classList.add('video-card');
 
-      // Hanya pemilik video yang bisa hapus
-      const deleteButton = vid.owner === currentUser
-        ? `<button class="delete-btn" data-index="${index}">Hapus</button>`
-        : '';
+      const deleteButton = vid.owner === currentUser ? `<button class="delete-btn" data-index="${index}">Hapus</button>` : '';
 
       videoCard.innerHTML = `
         <img src="${URL.createObjectURL(vid.thumbnail)}" alt="Thumbnail" class="video-thumb">
         <h3>${vid.title}</h3>
         <video src="${URL.createObjectURL(vid.video)}" controls class="video-player"></video>
+        <div class="video-info">
+          <span>Views: <span class="view-count">${vid.views}</span></span>
+          <span>Likes: <span class="like-count">${vid.likes}</span></span>
+        </div>
+        <button class="like-btn" data-index="${index}">Like ❤️</button>
         ${deleteButton}
       `;
 
       videosContainer.appendChild(videoCard);
+
+      // Tambahkan event listener untuk video play → tambah views
+      const videoElem = videoCard.querySelector('.video-player');
+      videoElem.addEventListener('play', () => {
+        vid.views += 1;
+        localStorage.setItem('videoList', JSON.stringify(videoList));
+        videoCard.querySelector('.view-count').textContent = vid.views;
+      });
+
+      // Event listener tombol like
+      const likeBtn = videoCard.querySelector('.like-btn');
+      likeBtn.addEventListener('click', () => {
+        vid.likes += 1;
+        localStorage.setItem('videoList', JSON.stringify(videoList));
+        videoCard.querySelector('.like-count').textContent = vid.likes;
+      });
     });
 
     // Event listener tombol hapus
@@ -152,16 +153,14 @@ document.addEventListener('DOMContentLoaded', () => {
     accountWrapper.classList.add('hidden');
     loginBtn.classList.remove('hidden');
     dropdownContent.classList.add('hidden');
-    // Video tetap tersimpan di localStorage
   });
 
-  // ===== Klik luar dropdown untuk menutup =====
+  // ===== Klik luar dropdown =====
   document.addEventListener('click', (e) => {
     if (!accountWrapper.contains(e.target) && !dropdownContent.contains(e.target)) {
       dropdownContent.classList.add('hidden');
     }
   });
 
-  // ===== Render video saat pertama load =====
   renderVideos();
 });
