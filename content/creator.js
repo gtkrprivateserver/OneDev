@@ -1,20 +1,45 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const loginBtn = document.getElementById("loginBtn");
-  const logoutBtn = document.getElementById("logoutBtn");
+
+  // POPUP HANDLER
   const loginPopup = document.getElementById("loginPopup");
-  const closePopup = document.getElementById("closePopup");
+  const logoutPopup = document.getElementById("logoutPopup");
+  const uploadPopup = document.getElementById("uploadPopup");
+
+  const loginBtn = document.getElementById("loginBtn");
+  const openUploadPopup = document.getElementById("openUploadPopup");
+
   const doLogin = document.getElementById("doLogin");
+  const doLogout = document.getElementById("doLogout");
+
+  const closeButtons = document.querySelectorAll(".closePopup");
 
   let isLogin = false;
 
   // OPEN LOGIN POPUP
   loginBtn.addEventListener("click", () => {
-    loginPopup.classList.remove("hidden");
+    if (isLogin) {
+      logoutPopup.classList.remove("hidden");
+    } else {
+      loginPopup.classList.remove("hidden");
+    }
   });
 
-  // CLOSE POPUP
-  closePopup.addEventListener("click", () => {
-    loginPopup.classList.add("hidden");
+  // OPEN UPLOAD POPUP
+  openUploadPopup.addEventListener("click", () => {
+    if (!isLogin) {
+      alert("Anda harus login terlebih dahulu!");
+      return;
+    }
+    uploadPopup.classList.remove("hidden");
+  });
+
+  // CLOSE POPUP (semua popup)
+  closeButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      loginPopup.classList.add("hidden");
+      logoutPopup.classList.add("hidden");
+      uploadPopup.classList.add("hidden");
+    });
   });
 
   // LOGIN
@@ -25,8 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (user === "admin" && pass === "admin123") {
       isLogin = true;
       loginPopup.classList.add("hidden");
-      loginBtn.classList.add("hidden");
-      logoutBtn.classList.remove("hidden");
+      loginBtn.textContent = "Logout";
       alert("Login berhasil!");
     } else {
       alert("Username atau password salah!");
@@ -34,59 +58,54 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // LOGOUT
-  logoutBtn.addEventListener("click", () => {
+  doLogout.addEventListener("click", () => {
     isLogin = false;
-    logoutBtn.classList.add("hidden");
-    loginBtn.classList.remove("hidden");
-    alert("Berhasil logout!");
+    logoutPopup.classList.add("hidden");
+    loginBtn.textContent = "Login";
+    alert("Anda telah logout.");
   });
 
   // UPLOAD VIDEO
   const uploadBtn = document.getElementById("uploadBtn");
-  const thumbnailInput = document.getElementById("thumbnailInput");
-  const videoInput = document.getElementById("videoInput");
   const videosContainer = document.getElementById("videosContainer");
 
   uploadBtn.addEventListener("click", () => {
-    if (!isLogin) {
-      alert("Anda harus login dulu!");
-      return;
-    }
-
     const title = document.getElementById("videoTitle").value;
-    const thumbnail = thumbnailInput.files[0];
-    const video = videoInput.files[0];
+    const thumbnail = document.getElementById("thumbnailInput").files[0];
+    const video = document.getElementById("videoInput").files[0];
 
     if (!title || !thumbnail || !video) {
-      alert("Lengkapi semua field!");
+      alert("Semua field wajib diisi!");
       return;
     }
 
-    const readerThumb = new FileReader();
-    const readerVideo = new FileReader();
+    const thumbReader = new FileReader();
+    const videoReader = new FileReader();
 
-    readerThumb.onload = () => {
-      readerVideo.onload = () => {
-        const videoCard = document.createElement("div");
-        videoCard.classList.add("video-card");
+    thumbReader.onload = () => {
+      videoReader.onload = () => {
 
-        videoCard.innerHTML = `
-          <img src="${readerThumb.result}" class="video-thumb">
+        const card = document.createElement("div");
+        card.classList.add("video-card");
 
+        card.innerHTML = `
+          <img src="${thumbReader.result}" class="video-thumb">
           <h3>${title}</h3>
-
           <video controls>
-            <source src="${readerVideo.result}">
+            <source src="${videoReader.result}">
           </video>
         `;
 
-        videosContainer.prepend(videoCard);
+        videosContainer.prepend(card);
+
+        uploadPopup.classList.add("hidden");
+        alert("Video berhasil diupload!");
       };
-      readerVideo.readAsDataURL(video);
+
+      videoReader.readAsDataURL(video);
     };
 
-    readerThumb.readAsDataURL(thumbnail);
-
-    alert("Video berhasil diupload!");
+    thumbReader.readAsDataURL(thumbnail);
   });
+
 });
