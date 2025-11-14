@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   // ============================
-  //  ACCOUNT CONFIG
+  //  ACCOUNT LIST
   // ============================
   const accounts = [
     { username: "admin", password: "admin123" },
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // ============================
-  //  POPUP HANDLER
+  //  ELEMENTS
   // ============================
   const loginPopup = document.getElementById("loginPopup");
   const logoutPopup = document.getElementById("logoutPopup");
@@ -28,26 +28,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const closeButtons = document.querySelectorAll(".closePopup");
 
+  const uploadBtn = document.getElementById("uploadBtn");
+  const videosContainer = document.getElementById("videosContainer");
 
-  // OPEN LOGIN POPUP
+
+  // ============================
+  //  LOGIN BUTTON HANDLER
+  // ============================
   loginBtn.addEventListener("click", () => {
-    if (isLogin) {
-      logoutPopup.classList.remove("hidden");
-    } else {
-      loginPopup.classList.remove("hidden");
-    }
+    if (isLogin) logoutPopup.classList.remove("hidden");
+    else loginPopup.classList.remove("hidden");
   });
 
-  // OPEN UPLOAD POPUP
+
+  // ============================
+  //  OPEN UPLOAD POPUP
+  // ============================
   openUploadPopup.addEventListener("click", () => {
-    if (!isLogin) {
-      alert("Anda harus login terlebih dahulu!");
-      return;
-    }
+    if (!isLogin) return alert("Anda harus login terlebih dahulu!");
     uploadPopup.classList.remove("hidden");
   });
 
-  // CLOSE POPUP
+
+  // ============================
+  //  CLOSE POPUP (ALL)
+  // ============================
   closeButtons.forEach(btn => {
     btn.addEventListener("click", () => {
       loginPopup.classList.add("hidden");
@@ -61,24 +66,21 @@ document.addEventListener("DOMContentLoaded", () => {
   //  LOGIN SYSTEM
   // ============================
   doLogin.addEventListener("click", () => {
+
     const user = document.getElementById("loginUser").value;
     const pass = document.getElementById("loginPass").value;
 
-    const found = accounts.find(acc =>
-      acc.username === user && acc.password === pass
-    );
+    const found = accounts.find(acc => acc.username === user && acc.password === pass);
 
-    if (found) {
-      isLogin = true;
-      currentUser = found.username;
+    if (!found) return alert("Username atau password salah!");
 
-      loginPopup.classList.add("hidden");
-      loginBtn.textContent = currentUser + " (Logout)";
+    isLogin = true;
+    currentUser = found.username;
 
-      alert(`Login berhasil sebagai ${currentUser}!`);
-    } else {
-      alert("Username atau password salah!");
-    }
+    loginBtn.textContent = `${currentUser} (Logout)`;
+    loginPopup.classList.add("hidden");
+
+    alert(`Login berhasil sebagai ${currentUser}!`);
   });
 
 
@@ -99,26 +101,23 @@ document.addEventListener("DOMContentLoaded", () => {
   // ============================
   //  UPLOAD VIDEO SYSTEM
   // ============================
-  const uploadBtn = document.getElementById("uploadBtn");
-  const videosContainer = document.getElementById("videosContainer");
-
   uploadBtn.addEventListener("click", () => {
 
     const title = document.getElementById("videoTitle").value;
     const thumbnail = document.getElementById("thumbnailInput").files[0];
     const video = document.getElementById("videoInput").files[0];
 
-    if (!title || !thumbnail || !video) {
-      alert("Semua field wajib diisi!");
-      return;
-    }
+    if (!title || !thumbnail || !video)
+      return alert("Semua field wajib diisi!");
 
     const thumbReader = new FileReader();
     const videoReader = new FileReader();
 
     thumbReader.onload = () => {
+
       videoReader.onload = () => {
 
+        // CREATE VIDEO CARD
         const card = document.createElement("div");
         card.classList.add("video-card");
 
@@ -126,7 +125,8 @@ document.addEventListener("DOMContentLoaded", () => {
           <img src="${thumbReader.result}" class="video-thumb">
           <h3>${title}</h3>
           <p class="uploaded-by">Uploaded by: ${currentUser}</p>
-          <video controls>
+
+          <video controls controlsList="nodownload" oncontextmenu="return false;">
             <source src="${videoReader.result}">
           </video>
         `;
