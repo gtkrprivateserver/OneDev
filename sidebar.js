@@ -7,26 +7,33 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.prepend(sidebar);
   }
 
-  // Daftar halaman
+  // Daftar halaman (PATH SUDAH DIPERBAIKI: gunakan "/" supaya balik ke root)
   const pages = [
-    { name: "🏠 Home", link: "index.html" },
-    { name: "💡 About", link: "about.html" },
+    { name: "🏠 Home", link: "/index.html" },
+    { name: "💡 About", link: "/about.html" },
     { name: "📹 Content Creator", link: "/content/creator.html" },
-    { name: "⏳ Monitor", link: "monitor.html" },
-    { name: "💰 Pricing", link: "pricing.html" },
-    { name: "📩 Contact", link: "contact.html" },
-    { name: "🛒 Store", link: "store.html" },
-    { name: "🎮 Top Up", link: "topup.html" },
-    { name: "☄️ Collaboration", link: "collaboration.html" },
-    { name: "💎 Exchange", link: "exchange.html" },
-    { name: "🕹️ GTKR", link: "https://gtkr.vercel.app" }
+    { name: "⏳ Monitor", link: "/monitor.html" },
+    { name: "💰 Pricing", link: "/pricing.html" },
+    { name: "📩 Contact", link: "/contact.html" },
+    { name: "🛒 Store", link: "/store.html" },
+    { name: "🎮 Top Up", link: "/topup.html" },
+    { name: "☄️ Collaboration", link: "/collaboration.html" },
+    { name: "💎 Exchange", link: "/exchange.html" },
+    { name: "🕹️ GTKR", link: "https://gtkr.vercel.app" } // external skip
   ];
 
   // Bangun sidebar
   sidebar.innerHTML = `
     <h2 class="logo">ONE<span>DEV</span></h2>
     <nav>
-      ${pages.map(p => `<a href="${p.link}" class="${window.location.pathname.includes(p.link) ? "active" : ""}">${p.name}</a>`).join("")}
+      ${pages.map(p => `
+        <a href="${p.link}" class="${
+          window.location.pathname === p.link ||
+          window.location.pathname.endsWith(p.link.replace("/", ""))
+            ? "active"
+            : ""
+        }">${p.name}</a>
+      `).join("")}
     </nav>
     <footer class="sidebar-footer">
       <hr class="footer-divider" />
@@ -46,10 +53,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Tutup sidebar jika klik luar di mobile
   document.addEventListener("click", (e) => {
-    if (window.innerWidth <= 900 &&
-        sidebar.classList.contains("active") &&
-        !sidebar.contains(e.target) &&
-        !e.target.closest("#menuBtn")) {
+    if (
+      window.innerWidth <= 900 &&
+      sidebar.classList.contains("active") &&
+      !sidebar.contains(e.target) &&
+      !e.target.closest("#menuBtn")
+    ) {
       sidebar.classList.remove("active");
     }
   });
