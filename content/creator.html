@@ -4,10 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ONEDEV Creator Panel</title>
-
-  <!-- Tetap gunakan style.css lama -->
   <link rel="stylesheet" href="../styles.css">
-  <!-- Styling khusus Creator -->
   <link rel="stylesheet" href="creator.css">
 </head>
 <body>
@@ -22,17 +19,15 @@
     </div>
 
     <div class="header-right">
-      <div class="account-wrapper">
-        <button id="loginBtn" class="btn-small">Login</button>
+      <button id="loginBtn" class="btn-small">Login</button>
 
-        <div id="accountDropdown" class="dropdown hidden">
-          <button class="btn-small">Account ▼</button>
-          <div class="dropdown-content hidden">
-            <button id="openUpload">Upload</button>
-            <button id="settingBtn">Setting</button>
-            <button id="profileBtn">Profil</button>
-            <button id="logoutBtn">Logout</button>
-          </div>
+      <div id="accountDropdown" class="dropdown hidden">
+        <button id="accountBtn" class="btn-small">Account ▼</button>
+        <div id="dropdownContent" class="dropdown-content hidden">
+          <button id="openUpload">Upload</button>
+          <button id="settingBtn">Setting</button>
+          <button id="profileBtn">Profil</button>
+          <button id="logoutBtn">Logout</button>
         </div>
       </div>
     </div>
