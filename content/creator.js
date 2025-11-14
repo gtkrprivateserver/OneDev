@@ -24,11 +24,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const videosContainer = document.getElementById("videosContainer");
 
-  // LOAD VIDEO DARI LOCALSTORAGE
+  // Load video dari localStorage
   function loadVideos() {
-    const data = JSON.parse(localStorage.getItem("videos") || "[]");
+    const videos = JSON.parse(localStorage.getItem("videos") || "[]");
     videosContainer.innerHTML = "";
-    data.forEach(v => {
+    videos.forEach(v => {
       const card = document.createElement("div");
       card.classList.add("video-card");
       card.innerHTML = `
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   loadVideos();
 
-  // LOGIN POPUP
+  // LOGIN
   loginBtn.addEventListener("click", () => {
     if (!isLogin) loginPopup.classList.remove("hidden");
   });
@@ -53,13 +53,12 @@ document.addEventListener("DOMContentLoaded", () => {
   doLogin.addEventListener("click", () => {
     const username = document.getElementById("loginUser").value.trim();
     const password = document.getElementById("loginPass").value.trim();
-    const account = accounts.find(acc => acc.username === username && acc.password === password);
+    const acc = accounts.find(a => a.username === username && a.password === password);
 
-    if (account) {
+    if (acc) {
       isLogin = true;
-      currentUser = account.username;
+      currentUser = acc.username;
       loginPopup.classList.add("hidden");
-
       loginBtn.classList.add("hidden");
       accountDropdown.classList.remove("hidden");
       accountBtn.textContent = currentUser + " ▼";
@@ -68,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // DROPDOWN TOGGLE
+  // Toggle dropdown account
   accountBtn.addEventListener("click", () => {
     dropdownContent.classList.toggle("hidden");
   });
@@ -121,14 +120,12 @@ document.addEventListener("DOMContentLoaded", () => {
         allVideos.push(videoData);
         localStorage.setItem("videos", JSON.stringify(allVideos));
 
-        loadVideos();
-
-        uploadPopup.classList.add("hidden");
-
         document.getElementById("videoTitle").value = "";
         document.getElementById("thumbnailInput").value = "";
         document.getElementById("videoInput").value = "";
 
+        uploadPopup.classList.add("hidden");
+        loadVideos();
         alert("Video berhasil diupload!");
       };
       readerVideo.readAsDataURL(videoFile);
@@ -136,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
     readerThumb.readAsDataURL(thumbFile);
   });
 
-  // CLOSE DROPDOWN KETIKA KLIK DI LUAR
+  // Tutup dropdown jika klik di luar
   document.addEventListener("click", e => {
     if (!accountDropdown.contains(e.target)) dropdownContent.classList.add("hidden");
   });
