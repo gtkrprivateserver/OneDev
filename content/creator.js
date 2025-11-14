@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // === Account Config ===
   const accounts = [
     { username: "admin", password: "admin123" },
     { username: "creator", password: "creator123" }
@@ -7,91 +8,75 @@ document.addEventListener("DOMContentLoaded", () => {
   let isLogin = false;
   let currentUser = null;
 
+  // === DOM Elements ===
+  const loginBtn = document.getElementById("loginBtn");
+  const accountDropdown = document.getElementById("accountDropdown");
+  const dropdownBtn = accountDropdown.querySelector("button");
+  const dropdownContent = accountDropdown.querySelector(".dropdown-content");
+
   const loginPopup = document.getElementById("loginPopup");
   const uploadPopup = document.getElementById("uploadPopup");
 
-  const loginBtn = document.getElementById("loginBtn");
-  const accountDropdown = document.getElementById("accountDropdown");
-  const currentUserSpan = document.getElementById("currentUser");
-
   const doLogin = document.getElementById("doLogin");
-  const doLogout = document.getElementById("doLogout");
-  const openUploadPopup = document.getElementById("openUploadPopup");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const openUpload = document.getElementById("openUpload");
+  const doUpload = document.getElementById("doUpload");
+
   const closeButtons = document.querySelectorAll(".closePopup");
+  const videoGrid = document.getElementById("videoGrid");
 
-  const uploadBtn = document.getElementById("uploadBtn");
-  const videosContainer = document.getElementById("videosContainer");
+  // === Popup Handlers ===
+  loginBtn.addEventListener("click", () => loginPopup.classList.remove("hidden"));
 
-  // Load videos from localStorage
-  function loadVideos() {
-    let data = JSON.parse(localStorage.getItem("videos") || "[]");
-    videosContainer.innerHTML = "";
-    data.forEach(v => {
-      const card = document.createElement("div");
-      card.classList.add("video-card");
-      card.innerHTML = `
-        <img src="${v.thumb}" class="video-thumb">
-        <h3>${v.title}</h3>
-        <p class="uploaded-by">Uploaded by: ${v.user}</p>
-        <video controls>
-          <source src="${v.video}">
-        </video>
-      `;
-      videosContainer.prepend(card);
-    });
-  }
-
-  loadVideos();
-
-  // Popup close
-  closeButtons.forEach(btn => btn.addEventListener("click", () => {
-    loginPopup.classList.add("hidden");
-    uploadPopup.classList.add("hidden");
-  }));
-
-  // Login button
-  loginBtn.addEventListener("click", () => {
-    if(isLogin){
-      accountDropdown.classList.toggle("hidden");
-    } else {
-      loginPopup.classList.remove("hidden");
-    }
+  dropdownBtn.addEventListener("click", () => {
+    dropdownContent.classList.toggle("hidden");
   });
 
+  openUpload.addEventListener("click", () => uploadPopup.classList.remove("hidden"));
+
+  closeButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      loginPopup.classList.add("hidden");
+      uploadPopup.classList.add("hidden");
+      dropdownContent.classList.add("hidden");
+    });
+  });
+
+  // === Login System ===
   doLogin.addEventListener("click", () => {
     const user = document.getElementById("loginUser").value;
     const pass = document.getElementById("loginPass").value;
-    const found = accounts.find(acc => acc.username===user && acc.password===pass);
 
-    if(found){
+    const account = accounts.find(a => a.username === user && a.password === pass);
+    if(account){
       isLogin = true;
-      currentUser = found.username;
+      currentUser = user;
       loginPopup.classList.add("hidden");
-      currentUserSpan.textContent = currentUser;
+      loginBtn.classList.add("hidden");
       accountDropdown.classList.remove("hidden");
-    } else {
-      alert("Username atau password salah!");
-    }
+      localStorage.setItem("creator_login", "true");
+      localStorage.setItem("creator_user", currentUser);
+      loadVideos();
+      alert(`Login berhasil sebagai ${currentUser}`);
+    } else alert("Username / Password salah!");
   });
 
-  doLogout.addEventListener("click", () => {
+  // === Logout System ===
+  logoutBtn.addEventListener("click", () => {
     isLogin = false;
     currentUser = null;
     accountDropdown.classList.add("hidden");
+    loginBtn.classList.remove("hidden");
+    localStorage.removeItem("creator_login");
+    localStorage.removeItem("creator_user");
+    alert("Anda telah logout");
   });
 
-  openUploadPopup.addEventListener("click", () => {
-    if(!isLogin){
-      alert("Login terlebih dahulu!");
-      return;
-    }
-    uploadPopup.classList.remove("hidden");
-  });
-
-  uploadBtn.addEventListener("click", () => {
+  // === Upload Video ===
+  doUpload.addEventListener("click", () => {
     const title = document.getElementById("videoTitle").value;
-    const thumbFile = document.getElementById("thumbnailInput").files[0];
-    const videoFile = document.getElementById("videoInput").files[0];
+    const thumbFile = document.getElementById("videoThumb").files[0];
+    const videoFile = document.getElementById("videoFile").files[0];
 
     if(!title || !thumbFile || !videoFile){
       alert("Semua field wajib diisi!");
@@ -103,19 +88,55 @@ document.addEventListener("DOMContentLoaded", () => {
 
     thumbReader.onload = () => {
       videoReader.onload = () => {
-        let videos = JSON.parse(localStorage.getItem("videos")||"[]");
-        videos.push({
+        const videoData = {
+          id: Date.now(),
           title,
           thumb: thumbReader.result,
-          video: videoReader.result,
-          user: currentUser
-        });
-        localStorage.setItem("videos", JSON.stringify(videos));
-        loadVideos();
+          src: videoReader.result,
+          uploader: currentUser
+        };
+        saveVideo(videoData);
+        renderVideo(videoData);
         uploadPopup.classList.add("hidden");
       };
       videoReader.readAsDataURL(videoFile);
     };
     thumbReader.readAsDataURL(thumbFile);
   });
+
+  // === Video Storage ===
+  function saveVideo(data){
+    const videos = JSON.parse(localStorage.getItem("creator_videos")||"[]");
+    videos.push(data);
+    localStorage.setItem("creator_videos", JSON.stringify(videos));
+  }
+
+  function loadVideos(){
+    videoGrid.innerHTML = "";
+    const videos = JSON.parse(localStorage.getItem("creator_videos")||"[]");
+    videos.forEach(v => renderVideo(v));
+  }
+
+  function renderVideo(v){
+    const card = document.createElement("div");
+    card.classList.add("video-card");
+    card.innerHTML = `
+      <img src="${v.thumb}" class="video-thumb">
+      <h3>${v.title}</h3>
+      <p class="uploader">Uploaded by: ${v.uploader}</p>
+      <video controls>
+        <source src="${v.src}">
+      </video>
+    `;
+    videoGrid.prepend(card);
+  }
+
+  // === Restore Login on Reload ===
+  if(localStorage.getItem("creator_login") === "true"){
+    isLogin = true;
+    currentUser = localStorage.getItem("creator_user");
+    loginBtn.classList.add("hidden");
+    accountDropdown.classList.remove("hidden");
+    loadVideos();
+  }
 });
