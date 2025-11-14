@@ -1,153 +1,91 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
+  // ===== Elements =====
+  const loginBtn = document.getElementById('loginBtn');
+  const loginPopup = document.getElementById('loginPopup');
+  const doLoginBtn = document.getElementById('doLogin');
+  const accountWrapper = document.getElementById('accountDropdown');
+  const accountBtn = document.getElementById('accountBtn');
+  const dropdownContent = document.getElementById('dropdownContent');
+  const openUploadBtn = document.getElementById('openUpload');
+  const uploadPopup = document.getElementById('uploadPopup');
+  const closePopupBtns = document.querySelectorAll('.closePopup');
+  const uploadBtn = document.getElementById('uploadBtn');
+  const videosContainer = document.getElementById('videosContainer');
 
-  // ======= ACCOUNTS =======
-  const accounts = [
-    { username: "admin", password: "admin123" },
-    { username: "creator", password: "creator123" }
-  ];
-  let isLogin = false;
-  let currentUser = null;
+  let loggedIn = false;
 
-  // ======= ELEMENTS =======
-  const loginBtn = document.getElementById("loginBtn");
-  const accountDropdown = document.getElementById("accountDropdown");
-  const accountBtn = document.getElementById("accountBtn");
-  const dropdownContent = document.getElementById("dropdownContent");
-  const loginPopup = document.getElementById("loginPopup");
-  const uploadPopup = document.getElementById("uploadPopup");
-  const doLogin = document.getElementById("doLogin");
-  const logoutBtn = document.getElementById("logoutBtn");
-  const openUpload = document.getElementById("openUpload");
-  const uploadVideoBtn = document.getElementById("uploadBtn");
-  const closePopups = document.querySelectorAll(".closePopup");
-  const videosContainer = document.getElementById("videosContainer");
-
-  // ======= LOAD VIDEOS DARI LOCALSTORAGE =======
-  function loadVideos() {
-    const videos = JSON.parse(localStorage.getItem("videos") || "[]");
-    videosContainer.innerHTML = "";
-    videos.forEach(v => {
-      const card = document.createElement("div");
-      card.classList.add("video-card");
-      card.innerHTML = `
-        <img src="${v.thumb}" class="video-thumb">
-        <h3>${v.title}</h3>
-        <p class="uploaded-by">Uploaded by: ${v.user}</p>
-        <video controls>
-          <source src="${v.video}">
-        </video>
-      `;
-      videosContainer.prepend(card);
-    });
-  }
-  loadVideos();
-
-  // ======= LOGIN =======
-  loginBtn.addEventListener("click", () => {
-    if (!isLogin) loginPopup.classList.remove("hidden");
+  // ===== Login =====
+  loginBtn.addEventListener('click', () => {
+    loginPopup.classList.remove('hidden');
   });
 
-  doLogin.addEventListener("click", () => {
-    const username = document.getElementById("loginUser").value.trim();
-    const password = document.getElementById("loginPass").value.trim();
-    const acc = accounts.find(a => a.username === username && a.password === password);
+  doLoginBtn.addEventListener('click', () => {
+    const username = document.getElementById('loginUser').value;
+    const password = document.getElementById('loginPass').value;
 
-    if (acc) {
-      isLogin = true;
-      currentUser = acc.username;
-      loginPopup.classList.add("hidden");
-      loginBtn.classList.add("hidden");
-      accountDropdown.classList.remove("hidden");
-      accountBtn.textContent = currentUser + " ▼";
-    } else {
-      alert("Username atau password salah!");
+    if (!username || !password) {
+      alert('Isi username dan password!');
+      return;
     }
+
+    // Contoh sederhana login
+    loggedIn = true;
+    loginPopup.classList.add('hidden');
+    loginBtn.classList.add('hidden');
+    accountWrapper.classList.remove('hidden');
   });
 
-  // ======= DROPDOWN =======
-  accountBtn.addEventListener("click", () => {
-    dropdownContent.classList.toggle("hidden");
+  // ===== Account dropdown =====
+  accountBtn.addEventListener('click', () => {
+    dropdownContent.classList.toggle('hidden');
   });
 
-  // ======= LOGOUT =======
-  logoutBtn.addEventListener("click", () => {
-    isLogin = false;
-    currentUser = null;
-    accountDropdown.classList.add("hidden");
-    loginBtn.classList.remove("hidden");
-    dropdownContent.classList.add("hidden");
+  // ===== Open Upload Popup =====
+  openUploadBtn.addEventListener('click', () => {
+    uploadPopup.classList.remove('hidden');
   });
 
-  // ======= OPEN UPLOAD POPUP =======
-  openUpload.addEventListener("click", () => {
-    if (!isLogin) return alert("Anda harus login terlebih dahulu!");
-    uploadPopup.classList.remove("hidden");
-    dropdownContent.classList.add("hidden");
-  });
-
-  // ======= CLOSE POPUPS =======
-  closePopups.forEach(btn => {
-    btn.addEventListener("click", () => {
-      loginPopup.classList.add("hidden");
-      uploadPopup.classList.add("hidden");
+  // ===== Close Popup =====
+  closePopupBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.closest('.popup').classList.add('hidden');
     });
   });
 
-  // ======= UPLOAD VIDEO SESUAI CREATOR.CSS =======
-  uploadVideoBtn.addEventListener("click", () => {
-    const titleInput = document.getElementById("videoTitle");
-    const thumbInput = document.getElementById("thumbnailInput");
-    const videoInput = document.getElementById("videoInput");
+  // ===== Upload Video =====
+  uploadBtn.addEventListener('click', () => {
+    const title = document.getElementById('videoTitle').value;
+    const thumbnail = document.getElementById('thumbnailInput').files[0];
+    const video = document.getElementById('videoInput').files[0];
 
-    const title = titleInput.value.trim();
-    const thumbFile = thumbInput.files[0];
-    const videoFile = videoInput.files[0];
+    if (!title || !thumbnail || !video) {
+      alert('Mohon isi semua field!');
+      return;
+    }
 
-    if (!title || !thumbFile || !videoFile) return alert("Semua field wajib diisi!");
+    // Buat card video baru
+    const videoCard = document.createElement('div');
+    videoCard.classList.add('video-card');
+    videoCard.innerHTML = `
+      <img src="${URL.createObjectURL(thumbnail)}" alt="Thumbnail" class="video-thumb">
+      <h3>${title}</h3>
+      <video src="${URL.createObjectURL(video)}" controls class="video-player"></video>
+    `;
+    videosContainer.appendChild(videoCard);
 
-    // Gunakan FileReader
-    const thumbReader = new FileReader();
-    const videoReader = new FileReader();
-
-    thumbReader.onload = () => {
-      videoReader.onload = () => {
-        const videoData = {
-          title,
-          thumb: thumbReader.result,
-          video: videoReader.result,
-          user: currentUser
-        };
-
-        // simpan ke localStorage
-        const allVideos = JSON.parse(localStorage.getItem("videos") || "[]");
-        allVideos.push(videoData);
-        localStorage.setItem("videos", JSON.stringify(allVideos));
-
-        // tampilkan card
-        const card = document.createElement("div");
-        card.classList.add("video-card");
-        card.innerHTML = `
-          <img src="${videoData.thumb}" class="video-thumb">
-          <h3>${videoData.title}</h3>
-          <p class="uploaded-by">Uploaded by: ${videoData.user}</p>
-          <video controls>
-            <source src="${videoData.video}">
-          </video>
-        `;
-        videosContainer.prepend(card);
-
-        uploadPopup.classList.add("hidden");
-
-        // reset input
-        titleInput.value = "";
-        thumbInput.value = "";
-        videoInput.value = "";
-
-        alert("Video berhasil diupload!");
-      };
-      videoReader.readAsDataURL(videoFile);
-    };
-    thumbReader.readAsDataURL(thumbFile);
+    // Reset form dan tutup popup
+    document.getElementById('videoTitle').value = '';
+    document.getElementById('thumbnailInput').value = '';
+    document.getElementById('videoInput').value = '';
+    uploadPopup.classList.add('hidden');
   });
 
+  // ===== Logout =====
+  const logoutBtn = document.getElementById('logoutBtn');
+  logoutBtn.addEventListener('click', () => {
+    loggedIn = false;
+    accountWrapper.classList.add('hidden');
+    loginBtn.classList.remove('hidden');
+    dropdownContent.classList.add('hidden');
+  });
 });
