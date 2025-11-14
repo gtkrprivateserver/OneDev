@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const videosContainer = document.getElementById("videosContainer");
 
-  // Load video dari localStorage
+  // ======= Load video dari localStorage =======
   function loadVideos() {
     const videos = JSON.parse(localStorage.getItem("videos") || "[]");
     videosContainer.innerHTML = "";
@@ -42,10 +42,9 @@ document.addEventListener("DOMContentLoaded", () => {
       videosContainer.prepend(card);
     });
   }
-
   loadVideos();
 
-  // LOGIN
+  // ======= LOGIN =======
   loginBtn.addEventListener("click", () => {
     if (!isLogin) loginPopup.classList.remove("hidden");
   });
@@ -67,12 +66,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Toggle dropdown account
+  // ======= Toggle dropdown account =======
   accountBtn.addEventListener("click", () => {
     dropdownContent.classList.toggle("hidden");
   });
 
-  // LOGOUT
+  // ======= LOGOUT =======
   logoutBtn.addEventListener("click", () => {
     isLogin = false;
     currentUser = null;
@@ -81,14 +80,14 @@ document.addEventListener("DOMContentLoaded", () => {
     dropdownContent.classList.add("hidden");
   });
 
-  // OPEN UPLOAD POPUP
+  // ======= OPEN UPLOAD POPUP =======
   openUpload.addEventListener("click", () => {
     if (!isLogin) return alert("Anda harus login terlebih dahulu!");
     uploadPopup.classList.remove("hidden");
     dropdownContent.classList.add("hidden");
   });
 
-  // CLOSE POPUP
+  // ======= CLOSE POPUP =======
   closePopups.forEach(btn => {
     btn.addEventListener("click", () => {
       loginPopup.classList.add("hidden");
@@ -96,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // UPLOAD VIDEO
+  // ======= UPLOAD VIDEO =======
   uploadVideoBtn.addEventListener("click", () => {
     const title = document.getElementById("videoTitle").value.trim();
     const thumbFile = document.getElementById("thumbnailInput").files[0];
@@ -120,6 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
         allVideos.push(videoData);
         localStorage.setItem("videos", JSON.stringify(allVideos));
 
+        // reset input
         document.getElementById("videoTitle").value = "";
         document.getElementById("thumbnailInput").value = "";
         document.getElementById("videoInput").value = "";
