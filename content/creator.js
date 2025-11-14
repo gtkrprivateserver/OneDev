@@ -1,6 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  // POPUP HANDLER
+  // ============================
+  //  ACCOUNT CONFIG
+  // ============================
+  const accounts = [
+    { username: "admin", password: "admin123" },
+    { username: "creator", password: "creator123" },
+    { username: "user1", password: "pass1" }
+  ];
+
+  let isLogin = false;
+  let currentUser = null;
+
+
+  // ============================
+  //  POPUP HANDLER
+  // ============================
   const loginPopup = document.getElementById("loginPopup");
   const logoutPopup = document.getElementById("logoutPopup");
   const uploadPopup = document.getElementById("uploadPopup");
@@ -13,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const closeButtons = document.querySelectorAll(".closePopup");
 
-  let isLogin = false;
 
   // OPEN LOGIN POPUP
   loginBtn.addEventListener("click", () => {
@@ -33,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     uploadPopup.classList.remove("hidden");
   });
 
-  // CLOSE POPUP (semua popup)
+  // CLOSE POPUP
   closeButtons.forEach(btn => {
     btn.addEventListener("click", () => {
       loginPopup.classList.add("hidden");
@@ -42,34 +56,54 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // LOGIN
+
+  // ============================
+  //  LOGIN SYSTEM
+  // ============================
   doLogin.addEventListener("click", () => {
     const user = document.getElementById("loginUser").value;
     const pass = document.getElementById("loginPass").value;
 
-    if (user === "admin" && pass === "admin123") {
+    const found = accounts.find(acc =>
+      acc.username === user && acc.password === pass
+    );
+
+    if (found) {
       isLogin = true;
+      currentUser = found.username;
+
       loginPopup.classList.add("hidden");
-      loginBtn.textContent = "Logout";
-      alert("Login berhasil!");
+      loginBtn.textContent = currentUser + " (Logout)";
+
+      alert(`Login berhasil sebagai ${currentUser}!`);
     } else {
       alert("Username atau password salah!");
     }
   });
 
-  // LOGOUT
+
+  // ============================
+  //  LOGOUT SYSTEM
+  // ============================
   doLogout.addEventListener("click", () => {
     isLogin = false;
+    currentUser = null;
+
     logoutPopup.classList.add("hidden");
     loginBtn.textContent = "Login";
+
     alert("Anda telah logout.");
   });
 
-  // UPLOAD VIDEO
+
+  // ============================
+  //  UPLOAD VIDEO SYSTEM
+  // ============================
   const uploadBtn = document.getElementById("uploadBtn");
   const videosContainer = document.getElementById("videosContainer");
 
   uploadBtn.addEventListener("click", () => {
+
     const title = document.getElementById("videoTitle").value;
     const thumbnail = document.getElementById("thumbnailInput").files[0];
     const video = document.getElementById("videoInput").files[0];
@@ -91,6 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
         card.innerHTML = `
           <img src="${thumbReader.result}" class="video-thumb">
           <h3>${title}</h3>
+          <p class="uploaded-by">Uploaded by: ${currentUser}</p>
           <video controls>
             <source src="${videoReader.result}">
           </video>
