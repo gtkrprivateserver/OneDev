@@ -1,11 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  // ======= ACCOUNTS CONFIG =======
+  // ======= ACCOUNTS =======
   const accounts = [
     { username: "admin", password: "admin123" },
     { username: "creator", password: "creator123" }
   ];
-
   let isLogin = false;
   let currentUser = null;
 
@@ -29,7 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
     videosContainer.innerHTML = "";
     videos.forEach(v => {
       const card = document.createElement("div");
-      card.classList.add("video-card");
+      card.classList.add("video-card"); // sesuai creator.css
+
       card.innerHTML = `
         <img src="${v.thumb}" class="video-thumb">
         <h3>${v.title}</h3>
@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <source src="${v.video}">
         </video>
       `;
+
       videosContainer.prepend(card);
     });
   }
@@ -94,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ======= UPLOAD VIDEO =======
+  // ======= UPLOAD VIDEO SESUAI CREATOR.CSS =======
   uploadVideoBtn.addEventListener("click", () => {
     const titleInput = document.getElementById("videoTitle");
     const thumbInput = document.getElementById("thumbnailInput");
@@ -118,13 +119,27 @@ document.addEventListener("DOMContentLoaded", () => {
           user: currentUser
         };
 
+        // simpan ke localStorage
         const allVideos = JSON.parse(localStorage.getItem("videos") || "[]");
         allVideos.push(videoData);
         localStorage.setItem("videos", JSON.stringify(allVideos));
 
-        loadVideos();
+        // tampilkan video sesuai style
+        const card = document.createElement("div");
+        card.classList.add("video-card");
+        card.innerHTML = `
+          <img src="${videoData.thumb}" class="video-thumb">
+          <h3>${videoData.title}</h3>
+          <p class="uploaded-by">Uploaded by: ${videoData.user}</p>
+          <video controls>
+            <source src="${videoData.video}">
+          </video>
+        `;
+        videosContainer.prepend(card);
+
         uploadPopup.classList.add("hidden");
 
+        // reset input
         titleInput.value = "";
         thumbInput.value = "";
         videoInput.value = "";
