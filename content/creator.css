@@ -1,177 +1,227 @@
-/* ===============================
-   LAYOUT CREATOR 
-================================= */
-
-.main-content {
-  padding: 20px;
-}
-
-h2 {
-  margin-bottom: 10px;
-  color: #fff;
-}
-
-.videos-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
-}
-
-/* ===============================
-   VIDEO CARD
-================================= */
-
-.video-card {
-  background: #111;
-  padding: 15px;
-  border-radius: 12px;
-  border: 1px solid #222;
-  transition: 0.2s ease;
-}
-
-.video-card:hover {
-  transform: scale(1.03);
-}
-
-.video-thumb {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-
-.video-card h3 {
-  color: #fff;
-  font-size: 17px;
-  margin-bottom: 10px;
-}
-
-.video-card video {
-  width: 100%;
-  border-radius: 10px;
-  margin-top: 10px;
-}
-
-/* ===============================
-   UPLOAD BUTTON
-================================= */
-
-.btn-primary {
-  background: #4b70f5;
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: none;
-  color: white;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-.btn-primary:hover {
-  background: #3d5dde;
-}
-
-.btn-sec {
-  background: #222;
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid #444;
-  color: #fff;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-.btn-sec:hover {
-  background: #333;
+/* ============================
+   GLOBAL STYLES
+============================ */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f8;
+  margin: 0;
+  padding: 0;
 }
 
 .hidden {
   display: none !important;
 }
 
-/* ===============================
-   POPUP GLOBAL
-================================= */
+button {
+  cursor: pointer;
+}
 
-.popup {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(6px);
+/* ============================
+   HEADER
+============================ */
+header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  z-index: 9000;
+  padding: 15px 30px;
+  background-color: #1e1e2f;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-.popup.hidden {
-  display: none;
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
 }
 
-.popup-content {
-  background: #121212;
-  padding: 25px;
-  width: 90%;
-  max-width: 420px;
-  border-radius: 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  animation: popupFade 0.2s ease;
+header .btn-sec {
+  background-color: transparent;
+  color: white;
+  border: 1px solid #fff;
+  padding: 5px 15px;
+  border-radius: 5px;
+  transition: 0.3s;
 }
 
-@keyframes popupFade {
-  from { opacity: 0; transform: scale(0.9); }
-  to   { opacity: 1; transform: scale(1); }
+header .btn-sec:hover {
+  background-color: #fff;
+  color: #1e1e2f;
 }
 
-/* POPUP UPLOAD */
-.popup-upload {
-  max-width: 480px;
+/* ============================
+   VIDEO GRID
+============================ */
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
 }
 
-/* INPUT STYLE */
-.popup-content input[type="text"],
-.popup-content input[type="password"],
-.popup-content input[type="file"] {
-  background: #1d1d1d;
-  border: 1px solid #333;
+.video-card {
+  background-color: #fff;
+  border-radius: 10px;
   padding: 10px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.video-card:hover {
+  transform: translateY(-3px);
+}
+
+.video-card img.video-thumb {
+  width: 100%;
   border-radius: 8px;
-  color: #fff;
+}
+
+.video-card h3 {
+  margin: 10px 0 5px 0;
+  font-size: 1.1rem;
+}
+
+.video-card p.uploaded-by {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.video-card video {
+  width: 100%;
+  border-radius: 8px;
   outline: none;
 }
 
-.popup-content input:focus {
-  border-color: #4b70f5;
+/* ============================
+   BUTTON PRIMARY
+============================ */
+.btn-primary {
+  background-color: #4e54c8;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: 0.3s;
 }
 
-/* LABEL */
-.popup-content label {
-  color: #ddd;
-  font-size: 14px;
+.btn-primary:hover {
+  background-color: #3b40a4;
 }
 
-/* ===============================
-   HEADER CUSTOM
-================================= */
-
-.header-right {
+/* ============================
+   POPUP STYLES
+============================ */
+.popup, .player-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(30, 30, 47, 0.85);
   display: flex;
-  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
 }
 
-.header-left h1 {
-  color: #fff;
+.popup-content, .player-box {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+  position: relative;
 }
 
-/* ===============================
-   RESPONSIVE
-================================= */
+.popup-content h2, .player-box h2 {
+  margin-top: 0;
+}
 
-@media (max-width: 600px) {
-  .video-thumb {
-    height: 140px;
-  }
+.popup-content input, .popup-content label, .upload-box input, .upload-box label {
+  width: 100%;
+  margin: 8px 0;
+  padding: 8px;
+  font-size: 0.95rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.closePopup {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+.closePopup:hover {
+  background-color: #c0392b;
+}
+
+/* ============================
+   PLAYER STYLES
+============================ */
+.player-box {
+  width: 90%;
+  max-width: 700px;
+}
+
+.player-box video {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 10px;
+  outline: none;
+}
+
+.stats {
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+
+#commentList {
+  max-height: 120px;
+  overflow-y: auto;
+  background-color: #f4f4f8;
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+#commentInput {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* ============================
+   UPLOAD BOX
+============================ */
+.upload-section {
+  padding: 20px;
+  background-color: #fff;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0,0,0,0.05);
+}
+
+.upload-box label {
+  font-weight: bold;
+}
+
+.upload-box input {
+  margin-bottom: 10px;
+}
+
+.upload-box button {
+  margin-top: 10px;
 }
