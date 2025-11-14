@@ -3,112 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ONEDEV Creator</title>
+  <title>ONEDEV - Creator Panel</title>
 
-  <!-- Global style (tidak diubah) -->
   <link rel="stylesheet" href="../styles.css">
-
-  <!-- CSS khusus Creator -->
   <link rel="stylesheet" href="creator.css">
-
-  <style>
-    /* Fix tombol login yang ketutup banner */
-    header, .header-right, .btn-login {
-      position: relative;
-      z-index: 3000 !important;
-    }
-    #adsContainer { pointer-events: none; }
-    .main-content { position: relative; z-index: 2; }
-  </style>
 </head>
-
 <body>
 
+<!-- Banner otomatis -->
 <div id="adsContainer"></div>
 
-<!-- Sidebar dari sidebar.js -->
-
+<!-- Sidebar otomatis dari sidebar.js -->
 <div class="main-content">
-
   <header>
     <div class="header-left">
       <button id="menuBtn" class="menu-btn">☰</button>
-      <h1>Creator Dashboard</h1>
+      <h1>Creator Panel</h1>
     </div>
 
     <div class="header-right">
-      <button class="btn-login" id="loginBtn">Login</button>
-      <button class="btn-logout" id="logoutBtn" style="display:none;">Logout</button>
-
-      <button class="btn-upload" id="openUploadBtn" style="display:none;">Upload</button>
+      <button id="loginBtn" class="btn-sec">Login</button>
+      <button id="logoutBtn" class="btn-sec hidden">Logout</button>
     </div>
   </header>
 
-  <section class="creator-container">
+  <!-- Upload Section -->
+  <section class="upload-section">
+    <h2>Upload Video Baru</h2>
 
-    <!-- LOGIN -->
-    <div class="creator-login-overlay" id="loginOverlay">
-      <div class="creator-login-popup">
-        <h2>Masuk sebagai Creator</h2>
-        <p>Silakan login untuk upload video.</p>
+    <div class="upload-box">
+      <label>Judul Video</label>
+      <input type="text" id="videoTitle" placeholder="Masukkan judul video...">
 
-        <input type="text" id="username" placeholder="Username creator">
-        <input type="password" id="password" placeholder="Password">
+      <label>Thumbnail Video</label>
+      <input type="file" id="thumbnailInput" accept="image/*">
 
-        <button class="btn-primary" id="submitLogin">Login</button>
-        <button class="btn-close" id="closeLoginPopup">Tutup</button>
-      </div>
+      <label>File Video</label>
+      <input type="file" id="videoInput" accept="video/mp4,video/mkv,video/webm">
+
+      <button class="btn-primary" id="uploadBtn">Upload</button>
     </div>
+  </section>
 
-    <!-- DASHBOARD -->
-    <div class="creator-dashboard" id="dashboard" style="display:none;">
-
-      <!-- UPLOAD -->
-      <div class="upload-overlay" id="uploadOverlay">
-        <div class="upload-popup">
-          <h2>Upload Video Baru</h2>
-
-          <form id="uploadForm">
-            <label>Judul Video</label>
-            <input type="text" id="videoTitle" required>
-
-            <label>Thumbnail</label>
-            <input type="file" id="thumbFile" accept="image/*" required>
-
-            <label>Video File</label>
-            <input type="file" id="videoFile" accept="video/*" required>
-
-            <button type="submit" class="btn-primary">Upload</button>
-            <button type="button" class="btn-close" id="closeUploadPopup">Batal</button>
-          </form>
-        </div>
-      </div>
-
-      <h2>Video Anda</h2>
-      <div class="creator-video-grid" id="videoList"></div>
-
-    </div>
-
+  <section class="video-list">
+    <h2>Video Anda</h2>
+    <div id="videosContainer" class="videos-grid"></div>
   </section>
 </div>
 
-<!-- PLAYER -->
-<div id="playerOverlay" class="player-overlay" style="display:none;">
-  <div class="player-box">
-    <button class="player-close" id="closePlayer">Tutup</button>
-    <h2 id="playerTitle"></h2>
+<!-- LOGIN POPUP -->
+<div id="loginPopup" class="popup hidden">
+  <div class="popup-content">
+    <h2>Login Creator</h2>
 
-    <video id="playerVideo" controls></video>
+    <label>Username</label>
+    <input type="text" id="loginUser" placeholder="Masukkan username...">
 
-    <div class="stats" id="playerStats"></div>
+    <label>Password</label>
+    <input type="password" id="loginPass" placeholder="Masukkan password...">
 
-    <button class="like-btn" id="likeBtn">Like ❤️</button>
-
-    <h3>Komentar</h3>
-    <div id="commentList"></div>
-
-    <textarea id="commentInput" placeholder="Tulis komentar..."></textarea>
-    <button class="like-btn" id="submitComment">Kirim</button>
+    <button id="doLogin" class="btn-primary">Login</button>
+    <button id="closePopup" class="btn-sec">Tutup</button>
   </div>
 </div>
 
