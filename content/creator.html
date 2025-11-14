@@ -19,8 +19,13 @@
       <h1>Creator Panel</h1>
     </div>
     <div class="header-right">
-      <button id="loginBtn" class="btn-primary">Login</button>
-      <button id="openUploadPopup" class="btn-primary hidden">Upload Video</button>
+      <button id="accountBtn" class="btn-small">Login</button>
+      <div id="accountMenu" class="account-menu hidden">
+        <button id="menuProfile">Profile</button>
+        <button id="menuSetting">Setting</button>
+        <button id="menuUpload">Upload Video</button>
+        <button id="menuLogout">Logout</button>
+      </div>
     </div>
   </header>
 
@@ -38,14 +43,6 @@
     <input type="password" id="loginPass" placeholder="Password">
     <button id="doLogin" class="btn-primary">Login</button>
     <button class="closePopup">Tutup</button>
-  </div>
-</div>
-
-<div id="logoutPopup" class="popup hidden">
-  <div class="popup-content">
-    <h2>Logout?</h2>
-    <button id="doLogout" class="btn-primary">Logout</button>
-    <button class="closePopup">Batal</button>
   </div>
 </div>
 
