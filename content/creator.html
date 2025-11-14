@@ -3,125 +3,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ONEDEV - Coming Soon</title>
+  <title>ONEDEV - Creator Panel</title>
+
   <link rel="stylesheet" href="../styles.css">
-  <style>
-    /* Countdown timer styling */
-    .countdown {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 30px;
-      font-size: 2em;
-      color: #00b4d8;
-      font-weight: bold;
-      flex-wrap: wrap;
-    }
+  <link rel="stylesheet" href="creator.css">
 
-    .countdown-item {
-      text-align: center;
-      min-width: 60px;
-    }
-
-    .countdown-item span {
-      display: block;
-      font-size: 1.2em;
-      color: #00b4d8;
-      margin-bottom: 5px;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      section h2 {
-        font-size: 1.7em;
-      }
-      section p {
-        font-size: 1em;
-      }
-      .countdown {
-        font-size: 1.5em;
-        gap: 10px;
-      }
-      .countdown-item {
-        min-width: 50px;
-      }
-      .countdown-item span {
-        font-size: 1em;
-      }
-    }
-
-    @media (max-width: 480px) {
-      section h2 {
-        font-size: 1.4em;
-      }
-      section p {
-        font-size: 0.95em;
-      }
-      .countdown {
-        font-size: 1.2em;
-        gap: 8px;
-      }
-      .countdown-item {
-        min-width: 45px;
-      }
-      .countdown-item span {
-        font-size: 0.95em;
-      }
-    }
-  </style>
+  <!-- Font Awesome untuk icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-  <div class="main-content">
-    <header>
-      <div class="header-left">
-        <button id="menuBtn" class="menu-btn">☰</button>
-        <h1>Content Creator</h1>
-      </div>
-    </header>
 
-    <section style="text-align:center; margin-top:80px; padding: 0 10px;">
-      <h2 style="font-size:2em; color:#00b4d8;">Coming Soon 🚀</h2>
-      <p style="margin-top:20px; color:#ccc; font-size:1.1em;">
-        Kami sedang dalam pengembangan.<br>
-        Silakan kunjungi kembali nanti!
-      </p>
+<div id="adsContainer"></div>
 
-      <!-- Countdown Timer -->
-      <div class="countdown" id="countdown">
-        <div class="countdown-item"><span id="days">0</span>Days</div>
-        <div class="countdown-item"><span id="hours">0</span>Hours</div>
-        <div class="countdown-item"><span id="minutes">0</span>Minutes</div>
-        <div class="countdown-item"><span id="seconds">0</span>Seconds</div>
+<div class="main-content">
+  <header>
+    <div class="header-left">
+      <button id="menuBtn" class="menu-btn">☰</button>
+      <h1>Creator Panel</h1>
+    </div>
+
+    <div class="header-right">
+      <div id="loginContainer">
+        <button id="loginBtn" class="btn-sec"><i class="fa fa-user"></i> Login</button>
       </div>
-    </section>
+
+      <div id="accountDropdown" class="dropdown hidden">
+        <button class="dropbtn">
+          <i class="fa fa-user-circle"></i> <span id="currentUser"></span> ▼
+        </button>
+        <div class="dropdown-content">
+          <button id="openUploadPopup"><i class="fa fa-upload"></i> Upload Video</button>
+          <button id="goProfile"><i class="fa fa-id-badge"></i> Profile</button>
+          <button id="goSetting"><i class="fa fa-gear"></i> Setting</button>
+          <button id="doLogout"><i class="fa fa-right-from-bracket"></i> Logout</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Upload Popup -->
+  <div id="uploadPopup" class="popup hidden">
+    <div class="popup-content">
+      <h2>Upload Video</h2>
+
+      <label>Judul Video</label>
+      <input type="text" id="videoTitle" placeholder="Masukkan judul video">
+
+      <label>Thumbnail</label>
+      <input type="file" id="thumbnailInput" accept="image/*">
+
+      <label>File Video</label>
+      <input type="file" id="videoInput" accept="video/mp4,video/mkv,video/webm">
+
+      <button id="uploadBtn" class="btn-primary">Upload</button>
+      <button class="btn-sec closePopup">Tutup</button>
+    </div>
   </div>
 
-  <!-- Sidebar otomatis dimasukkan oleh sidebar.js -->
-  <script src="../sidebar.js"></script>
+  <!-- Login Popup -->
+  <div id="loginPopup" class="popup hidden">
+    <div class="popup-content">
+      <h2>Login</h2>
 
-  <script>
-    // Set tanggal rilis Countdown (ubah sesuai jadwal)
-    const launchDate = new Date("Dec 31, 2025 00:00:00").getTime();
+      <label>Username</label>
+      <input type="text" id="loginUser" placeholder="Username...">
 
-    const countdownTimer = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = launchDate - now;
+      <label>Password</label>
+      <input type="password" id="loginPass" placeholder="Password...">
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      <button id="doLogin" class="btn-primary">Login</button>
+      <button class="btn-sec closePopup">Tutup</button>
+    </div>
+  </div>
 
-      document.getElementById("days").innerText = days;
-      document.getElementById("hours").innerText = hours;
-      document.getElementById("minutes").innerText = minutes;
-      document.getElementById("seconds").innerText = seconds;
+  <!-- Video Section -->
+  <section class="video-section">
+    <h2>Video Anda</h2>
+    <div id="videosContainer" class="videos-grid"></div>
+  </section>
+</div>
 
-      if (distance < 0) {
-        clearInterval(countdownTimer);
-        document.getElementById("countdown").innerHTML = "<h3>🚀 Bot Telah Tersedia!</h3>";
-      }
-    }, 1000);
-  </script>
+<script src="../sidebar.js"></script>
+<script src="creator.js"></script>
 </body>
 </html>
