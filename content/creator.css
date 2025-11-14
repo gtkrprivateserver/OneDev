@@ -38,10 +38,15 @@
   cursor: pointer;
 }
 
-.btn-primary { background: #007bff; color: #fff; }
-.btn-sec { background: #ccc; color: #000; }
+.btn-primary {
+  background: #007bff;
+  color: #fff;
+}
 
-.closePopup { background: #f44336; color: #fff; }
+.closePopup {
+  background: #f44336;
+  color: #fff;
+}
 
 /* ===========================
    VIDEO GRID
