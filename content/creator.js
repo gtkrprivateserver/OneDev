@@ -1,6 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-
-  // ===== ACCOUNTS =====
   const accounts = [
     { username:"admin", password:"admin123" },
     { username:"creator", password:"creator123" },
@@ -9,38 +7,34 @@ document.addEventListener("DOMContentLoaded", () => {
   let isLogin = false;
   let currentUser = null;
 
-  // ===== POPUPS =====
   const loginPopup = document.getElementById("loginPopup");
   const uploadPopup = document.getElementById("uploadPopup");
 
   const loginBtn = document.getElementById("loginBtn");
-  const openUploadPopup = document.getElementById("openUploadPopup");
+  const accountDropdown = document.getElementById("accountDropdown");
 
   const doLogin = document.getElementById("doLogin");
   const closeButtons = document.querySelectorAll(".closePopup");
-
   const uploadBtn = document.getElementById("uploadBtn");
   const videosContainer = document.getElementById("videosContainer");
 
-  // Open login
+  const menuUpload = document.getElementById("menuUpload");
+  const menuLogout = document.getElementById("menuLogout");
+
+  // Toggle login popup / account dropdown
   loginBtn.addEventListener("click", () => {
-    loginPopup.classList.toggle("hidden");
-  });
-
-  // Open upload
-  openUploadPopup.addEventListener("click", () => {
-    if(!isLogin){
-      alert("Login terlebih dahulu!");
-      return;
+    if(isLogin){
+      accountDropdown.classList.toggle("hidden");
+    } else {
+      loginPopup.classList.remove("hidden");
     }
-    uploadPopup.classList.remove("hidden");
   });
 
-  // Close all popup
   closeButtons.forEach(btn => {
     btn.addEventListener("click", () => {
       loginPopup.classList.add("hidden");
       uploadPopup.classList.add("hidden");
+      accountDropdown.classList.add("hidden");
     });
   });
 
@@ -48,17 +42,36 @@ document.addEventListener("DOMContentLoaded", () => {
   doLogin.addEventListener("click", () => {
     const user = document.getElementById("loginUser").value;
     const pass = document.getElementById("loginPass").value;
-    const found = accounts.find(acc => acc.username === user && acc.password === pass);
+    const found = accounts.find(acc => acc.username===user && acc.password===pass);
 
     if(found){
       isLogin = true;
       currentUser = found.username;
       loginPopup.classList.add("hidden");
-      loginBtn.textContent = currentUser + " (Account)";
+      loginBtn.textContent = currentUser;
       alert(`Login berhasil sebagai ${currentUser}!`);
     } else {
       alert("Username atau password salah!");
     }
+  });
+
+  // LOGOUT
+  menuLogout.addEventListener("click", () => {
+    isLogin=false;
+    currentUser=null;
+    loginBtn.textContent="Login";
+    accountDropdown.classList.add("hidden");
+    alert("Anda telah logout.");
+  });
+
+  // OPEN UPLOAD
+  menuUpload.addEventListener("click", () => {
+    if(!isLogin){
+      alert("Login terlebih dahulu!");
+      return;
+    }
+    uploadPopup.classList.remove("hidden");
+    accountDropdown.classList.add("hidden");
   });
 
   // UPLOAD VIDEO
@@ -79,8 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
       videoReader.onload = () => {
         const card = document.createElement("div");
         card.classList.add("video-card");
-
-        card.innerHTML = `
+        card.innerHTML=`
           <img src="${thumbReader.result}" class="video-thumb">
           <div class="play-overlay"></div>
           <div class="video-info">
@@ -91,15 +103,14 @@ document.addEventListener("DOMContentLoaded", () => {
             <source src="${videoReader.result}">
           </video>
         `;
-
         const overlay = card.querySelector(".play-overlay");
         const videoEl = card.querySelector(".video-player");
         const thumbEl = card.querySelector(".video-thumb");
 
         overlay.addEventListener("click", () => {
-          overlay.style.display = "none";
-          thumbEl.style.display = "none";
-          videoEl.style.display = "block";
+          overlay.style.display="none";
+          thumbEl.style.display="none";
+          videoEl.style.display="block";
           videoEl.play();
         });
 
