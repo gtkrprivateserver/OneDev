@@ -1,1 +1,149 @@
-y
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ONEDEV Creator Dashboard</title>
+
+  <!-- Styles global -->
+  <link rel="stylesheet" href="../styles.css">
+
+  <!-- Styles khusus creator -->
+  <link rel="stylesheet" href="../content/creator.css">
+</head>
+<body>
+
+<!-- Banner otomatis -->
+<div id="adsContainer"></div>
+
+<!-- Sidebar otomatis melalui sidebar.js -->
+
+<div class="main-content">
+
+  <header>
+    <div class="header-left">
+      <button id="menuBtn" class="menu-btn">☰</button>
+      <h1>Creator Dashboard</h1>
+    </div>
+
+    <div class="header-right">
+      <button class="btn-login" id="loginBtn">Login</button>
+      <button class="btn-logout" id="logoutBtn" style="display:none;">Logout</button>
+    </div>
+  </header>
+
+  <!-- CREATOR SECTION -->
+  <section class="creator-container">
+
+    <!-- Jika belum login -->
+    <div class="creator-login-box" id="loginBox">
+      <h2>Masuk sebagai Creator</h2>
+      <p>Silahkan login untuk mengelola konten Anda.</p>
+
+      <input type="text" id="username" placeholder="Username creator">
+      <input type="password" id="password" placeholder="Password">
+
+      <button class="btn-primary" id="submitLogin">Login</button>
+    </div>
+
+    <!-- DASHBOARD CREATOR -->
+    <div class="creator-dashboard" id="dashboard" style="display:none;">
+
+      <h2>Upload Video Baru</h2>
+
+      <form class="creator-upload-form" id="uploadForm">
+        <label>Judul Video</label>
+        <input type="text" id="videoTitle" placeholder="Masukkan judul video" required>
+
+        <label>Thumbnail Video</label>
+        <input type="file" id="videoThumbnail" accept="image/*" required>
+
+        <label>File Video</label>
+        <input type="file" id="videoFile" accept="video/*" required>
+
+        <button type="submit" class="btn-primary">Upload</button>
+      </form>
+
+      <h2>Video Anda</h2>
+
+      <div class="creator-video-grid" id="videoList">
+        <!-- Video akan tampil otomatis disini -->
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+<script src="../sidebar.js"></script>
+
+<script>
+  // LOGIN LOGIC SEDERHANA
+  const loginBtn = document.getElementById("loginBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const loginBox = document.getElementById("loginBox");
+  const dashboard = document.getElementById("dashboard");
+  const submitLogin = document.getElementById("submitLogin");
+
+  submitLogin.onclick = () => {
+    const user = document.getElementById("username").value.trim();
+    const pass = document.getElementById("password").value.trim();
+
+    if (user.length > 0 && pass.length > 0) {
+      loginBox.style.display = "none";
+      dashboard.style.display = "block";
+      loginBtn.style.display = "none";
+      logoutBtn.style.display = "inline-block";
+    } else {
+      alert("Username dan password wajib diisi!");
+    }
+  };
+
+  logoutBtn.onclick = () => {
+    dashboard.style.display = "none";
+    loginBox.style.display = "block";
+    loginBtn.style.display = "inline-block";
+    logoutBtn.style.display = "none";
+  };
+
+  // UPLOAD VIDEO (TANPA DOWNLOAD)
+  const uploadForm = document.getElementById("uploadForm");
+  const videoList = document.getElementById("videoList");
+
+  uploadForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const title = document.getElementById("videoTitle").value;
+    const thumbnail = document.getElementById("videoThumbnail").files[0];
+    const video = document.getElementById("videoFile").files[0];
+
+    if (!thumbnail || !video) {
+      alert("Pilih thumbnail dan video terlebih dahulu");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      const thumbnailURL = event.target.result;
+
+      const videoBox = document.createElement("div");
+      videoBox.className = "creator-video-box";
+
+      videoBox.innerHTML = `
+        <img src="${thumbnailURL}" alt="thumbnail">
+        <h3>${title}</h3>
+        <p>Video berhasil diupload</p>
+      `;
+
+      videoList.appendChild(videoBox);
+    };
+
+    reader.readAsDataURL(thumbnail);
+
+    uploadForm.reset();
+  });
+</script>
+
+</body>
+</html>
