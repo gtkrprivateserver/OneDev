@@ -13,7 +13,7 @@
 <!-- Banner otomatis -->
 <div id="adsContainer"></div>
 
-<!-- Sidebar otomatis dari sidebar.js -->
+<!-- Sidebar otomatis -->
 <div class="main-content">
   <header>
     <div class="header-left">
@@ -22,28 +22,10 @@
     </div>
 
     <div class="header-right">
+      <button id="openUploadPopup" class="btn-primary">Upload Video</button>
       <button id="loginBtn" class="btn-sec">Login</button>
-      <button id="logoutBtn" class="btn-sec hidden">Logout</button>
     </div>
   </header>
-
-  <!-- Upload Section -->
-  <section class="upload-section">
-    <h2>Upload Video Baru</h2>
-
-    <div class="upload-box">
-      <label>Judul Video</label>
-      <input type="text" id="videoTitle" placeholder="Masukkan judul video...">
-
-      <label>Thumbnail Video</label>
-      <input type="file" id="thumbnailInput" accept="image/*">
-
-      <label>File Video</label>
-      <input type="file" id="videoInput" accept="video/mp4,video/mkv,video/webm">
-
-      <button class="btn-primary" id="uploadBtn">Upload</button>
-    </div>
-  </section>
 
   <section class="video-list">
     <h2>Video Anda</h2>
@@ -63,7 +45,38 @@
     <input type="password" id="loginPass" placeholder="Masukkan password...">
 
     <button id="doLogin" class="btn-primary">Login</button>
-    <button id="closePopup" class="btn-sec">Tutup</button>
+    <button class="btn-sec closePopup">Tutup</button>
+  </div>
+</div>
+
+<!-- LOGOUT POPUP -->
+<div id="logoutPopup" class="popup hidden">
+  <div class="popup-content">
+    <h2>Logout</h2>
+
+    <p>Apakah Anda yakin ingin keluar?</p>
+
+    <button id="doLogout" class="btn-primary">Logout</button>
+    <button class="btn-sec closePopup">Batal</button>
+  </div>
+</div>
+
+<!-- UPLOAD POPUP -->
+<div id="uploadPopup" class="popup hidden">
+  <div class="popup-content popup-upload">
+    <h2>Upload Video Baru</h2>
+
+    <label>Judul Video</label>
+    <input type="text" id="videoTitle" placeholder="Masukkan judul video...">
+
+    <label>Thumbnail Video</label>
+    <input type="file" id="thumbnailInput" accept="image/*">
+
+    <label>File Video</label>
+    <input type="file" id="videoInput" accept="video/*">
+
+    <button id="uploadBtn" class="btn-primary">Upload</button>
+    <button class="btn-sec closePopup">Batal</button>
   </div>
 </div>
 
