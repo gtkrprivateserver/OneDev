@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ONEDEV - Creator Panel</title>
-
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="creator.css">
 </head>
@@ -18,6 +17,7 @@
       <button id="menuBtn" class="menu-btn">☰</button>
       <h1>Creator Panel</h1>
     </div>
+
     <div class="header-right">
       <button id="accountBtn" class="btn-small">Login</button>
       <div id="accountMenu" class="account-menu hidden">
@@ -29,40 +29,38 @@
     </div>
   </header>
 
+  <!-- VIDEO GRID -->
   <section class="video-list">
     <h2>Video Anda</h2>
     <div id="videosContainer" class="videos-grid"></div>
   </section>
 </div>
 
-<!-- POPUPS -->
+<!-- LOGIN POPUP -->
 <div id="loginPopup" class="popup hidden">
   <div class="popup-content">
-    <h2>Login</h2>
-    <input type="text" id="loginUser" placeholder="Username">
-    <input type="password" id="loginPass" placeholder="Password">
+    <h2>Login Creator</h2>
+    <label>Username</label>
+    <input type="text" id="loginUser" placeholder="Masukkan username">
+    <label>Password</label>
+    <input type="password" id="loginPass" placeholder="Masukkan password">
     <button id="doLogin" class="btn-primary">Login</button>
-    <button class="closePopup">Tutup</button>
+    <button id="closeLoginPopup" class="btn-sec">Tutup</button>
   </div>
 </div>
 
+<!-- UPLOAD POPUP -->
 <div id="uploadPopup" class="popup hidden">
   <div class="popup-content">
     <h2>Upload Video</h2>
-    <input type="text" id="videoTitle" placeholder="Judul Video">
+    <label>Judul Video</label>
+    <input type="text" id="videoTitle" placeholder="Masukkan judul video">
+    <label>Thumbnail</label>
     <input type="file" id="thumbnailInput" accept="image/*">
-    <input type="file" id="videoInput" accept="video/mp4,video/webm,video/mkv">
+    <label>File Video</label>
+    <input type="file" id="videoInput" accept="video/*">
     <button id="uploadBtn" class="btn-primary">Upload</button>
-    <button class="closePopup">Tutup</button>
-  </div>
-</div>
-
-<div id="playerOverlay" class="popup hidden">
-  <div class="popup-content player-box">
-    <button class="closePopup">Tutup</button>
-    <h2 id="playerTitle"></h2>
-    <p id="playerUser" class="uploaded-by"></p>
-    <video id="playerVideo" controls></video>
+    <button class="btn-sec closePopup">Batal</button>
   </div>
 </div>
 
