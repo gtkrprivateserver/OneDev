@@ -1,0 +1,142 @@
+/* ---------------------------
+   CREATOR DASHBOARD GENERAL
+----------------------------*/
+
+.creator-container {
+  padding: 30px;
+}
+
+.creator-container h2 {
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+/* ---------------------------
+   LOGIN BOX
+----------------------------*/
+
+.creator-login-box {
+  max-width: 400px;
+  margin: 50px auto;
+  background: #1b1d26;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.creator-login-box input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: none;
+  background: #2a2d38;
+  color: white;
+}
+
+.creator-login-box .btn-primary {
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* ---------------------------
+   DASHBOARD
+----------------------------*/
+
+.creator-dashboard {
+  margin-top: 20px;
+}
+
+/* Upload Form */
+
+.creator-upload-form {
+  background: #1b1d26;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 500px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.25);
+}
+
+.creator-upload-form label {
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 5px;
+  color: #b5b5b5;
+}
+
+.creator-upload-form input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: #2a2d38;
+  color: white;
+}
+
+.creator-upload-form button {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* ---------------------------
+   VIDEO GRID
+----------------------------*/
+
+.creator-video-grid {
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 20px;
+}
+
+.creator-video-box {
+  background: #1b1d26;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0,0,0,0.25);
+  transition: 0.2s;
+}
+
+.creator-video-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px rgba(0,0,0,0.35);
+}
+
+.creator-video-box img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.creator-video-box h3 {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+.creator-video-box p {
+  color: #b5b5b5;
+  font-size: 14px;
+}
+
+
+/* ---------------------------
+   LOGIN / LOGOUT BUTTONS
+----------------------------*/
+
+.header-right .btn-login,
+.header-right .btn-logout {
+  background: #20232d;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.header-right .btn-login:hover,
+.header-right .btn-logout:hover {
+  background: #2e323f;
+}
