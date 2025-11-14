@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  // ======= ACCOUNT CONFIG =======
   const accounts = [
     { username: "admin", password: "admin123" },
     { username: "creator", password: "creator123" }
@@ -8,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let isLogin = false;
   let currentUser = null;
 
+  // ======= ELEMENTS =======
   const loginBtn = document.getElementById("loginBtn");
   const accountDropdown = document.getElementById("accountDropdown");
   const accountBtn = document.getElementById("accountBtn");
@@ -20,11 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const logoutBtn = document.getElementById("logoutBtn");
   const openUpload = document.getElementById("openUpload");
   const uploadVideoBtn = document.getElementById("uploadBtn");
-  const closePopups = document.querySelectorAll(".closePopup");
 
+  const closePopups = document.querySelectorAll(".closePopup");
   const videosContainer = document.getElementById("videosContainer");
 
-  // ======= Load video dari localStorage =======
+  // ======= LOAD VIDEO DARI LOCALSTORAGE =======
   function loadVideos() {
     const videos = JSON.parse(localStorage.getItem("videos") || "[]");
     videosContainer.innerHTML = "";
@@ -66,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ======= Toggle dropdown account =======
+  // ======= TOGGLE DROPDOWN =======
   accountBtn.addEventListener("click", () => {
     dropdownContent.classList.toggle("hidden");
   });
@@ -97,9 +99,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ======= UPLOAD VIDEO =======
   uploadVideoBtn.addEventListener("click", () => {
-    const title = document.getElementById("videoTitle").value.trim();
-    const thumbFile = document.getElementById("thumbnailInput").files[0];
-    const videoFile = document.getElementById("videoInput").files[0];
+    const titleInput = document.getElementById("videoTitle");
+    const thumbInput = document.getElementById("thumbnailInput");
+    const videoInput = document.getElementById("videoInput");
+
+    const title = titleInput.value.trim();
+    const thumbFile = thumbInput.files[0];
+    const videoFile = videoInput.files[0];
 
     if (!title || !thumbFile || !videoFile) return alert("Semua field wajib diisi!");
 
@@ -119,23 +125,19 @@ document.addEventListener("DOMContentLoaded", () => {
         allVideos.push(videoData);
         localStorage.setItem("videos", JSON.stringify(allVideos));
 
-        // reset input
-        document.getElementById("videoTitle").value = "";
-        document.getElementById("thumbnailInput").value = "";
-        document.getElementById("videoInput").value = "";
-
-        uploadPopup.classList.add("hidden");
         loadVideos();
+        uploadPopup.classList.add("hidden");
+
+        // Reset input
+        titleInput.value = "";
+        thumbInput.value = "";
+        videoInput.value = "";
+
         alert("Video berhasil diupload!");
       };
       readerVideo.readAsDataURL(videoFile);
     };
     readerThumb.readAsDataURL(thumbFile);
-  });
-
-  // Tutup dropdown jika klik di luar
-  document.addEventListener("click", e => {
-    if (!accountDropdown.contains(e.target)) dropdownContent.classList.add("hidden");
   });
 
 });
