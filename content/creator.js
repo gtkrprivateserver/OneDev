@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const logoutBtn = document.getElementById('logoutBtn');
 
   let loggedIn = false;
+  let currentUser = null;
 
   // ===== Dummy akun =====
   const accounts = [
@@ -28,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const bannedKeywords = ['18+', 'dewasa', 'nsfw'];
 
   // ===== Array untuk simpan video permanen =====
+  // Setiap video menyimpan {title, thumbnail, video, owner}
   let videoList = JSON.parse(localStorage.getItem('videoList')) || [];
 
   // ===== Login =====
@@ -39,20 +41,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const username = document.getElementById('loginUser').value;
     const password = document.getElementById('loginPass').value;
 
-    // Cek banned akun
     if (bannedAccounts.includes(username)) {
       alert('Akun ini dibanned!');
       return;
     }
 
     const account = accounts.find(acc => acc.username === username && acc.password === password);
-
     if (!account) {
       alert('Username atau password salah!');
       return;
     }
 
     loggedIn = true;
+    currentUser = username;
     loginPopup.classList.add('hidden');
     loginBtn.classList.add('hidden');
     accountWrapper.classList.remove('hidden');
@@ -96,11 +97,11 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Simpan di array permanen
-    videoList.push({ title, thumbnail, video });
+    // Simpan video dengan owner
+    videoList.push({ title, thumbnail, video, owner: currentUser });
     localStorage.setItem('videoList', JSON.stringify(videoList));
 
-    // Render semua video
+    // Render video
     renderVideos();
 
     // Reset form dan tutup popup
@@ -116,16 +117,23 @@ document.addEventListener('DOMContentLoaded', () => {
     videoList.forEach((vid, index) => {
       const videoCard = document.createElement('div');
       videoCard.classList.add('video-card');
+
+      // Hanya pemilik video yang bisa hapus
+      const deleteButton = vid.owner === currentUser
+        ? `<button class="delete-btn" data-index="${index}">Hapus</button>`
+        : '';
+
       videoCard.innerHTML = `
         <img src="${URL.createObjectURL(vid.thumbnail)}" alt="Thumbnail" class="video-thumb">
         <h3>${vid.title}</h3>
         <video src="${URL.createObjectURL(vid.video)}" controls class="video-player"></video>
-        <button class="delete-btn" data-index="${index}">Hapus</button>
+        ${deleteButton}
       `;
+
       videosContainer.appendChild(videoCard);
     });
 
-    // Tambahkan event listener untuk tombol hapus
+    // Event listener tombol hapus
     const deleteBtns = videosContainer.querySelectorAll('.delete-btn');
     deleteBtns.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -140,6 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ===== Logout =====
   logoutBtn.addEventListener('click', () => {
     loggedIn = false;
+    currentUser = null;
     accountWrapper.classList.add('hidden');
     loginBtn.classList.remove('hidden');
     dropdownContent.classList.add('hidden');
