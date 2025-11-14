@@ -4,13 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ONEDEV - Creator Panel</title>
+
+  <!-- Styles global -->
   <link rel="stylesheet" href="../styles.css">
+  <!-- Styles khusus creator -->
   <link rel="stylesheet" href="creator.css">
 </head>
 <body>
 
+<!-- Banner otomatis -->
 <div id="adsContainer"></div>
 
+<!-- Sidebar otomatis dari sidebar.js -->
 <div class="main-content">
   <header>
     <div class="header-left">
@@ -19,17 +24,16 @@
     </div>
 
     <div class="header-right">
-      <button id="accountBtn" class="btn-small">Login</button>
-      <div id="accountMenu" class="account-menu hidden">
-        <button id="menuProfile">Profile</button>
-        <button id="menuSetting">Setting</button>
-        <button id="menuUpload">Upload Video</button>
-        <button id="menuLogout">Logout</button>
-      </div>
+      <button id="loginBtn" class="btn-sec">Login</button>
     </div>
   </header>
 
-  <!-- VIDEO GRID -->
+  <!-- Upload Section -->
+  <section class="upload-section">
+    <h2>Upload Video Baru</h2>
+    <button id="openUploadPopup" class="btn-primary">Upload Video</button>
+  </section>
+
   <section class="video-list">
     <h2>Video Anda</h2>
     <div id="videosContainer" class="videos-grid"></div>
@@ -41,26 +45,26 @@
   <div class="popup-content">
     <h2>Login Creator</h2>
     <label>Username</label>
-    <input type="text" id="loginUser" placeholder="Masukkan username">
+    <input type="text" id="loginUser" placeholder="Masukkan username...">
     <label>Password</label>
-    <input type="password" id="loginPass" placeholder="Masukkan password">
+    <input type="password" id="loginPass" placeholder="Masukkan password...">
     <button id="doLogin" class="btn-primary">Login</button>
-    <button id="closeLoginPopup" class="btn-sec">Tutup</button>
+    <button class="closePopup btn-sec">Tutup</button>
   </div>
 </div>
 
 <!-- UPLOAD POPUP -->
 <div id="uploadPopup" class="popup hidden">
   <div class="popup-content">
-    <h2>Upload Video</h2>
+    <h2>Upload Video Baru</h2>
     <label>Judul Video</label>
-    <input type="text" id="videoTitle" placeholder="Masukkan judul video">
-    <label>Thumbnail</label>
+    <input type="text" id="videoTitle" placeholder="Masukkan judul video...">
+    <label>Thumbnail Video</label>
     <input type="file" id="thumbnailInput" accept="image/*">
     <label>File Video</label>
-    <input type="file" id="videoInput" accept="video/*">
+    <input type="file" id="videoInput" accept="video/mp4,video/mkv,video/webm">
     <button id="uploadBtn" class="btn-primary">Upload</button>
-    <button class="btn-sec closePopup">Batal</button>
+    <button class="closePopup btn-sec">Batal</button>
   </div>
 </div>
 
