@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ONEDEV Creator Panel</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ONEDEV - Creator</title>
 
-<link rel="stylesheet" href="../styles.css">
-<link rel="stylesheet" href="creator.css">
-
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="creator.css">
 </head>
 <body>
 
-<!-- Banner otomatis -->
 <div id="adsContainer"></div>
-
-<!-- Sidebar otomatis -->
 <div class="main-content">
 
   <header>
@@ -25,54 +21,51 @@
 
     <div class="header-right">
       <button id="loginBtn" class="btn-sec">Login</button>
-
-      <!-- Dropdown menu muncul setelah login -->
       <div id="userDropdown" class="dropdown hidden">
-        <button class="drop-btn" id="dropdownBtn">Account ▼</button>
-        <div class="dropdown-content hidden">
-          <button id="openUploadPopup">Upload Video</button>
-          <button id="openSettings">Settings</button>
-          <button id="openProfile">Profile</button>
+        <button class="drop-btn">▼ Menu</button>
+        <div class="drop-content">
+          <button id="openUploadPopup">Upload</button>
+          <button id="viewProfile">Profil</button>
+          <button id="viewSetting">Setting</button>
           <button id="doLogout">Logout</button>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Upload Popup -->
-  <div id="uploadPopup" class="popup hidden">
-    <div class="popup-content">
-      <h2>Upload Video Baru</h2>
-      <label>Judul Video</label>
-      <input type="text" id="videoTitle" placeholder="Masukkan judul video...">
-      <label>Thumbnail Video</label>
-      <input type="file" id="thumbnailInput" accept="image/*">
-      <label>File Video</label>
-      <input type="file" id="videoInput" accept="video/mp4,video/webm,video/mkv">
-      <button id="uploadBtn" class="btn-primary">Upload</button>
-      <button class="closePopup btn-sec">Tutup</button>
-    </div>
-  </div>
-
-  <!-- Login Popup -->
-  <div id="loginPopup" class="popup hidden">
-    <div class="popup-content">
-      <h2>Login Creator</h2>
-      <label>Username</label>
-      <input type="text" id="loginUser" placeholder="Masukkan username...">
-      <label>Password</label>
-      <input type="password" id="loginPass" placeholder="Masukkan password...">
-      <button id="doLogin" class="btn-primary">Login</button>
-      <button class="closePopup btn-sec">Tutup</button>
-    </div>
-  </div>
-
-  <!-- Video Grid -->
   <section class="video-list">
     <h2>Video Anda</h2>
     <div id="videosContainer" class="videos-grid"></div>
   </section>
 
+</div>
+
+<!-- LOGIN POPUP -->
+<div id="loginPopup" class="popup hidden">
+  <div class="popup-content">
+    <h2>Login Creator</h2>
+    <label>Username</label>
+    <input type="text" id="loginUser" placeholder="Masukkan username...">
+    <label>Password</label>
+    <input type="password" id="loginPass" placeholder="Masukkan password...">
+    <button id="doLogin" class="btn-primary">Login</button>
+    <button class="closePopup btn-sec">Tutup</button>
+  </div>
+</div>
+
+<!-- UPLOAD POPUP -->
+<div id="uploadPopup" class="popup hidden">
+  <div class="popup-content">
+    <h2>Upload Video Baru</h2>
+    <label>Judul Video</label>
+    <input type="text" id="videoTitle" placeholder="Masukkan judul video...">
+    <label>Thumbnail Video</label>
+    <input type="file" id="thumbnailInput" accept="image/*">
+    <label>File Video</label>
+    <input type="file" id="videoInput" accept="video/mp4,video/webm">
+    <button id="uploadBtn" class="btn-primary">Upload</button>
+    <button class="closePopup btn-sec">Tutup</button>
+  </div>
 </div>
 
 <script src="../sidebar.js"></script>
