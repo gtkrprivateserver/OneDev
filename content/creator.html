@@ -1,128 +1,110 @@
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ONEDEV Creator Dashboard</title>
-
-  <!-- Styles global -->
-  <link rel="stylesheet" href="../styles.css">
-
+  <title>ONEDEV Creator</title>  <!-- Styles global -->  <link rel="stylesheet" href="../styles.css">
   <!-- Styles khusus creator -->
   <link rel="stylesheet" href="../content/creator.css">
 </head>
-<body>
-
-<!-- Banner otomatis -->
-<div id="adsContainer"></div>
-
-<!-- Sidebar otomatis melalui sidebar.js -->
-
-<div class="main-content">
-
-  <header>
+<body><!-- Banner otomatis --><div id="adsContainer"></div><!-- Sidebar otomatis melalui sidebar.js --><div class="main-content">  <header>
     <div class="header-left">
       <button id="menuBtn" class="menu-btn">☰</button>
       <h1>Creator Dashboard</h1>
+    </div><div class="header-right">
+  <button class="btn-login" id="loginBtn">Login</button>
+  <button class="btn-logout" id="logoutBtn" style="display:none;">Logout</button>
+  <button class="btn-upload" id="openUploadBtn" style="display:none;">Upload</button>
+</div>
+
+  </header>  <section class="creator-container"><!-- LOGIN POPUP -->
+<div class="creator-login-overlay" id="loginOverlay">
+  <div class="creator-login-popup">
+    <h2>Masuk sebagai Creator</h2>
+    <p>Silahkan login untuk mengelola konten Anda.</p>
+
+    <input type="text" id="username" placeholder="Username creator">
+    <input type="password" id="password" placeholder="Password">
+
+    <button class="btn-primary" id="submitLogin">Login</button>
+    <button class="btn-close" id="closeLoginPopup">Tutup</button>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="creator-dashboard" id="dashboard" style="display:none;">
+
+  <!-- UPLOAD POPUP -->
+  <div class="upload-overlay" id="uploadOverlay">
+    <div class="upload-popup">
+      <h2>Upload Video Baru</h2>
+
+      <form id="uploadForm">
+        <label>Judul Video</label>
+        <input type="text" id="videoTitle" required>
+
+        <label>Thumbnail</label>
+        <input type="file" id="videoThumbnail" accept="image/*" required>
+
+        <label>Video File</label>
+        <input type="file" id="videoFile" accept="video/*" required>
+
+        <button type="submit" class="btn-primary">Upload</button>
+        <button type="button" class="btn-close" id="closeUploadPopup">Batal</button>
+      </form>
     </div>
+  </div>
 
-    <div class="header-right">
-      <button class="btn-login" id="loginBtn">Login</button>
-      <button class="btn-logout" id="logoutBtn" style="display:none;">Logout</button>
+  <h2>Video Anda</h2>
 
-      <!-- Tombol upload setelah login -->
-      <button class="btn-upload" id="openUploadBtn" style="display:none;">Upload</button>
-    </div>
-  </header>
-
-  <section class="creator-container">
-
-    <!-- LOGIN POPUP -->
-    <div class="creator-login-overlay" id="loginOverlay">
-      <div class="creator-login-popup">
-        <h2>Masuk sebagai Creator</h2>
-        <p>Silahkan login untuk mengelola konten Anda.</p>
-
-        <input type="text" id="username" placeholder="Username creator">
-        <input type="password" id="password" placeholder="Password">
-
-        <button class="btn-primary" id="submitLogin">Login</button>
-        <button class="btn-close" id="closeLoginPopup">Tutup</button>
-      </div>
-    </div>
-
-    <!-- DASHBOARD -->
-    <div class="creator-dashboard" id="dashboard" style="display:none;">
-
-      <!-- UPLOAD POPUP -->
-      <div class="upload-overlay" id="uploadOverlay">
-        <div class="upload-popup">
-          <h2>Upload Video Baru</h2>
-
-          <form id="uploadForm">
-            <label>Judul Video</label>
-            <input type="text" id="videoTitle" required>
-
-            <label>Thumbnail</label>
-            <input type="file" id="videoThumbnail" accept="image/*" required>
-
-            <label>Video File</label>
-            <input type="file" id="videoFile" accept="video/*" required>
-
-            <button type="submit" class="btn-primary">Upload</button>
-            <button type="button" class="btn-close" id="closeUploadPopup">Batal</button>
-          </form>
-        </div>
-      </div>
-
-      <h2>Video Anda</h2>
-
-      <div class="creator-video-grid" id="videoList">
-        <!-- Video muncul otomatis -->
-      </div>
-
-    </div>
-
-  </section>
+  <div class="creator-video-grid" id="videoList"></div>
 
 </div>
 
-<script src="../sidebar.js"></script>
+  </section></div><!-- VIDEO PLAYER POPUP --><div class="video-watch-overlay" id="watchOverlay">
+  <div class="video-watch-popup"><video id="watchVideo" controls></video>
 
-<script>
-/* -------------------------------------------------
-     POPUP LOGIN
-------------------------------------------------- */
+<h2 id="watchTitle"></h2>
+
+<div class="video-stats">
+  <span id="watchViews">0 views</span>
+  <button id="likeBtn">👍 <span id="likeCount">0</span></button>
+</div>
+
+<div class="comment-box">
+  <h3>Komentar</h3>
+  <div id="commentList"></div>
+
+  <textarea id="commentInput" placeholder="Tulis komentar..."></textarea>
+  <button id="sendComment">Kirim</button>
+</div>
+
+<button class="btn-close" id="closeWatchPopup">Tutup</button>
+
+  </div>
+</div><script src="../sidebar.js"></script><script>
+/* LOGIN */
 const loginBtn = document.getElementById("loginBtn");
 const logoutBtn = document.getElementById("logoutBtn");
 const loginOverlay = document.getElementById("loginOverlay");
 const submitLogin = document.getElementById("submitLogin");
 const closeLoginPopup = document.getElementById("closeLoginPopup");
-
 const dashboard = document.getElementById("dashboard");
 const openUploadBtn = document.getElementById("openUploadBtn");
 
-loginBtn.onclick = () => {
-  loginOverlay.style.display = "flex";
-};
-
-closeLoginPopup.onclick = () => {
-  loginOverlay.style.display = "none";
-};
+loginBtn.onclick = () => loginOverlay.style.display = "flex";
+closeLoginPopup.onclick = () => loginOverlay.style.display = "none";
 
 submitLogin.onclick = () => {
-  const user = document.getElementById("username").value.trim();
-  const pass = document.getElementById("password").value.trim();
+  const user = username.value.trim();
+  const pass = password.value.trim();
 
-  if (user.length > 0 && pass.length > 0) {
+  if (user && pass) {
     loginOverlay.style.display = "none";
     dashboard.style.display = "block";
     loginBtn.style.display = "none";
     logoutBtn.style.display = "inline-block";
     openUploadBtn.style.display = "inline-block";
-  } else {
-    alert("Username dan password wajib diisi!");
-  }
+  } else alert("Username dan password wajib diisi!");
 };
 
 logoutBtn.onclick = () => {
@@ -132,62 +114,120 @@ logoutBtn.onclick = () => {
   openUploadBtn.style.display = "none";
 };
 
-
-/* -------------------------------------------------
-     UPLOAD POPUP
-------------------------------------------------- */
+/* UPLOAD POPUP */
 const uploadOverlay = document.getElementById("uploadOverlay");
 const closeUploadPopup = document.getElementById("closeUploadPopup");
+openUploadBtn.onclick = () => uploadOverlay.style.display = "flex";
+closeUploadPopup.onclick = () => uploadOverlay.style.display = "none";
 
-openUploadBtn.onclick = () => {
-  uploadOverlay.style.display = "flex";
-};
-
-closeUploadPopup.onclick = () => {
-  uploadOverlay.style.display = "none";
-};
-
-
-/* -------------------------------------------------
-     PROSES UPLOAD VIDEO
-------------------------------------------------- */
-const uploadForm = document.getElementById("uploadForm");
+/* VIDEO SYSTEM */
+let videos = JSON.parse(localStorage.getItem("creatorVideos") || "[]");
 const videoList = document.getElementById("videoList");
+
+function loadVideos() {
+  videoList.innerHTML = "";
+  videos.forEach((v, i) => {
+    const div = document.createElement("div");
+    div.className = "creator-video-box";
+    div.innerHTML = `
+      <img src="${v.thumbnail}">
+      <h3>${v.title}</h3>
+      <p>${v.views} views</p>
+    `;
+    div.onclick = () => openVideo(i);
+    videoList.appendChild(div);
+  });
+}
+loadVideos();
 
 uploadForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const title = document.getElementById("videoTitle").value;
-  const thumbnail = document.getElementById("videoThumbnail").files[0];
-  const video = document.getElementById("videoFile").files[0];
+  const title = videoTitle.value;
+  const thumb = videoThumbnail.files[0];
+  const vid = videoFile.files[0];
 
-  if (!thumbnail || !video) {
-    alert("Thumbnail dan video wajib dipilih");
-    return;
-  }
+  const readerT = new FileReader();
+  const readerV = new FileReader();
 
-  const reader = new FileReader();
-  reader.onload = function(event) {
-    const thumbnailURL = event.target.result;
+  readerT.onload = t => {
+    readerV.onload = v => {
+      videos.push({
+        title,
+        thumbnail: t.target.result,
+        video: v.target.result,
+        views: 0,
+        likes: 0,
+        comments: []
+      });
 
-    const videoBox = document.createElement("div");
-    videoBox.className = "creator-video-box";
-
-    videoBox.innerHTML = `
-      <img src="${thumbnailURL}" alt="">
-      <h3>${title}</h3>
-      <p>Video berhasil diupload</p>
-    `;
-
-    videoList.appendChild(videoBox);
+      localStorage.setItem("creatorVideos", JSON.stringify(videos));
+      loadVideos();
+    };
+    readerV.readAsDataURL(vid);
   };
 
-  reader.readAsDataURL(thumbnail);
+  readerT.readAsDataURL(thumb);
 
-  uploadForm.reset();
   uploadOverlay.style.display = "none";
+  uploadForm.reset();
 });
-</script>
 
-</body>
+/* VIDEO PLAYER */
+const watchOverlay = document.getElementById("watchOverlay");
+const closeWatchPopup = document.getElementById("closeWatchPopup");
+const watchVideo = document.getElementById("watchVideo");
+const watchTitle = document.getElementById("watchTitle");
+const watchViews = document.getElementById("watchViews");
+const likeBtn = document.getElementById("likeBtn");
+const likeCount = document.getElementById("likeCount");
+const commentList = document.getElementById("commentList");
+let activeVideo = null;
+
+function openVideo(i) {
+  activeVideo = i;
+  let v = videos[i];
+
+  v.views++;
+  localStorage.setItem("creatorVideos", JSON.stringify(videos));
+
+  watchVideo.src = v.video;
+  watchTitle.innerText = v.title;
+  watchViews.innerText = v.views + " views";
+  likeCount.innerText = v.likes;
+
+  loadComments();
+  watchOverlay.style.display = "flex";
+}
+
+closeWatchPopup.onclick = () => {
+  watchOverlay.style.display = "none";
+  watchVideo.pause();
+};
+
+likeBtn.onclick = () => {
+  videos[activeVideo].likes++;
+  likeCount.innerText = videos[activeVideo].likes;
+  localStorage.setItem("creatorVideos", JSON.stringify(videos));
+};
+
+function loadComments() {
+  commentList.innerHTML = "";
+  videos[activeVideo].comments.forEach(c => {
+    const p = document.createElement("p");
+    p.innerText = "• " + c;
+    commentList.appendChild(p);
+  });
+}
+
+document.getElementById("sendComment").onclick = () => {
+  const txt = commentInput.value.trim();
+  if (!txt) return;
+
+  videos[activeVideo].comments.push(txt);
+  localStorage.setItem("creatorVideos", JSON.stringify(videos));
+  commentInput.value = "";
+  loadComments();
+};
+</script></body>
 </html>
