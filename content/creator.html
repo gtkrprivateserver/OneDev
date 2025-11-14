@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ONEDEV - Creator Panel</title>
-
-  <link rel="stylesheet" href="../styles.css">
-  <link rel="stylesheet" href="creator.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ONEDEV - Creator Panel</title>
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="creator.css">
 </head>
 <body>
 
@@ -17,53 +15,51 @@
   <header>
     <div class="header-left">
       <button id="menuBtn" class="menu-btn">☰</button>
-      <h1>Creator Panel</h1>
+      <h1>ONEDEV Creator</h1>
     </div>
 
     <div class="header-right">
-      <button id="loginBtn" class="btn-small"><i class="fa fa-user"></i> Login</button>
+      <button id="loginBtn" class="btn-small">Login</button>
 
       <div id="accountDropdown" class="dropdown hidden">
-        <button class="dropbtn"><i class="fa fa-user-circle"></i> <span id="currentUser"></span> ▼</button>
-        <div class="dropdown-content">
-          <button id="openUploadPopup"><i class="fa fa-upload"></i> Upload Video</button>
-          <button id="goProfile"><i class="fa fa-id-badge"></i> Profile</button>
-          <button id="goSetting"><i class="fa fa-gear"></i> Setting</button>
-          <button id="doLogout"><i class="fa fa-right-from-bracket"></i> Logout</button>
+        <button class="btn-small">Account ▼</button>
+        <div class="dropdown-content hidden">
+          <button id="openUpload">Upload</button>
+          <button id="settingBtn">Setting</button>
+          <button id="profileBtn">Profil</button>
+          <button id="logoutBtn">Logout</button>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Upload Popup -->
-  <div id="uploadPopup" class="popup hidden">
-    <div class="popup-content">
-      <h2>Upload Video</h2>
-
-      <input type="text" id="videoTitle" placeholder="Judul Video...">
-      <input type="file" id="thumbnailInput" accept="image/*">
-      <input type="file" id="videoInput" accept="video/mp4,video/mkv,video/webm">
-
-      <button id="uploadBtn" class="btn-primary"><i class="fa fa-upload"></i> Upload</button>
-      <button class="btn-sec closePopup">Tutup</button>
-    </div>
-  </div>
-
-  <!-- Login Popup -->
-  <div id="loginPopup" class="popup hidden">
-    <div class="popup-content">
-      <h2>Login</h2>
-      <input type="text" id="loginUser" placeholder="Username...">
-      <input type="password" id="loginPass" placeholder="Password...">
-      <button id="doLogin" class="btn-primary"><i class="fa fa-right-to-bracket"></i> Login</button>
-      <button class="btn-sec closePopup">Tutup</button>
-    </div>
-  </div>
-
   <section class="video-section">
     <h2>Video Anda</h2>
-    <div id="videosContainer" class="videos-grid"></div>
+    <div id="videoGrid" class="videos-grid"></div>
   </section>
+</div>
+
+<!-- LOGIN POPUP -->
+<div id="loginPopup" class="popup hidden">
+  <div class="popup-content">
+    <h2>Login Creator</h2>
+    <input type="text" id="loginUser" placeholder="Username">
+    <input type="password" id="loginPass" placeholder="Password">
+    <button id="doLogin">Login</button>
+    <button class="closePopup">Tutup</button>
+  </div>
+</div>
+
+<!-- UPLOAD POPUP -->
+<div id="uploadPopup" class="popup hidden">
+  <div class="popup-content">
+    <h2>Upload Video</h2>
+    <input type="text" id="videoTitle" placeholder="Judul Video">
+    <input type="file" id="videoThumb" accept="image/*">
+    <input type="file" id="videoFile" accept="video/*">
+    <button id="doUpload">Upload</button>
+    <button class="closePopup">Tutup</button>
+  </div>
 </div>
 
 <script src="../sidebar.js"></script>
