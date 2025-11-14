@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ONEDEV - Creator Panel</title>
-<link rel="stylesheet" href="../styles.css">
-<link rel="stylesheet" href="creator.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ONEDEV - Creator Panel</title>
+
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="creator.css">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
@@ -19,20 +23,58 @@
     </div>
 
     <div class="header-right">
-      <button id="loginBtn" class="btn-sec">Login</button>
+      <button id="loginBtn" class="btn-sec">
+        <i class="fa fa-user"></i> Login
+      </button>
+
       <div id="accountDropdown" class="dropdown hidden">
-        <button class="dropbtn">Account ▼</button>
+        <button class="dropbtn"><i class="fa fa-user-circle"></i> Account ▼</button>
         <div class="dropdown-content">
-          <button id="openUploadPopup">Upload Video</button>
-          <button id="goProfile">Profile</button>
-          <button id="goSetting">Setting</button>
-          <button id="doLogout">Logout</button>
+          <button id="openUploadPopup"><i class="fa fa-upload"></i> Upload Video</button>
+          <button id="goProfile"><i class="fa fa-id-badge"></i> Profile</button>
+          <button id="goSetting"><i class="fa fa-gear"></i> Setting</button>
+          <button id="doLogout"><i class="fa fa-right-from-bracket"></i> Logout</button>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Video Cards -->
+  <!-- Video Upload Popup -->
+  <div id="uploadPopup" class="popup hidden">
+    <div class="popup-content">
+      <h2>Upload Video Baru</h2>
+
+      <label>Judul Video</label>
+      <input type="text" id="videoTitle" placeholder="Masukkan judul video...">
+
+      <label>Thumbnail Video</label>
+      <input type="file" id="thumbnailInput" accept="image/*">
+
+      <label>File Video</label>
+      <input type="file" id="videoInput" accept="video/*">
+
+      <button class="btn-primary" id="uploadBtn"><i class="fa fa-upload"></i> Upload</button>
+      <button class="btn-sec closePopup">Tutup</button>
+    </div>
+  </div>
+
+  <!-- Login Popup -->
+  <div id="loginPopup" class="popup hidden">
+    <div class="popup-content">
+      <h2>Login Creator</h2>
+
+      <label>Username</label>
+      <input type="text" id="loginUser" placeholder="Masukkan username...">
+
+      <label>Password</label>
+      <input type="password" id="loginPass" placeholder="Masukkan password...">
+
+      <button id="doLogin" class="btn-primary"><i class="fa fa-right-to-bracket"></i> Login</button>
+      <button class="btn-sec closePopup">Tutup</button>
+    </div>
+  </div>
+
+  <!-- Video List -->
   <section class="video-list">
     <h2>Video Anda</h2>
     <div id="videosContainer" class="videos-grid"></div>
@@ -40,35 +82,8 @@
 
 </div>
 
-<!-- LOGIN POPUP -->
-<div id="loginPopup" class="popup hidden">
-  <div class="popup-content">
-    <h2>Login Creator</h2>
-    <label>Username</label>
-    <input type="text" id="loginUser" placeholder="Masukkan username...">
-    <label>Password</label>
-    <input type="password" id="loginPass" placeholder="Masukkan password...">
-    <button id="doLogin" class="btn-primary">Login</button>
-    <button class="closePopup btn-sec">Tutup</button>
-  </div>
-</div>
-
-<!-- UPLOAD POPUP -->
-<div id="uploadPopup" class="popup hidden">
-  <div class="popup-content">
-    <h2>Upload Video</h2>
-    <label>Judul Video</label>
-    <input type="text" id="videoTitle" placeholder="Masukkan judul video...">
-    <label>Thumbnail</label>
-    <input type="file" id="thumbnailInput" accept="image/*">
-    <label>File Video</label>
-    <input type="file" id="videoInput" accept="video/mp4,video/webm,video/mkv">
-    <button id="uploadBtn" class="btn-primary">Upload</button>
-    <button class="closePopup btn-sec">Tutup</button>
-  </div>
-</div>
-
 <script src="../sidebar.js"></script>
 <script src="creator.js"></script>
+
 </body>
 </html>
