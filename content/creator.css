@@ -1,202 +1,37 @@
-/* ==============================
-   CREATOR DASHBOARD MAIN STYLE
-   ============================== */
+/* Creator Dashboard CSS */
 
-.creator-container {
-  padding: 20px;
-}
+.creator-container { padding: 20px; }
 
-/* ==============================
-   LOGIN POPUP
-   ============================== */
-.creator-login-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.65);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
+/* Login Popup */ .creator-login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 999; }
 
-.creator-login-popup {
-  background: #111827;
-  padding: 25px;
-  width: 350px;
-  border-radius: 14px;
-  box-shadow: 0 0 25px rgba(0,0,0,0.35);
-  text-align: center;
-  border: 1px solid #374151;
-}
+.creator-login-popup { background: #fff; padding: 30px; width: 320px; border-radius: 12px; text-align: center; animation: popupShow 0.3s ease; }
 
-.creator-login-popup h2 {
-  margin-bottom: 10px;
-  color: #fff;
-}
+.creator-login-popup input { width: 100%; padding: 10px; margin: 10px 0; border-radius: 6px; border: 1px solid #ddd; }
 
-.creator-login-popup p {
-  color: #c9c9c9;
-  font-size: 14px;
-  margin-bottom: 20px;
-}
+.btn-close { background: #e74c3c; padding: 10px; margin-top: 10px; width: 100%; border-radius: 6px; cursor: pointer; color: #fff; border: none; }
 
-.creator-login-popup input {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border-radius: 8px;
-  border: 1px solid #444;
-  outline: none;
-  background: #1f2937;
-  color: #fff;
-}
+/* Upload Popup */ .upload-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 999; }
 
-.btn-close {
-  background: #e11d48;
-  padding: 10px 16px;
-  border-radius: 8px;
-  color: #fff;
-  border: none;
-  margin-top: 10px;
-  cursor: pointer;
-}
+.upload-popup { background: #fff; padding: 30px; width: 360px; border-radius: 12px; animation: popupShow 0.3s ease; }
 
-.btn-close:hover {
-  background: #be123c;
-}
+.upload-popup input { width: 100%; padding: 10px; margin: 10px 0; border-radius: 6px; border: 1px solid #ccc; }
 
-/* ==============================
-   BUTTON LOGIN / LOGOUT / UPLOAD
-   ============================== */
-.btn-login,
-.btn-logout,
-.btn-upload {
-  padding: 10px 18px;
-  background: #2563eb;
-  color: #fff;
-  border-radius: 8px;
-  cursor: pointer;
-  border: none;
-  margin-left: 10px;
-  font-size: 14px;
-}
+/* Video Grid */ .creator-video-grid { margin-top: 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
 
-.btn-logout {
-  background: #dc2626;
-}
+.creator-video-box { background: #fff; padding: 10px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
 
-.btn-upload {
-  background: #10b981;
-}
+.creator-thumb { width: 100%; border-radius: 8px; cursor: pointer; }
 
-.btn-login:hover { background: #1d4ed8; }
-.btn-logout:hover { background: #b91c1c; }
-.btn-upload:hover { background: #059669; }
+.stats { display: flex; justify-content: space-between; margin: 8px 0; font-size: 14px; }
 
-/* ==============================
-   UPLOAD POPUP
-   ============================== */
-.upload-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.70);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
+.like-btn { background: #3498db; color: white; padding: 8px 12px; border: none; border-radius: 6px; cursor: pointer; }
 
-.upload-popup {
-  width: 400px;
-  background: #111827;
-  padding: 25px;
-  border-radius: 14px;
-  border: 1px solid #374151;
-  box-shadow: 0 0 25px rgba(0,0,0,0.4);
-}
+/* Video Player */ .player-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: flex; justify-content: center; align-items: center; z-index: 9999; }
 
-.upload-popup h2 {
-  margin-bottom: 15px;
-  color: #fff;
-}
+.player-box { background: #fff; padding: 20px; width: 70%; max-width: 860px; border-radius: 10px; animation: popupShow 0.25s ease; }
 
-.upload-popup label {
-  color: #cfcfcf;
-  font-size: 14px;
-}
+.player-box video { width: 100%; border-radius: 10px; }
 
-.upload-popup input {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0 15px;
-  border-radius: 8px;
-  background: #1f2937;
-  border: 1px solid #374151;
-  color: #fff;
-}
+.player-close { float: right; background: #e74c3c; border: none; padding: 8px 12px; border-radius: 6px; color: #fff; cursor: pointer; }
 
-/* ==============================
-   VIDEO GRID
-   ============================== */
-.creator-video-grid {
-  margin-top: 25px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 20px;
-}
-
-.creator-video-box {
-  background: #111827;
-  padding: 15px;
-  border-radius: 12px;
-  text-align: center;
-  border: 1px solid #374151;
-  transition: 0.2s;
-}
-
-.creator-video-box:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
-}
-
-.creator-video-box img {
-  width: 100%;
-  height: 140px;
-  border-radius: 10px;
-  object-fit: cover;
-  margin-bottom: 10px;
-}
-
-.creator-video-box h3 {
-  font-size: 16px;
-  color: #fff;
-  margin-bottom: 5px;
-}
-
-.creator-video-box p {
-  color: #c9c9c9;
-  font-size: 13px;
-}
-
-/* ==============================
-   RESPONSIVE
-   ============================== */
-@media (max-width: 600px) {
-
-  .upload-popup,
-  .creator-login-popup {
-    width: 90%;
-  }
-
-  .btn-upload,
-  .btn-login,
-  .btn-logout {
-    padding: 8px 14px;
-  }
-}
+/* Animasi popup */ @keyframes popupShow { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
