@@ -28,8 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     videosContainer.innerHTML = "";
     videos.forEach(v => {
       const card = document.createElement("div");
-      card.classList.add("video-card"); // sesuai creator.css
-
+      card.classList.add("video-card");
       card.innerHTML = `
         <img src="${v.thumb}" class="video-thumb">
         <h3>${v.title}</h3>
@@ -38,7 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
           <source src="${v.video}">
         </video>
       `;
-
       videosContainer.prepend(card);
     });
   }
@@ -107,15 +105,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!title || !thumbFile || !videoFile) return alert("Semua field wajib diisi!");
 
-    const readerThumb = new FileReader();
-    const readerVideo = new FileReader();
+    // Gunakan FileReader
+    const thumbReader = new FileReader();
+    const videoReader = new FileReader();
 
-    readerThumb.onload = () => {
-      readerVideo.onload = () => {
+    thumbReader.onload = () => {
+      videoReader.onload = () => {
         const videoData = {
           title,
-          thumb: readerThumb.result,
-          video: readerVideo.result,
+          thumb: thumbReader.result,
+          video: videoReader.result,
           user: currentUser
         };
 
@@ -124,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
         allVideos.push(videoData);
         localStorage.setItem("videos", JSON.stringify(allVideos));
 
-        // tampilkan video sesuai style
+        // tampilkan card
         const card = document.createElement("div");
         card.classList.add("video-card");
         card.innerHTML = `
@@ -146,9 +145,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         alert("Video berhasil diupload!");
       };
-      readerVideo.readAsDataURL(videoFile);
+      videoReader.readAsDataURL(videoFile);
     };
-    readerThumb.readAsDataURL(thumbFile);
+    thumbReader.readAsDataURL(thumbFile);
   });
 
 });
