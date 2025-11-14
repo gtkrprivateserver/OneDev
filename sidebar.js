@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const pages = [
     { name: "🏠 Home", link: "index.html" },
     { name: "💡 About", link: "about.html" },
+    { name: "📹 Content Creator", link: "/content/creator.html" },
     { name: "✨ Features", link: "features.html" },
     { name: "⏳ Monitor", link: "monitor.html" },
     { name: "⚙️ Services", link: "services.html" },
