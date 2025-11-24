@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kontak ONEDEV</title>
+  <title>ONEDEV CONTACT US</title>
   <link rel="stylesheet" href="styles.css">
   <style>
     /* === FORM KONTAK KHUSUS === */
@@ -70,27 +70,27 @@
     <header>
       <div class="header-left">
         <button id="menuBtn" class="menu-btn">☰</button>
-        <h1>Hubungi Kami</h1>
+        <h1>Contact us</h1>
       </div>
     </header>
 
     <section class="contact">
       <h2>Kontak ONEDEV</h2>
-      <p>Kami siap membantu Anda. Hubungi kami melalui form di bawah ini:</p>
+      <p>We're ready to help you. Contact us using the form below:</p>
 
       <!-- Form Kontak -->
       <form class="contact-form" id="contactForm">
         <h3>Form Kontak</h3>
-        <label for="name">Nama Lengkap</label>
-        <input type="text" id="name" placeholder="Nama Anda" required>
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Your Name" required>
 
         <label for="email">Email</label>
         <input type="email" id="email" placeholder="email@example.com" required>
 
-        <label for="message">Pesan</label>
-        <textarea id="message" placeholder="Tulis pesan Anda..." rows="5" required></textarea>
+        <label for="message">message</label>
+        <textarea id="message" placeholder="Write your message..." rows="5" required></textarea>
 
-        <button type="submit">Kirim Pesan</button>
+        <button type="submit">Send Via WhatsApp</button>
       </form>
     </section>
   </div>
@@ -109,12 +109,12 @@
         const message = document.getElementById('message').value;
 
         // Kirim ke WhatsApp
-        const phoneNumber = "628123456789"; // Ganti nomor tujuan
-        const waMessage = `Halo, saya ${name} (${email}) ingin mengirim pesan:\n${message}`;
+        const phoneNumber = "6285363155850"; // Ganti nomor tujuan
+        const waMessage = `Halo, customer ${name} (${email}) want to send a message:\n${message}`;
         window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(waMessage)}`, "_blank");
 
         form.reset();
-        alert("Pesan telah dikirim via WhatsApp!");
+        alert("Message has been sent via WhatsApp!");
       });
     });
   </script>
