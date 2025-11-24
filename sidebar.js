@@ -10,16 +10,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // Daftar halaman (PATH SUDAH DIPERBAIKI: gunakan "/" supaya balik ke root)
   const pages = [
     { name: "🏠 Home", link: "/index.html" },
-    { name: "💡 About", link: "/about.html" },
+    
     { name: "📹 Content Creator", link: "/content/creator.html" },
     { name: "⏳ Monitor", link: "/monitor.html" },
-    { name: "💰 Pricing", link: "/pricing.html" },
-    { name: "📩 Contact", link: "/contact.html" },
+    { name: "🛃 Team GTKRPS", link: "/team/gtkrps.html" },
     { name: "🛒 Store", link: "/store.html" },
-    { name: "🎮 Top Up", link: "/topup.html" },
     { name: "☄️ Collaboration", link: "/collaboration.html" },
     { name: "💎 Exchange", link: "/exchange.html" },
-    { name: "🕹️ GTKR", link: "https://gtkr.vercel.app" } // external skip
+    { name: "💡 About", link: "/about.html" },
+    { name: "📩 Contact", link: "/contact.html" } // external skip
   ];
 
   // Bangun sidebar
