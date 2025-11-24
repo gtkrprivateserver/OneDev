@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ONEDEV CONTACT US</title>
+  <title>ONEDEV - Contact Us</title>
   <link rel="stylesheet" href="styles.css">
+
   <style>
     /* === FORM KONTAK KHUSUS === */
     .contact-form {
@@ -63,14 +64,15 @@
   </style>
 </head>
 <body>
-  <!-- Sidebar otomatis dari sidebar.js -->
+
+  <!-- Sidebar otomatis -->
   <div class="sidebar"></div>
 
   <div class="main-content">
     <header>
       <div class="header-left">
         <button id="menuBtn" class="menu-btn">☰</button>
-        <h1>Contact us</h1>
+        <h1>Contact Us</h1>
       </div>
     </header>
 
@@ -81,13 +83,14 @@
       <!-- Form Kontak -->
       <form class="contact-form" id="contactForm">
         <h3>Form Kontak</h3>
+
         <label for="name">Full Name</label>
         <input type="text" id="name" placeholder="Your Name" required>
 
         <label for="email">Email</label>
         <input type="email" id="email" placeholder="email@example.com" required>
 
-        <label for="message">message</label>
+        <label for="message">Message</label>
         <textarea id="message" placeholder="Write your message..." rows="5" required></textarea>
 
         <button type="submit">Send Via WhatsApp</button>
@@ -96,11 +99,12 @@
   </div>
 
   <script src="sidebar.js"></script>
+
+  <!-- === SCRIPT KONTAK + WHATSAPP === -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const form = document.getElementById('contactForm');
 
-      // Form kontak submit
       form.addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -108,15 +112,41 @@
         const email = document.getElementById('email').value;
         const message = document.getElementById('message').value;
 
-        // Kirim ke WhatsApp
-        const phoneNumber = "6285363155850"; // Ganti nomor tujuan
-        const waMessage = `Halo, customer ${name} (${email}) want to send a message:\n${message}`;
-        window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(waMessage)}`, "_blank");
+        // Timestamp
+        const now = new Date();
+        const timestamp = now.toLocaleString("id-ID", {
+          dateStyle: "full",
+          timeStyle: "short"
+        });
+
+        // Nomor WhatsApp tujuan
+        const phoneNumber = "6285363155850";
+
+        // Pesan WhatsApp lengkap
+        const waMessage = `
+📩 *NEW CONTACT MESSAGE FROM ONEDEV WEBSITE*
+
+👤 *Name:* ${name}
+📧 *Email:* ${email}
+🕒 *Posted on:* ${timestamp}
+
+💬 *Message:*
+${message}
+
+— automatically sent via the ONEDEV Contact Form
+        `;
+
+        // Kirim pesan ke WhatsApp
+        window.open(
+          `https://wa.me/${phoneNumber}?text=${encodeURIComponent(waMessage)}`,
+          "_blank"
+        );
 
         form.reset();
         alert("Message has been sent via WhatsApp!");
       });
     });
   </script>
+
 </body>
 </html>
