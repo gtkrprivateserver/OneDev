@@ -3,125 +3,161 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ONEDEV - Coming Soon</title>
+  <title>Daftar Team GTKRPS</title>
   <link rel="stylesheet" href="../styles.css">
   <style>
-    /* Countdown timer styling */
-    .countdown {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 30px;
-      font-size: 2em;
-      color: #00b4d8;
-      font-weight: bold;
-      flex-wrap: wrap;
+    .form-container {
+      max-width: 750px;
+      margin: 120px auto;
+      background: #fff;
+      padding: 35px;
+      border-radius: 18px;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+      animation: fadeIn 0.5s ease;
     }
 
-    .countdown-item {
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .form-container h2 {
       text-align: center;
-      min-width: 60px;
+      margin-bottom: 15px;
+      font-size: 28px;
+      color: #333;
     }
 
-    .countdown-item span {
-      display: block;
-      font-size: 1.2em;
-      color: #00b4d8;
-      margin-bottom: 5px;
+    .form-input {
+      margin-top: 15px;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      section h2 {
-        font-size: 1.7em;
-      }
-      section p {
-        font-size: 1em;
-      }
-      .countdown {
-        font-size: 1.5em;
-        gap: 10px;
-      }
-      .countdown-item {
-        min-width: 50px;
-      }
-      .countdown-item span {
-        font-size: 1em;
-      }
+    .form-input label {
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #333;
     }
 
-    @media (max-width: 480px) {
-      section h2 {
-        font-size: 1.4em;
-      }
-      section p {
-        font-size: 0.95em;
-      }
-      .countdown {
-        font-size: 1.2em;
-        gap: 8px;
-      }
-      .countdown-item {
-        min-width: 45px;
-      }
-      .countdown-item span {
-        font-size: 0.95em;
-      }
+    .form-input input,
+    .form-input textarea {
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      outline: none;
+      transition: .25s;
+    }
+
+    .form-input input:focus,
+    .form-input textarea:focus {
+      border-color: #6b4bff;
+      box-shadow: 0 0 10px rgba(107,75,255,0.25);
+    }
+
+    .btn-submit {
+      margin-top: 22px;
+      background: #6b4bff;
+      border: none;
+      padding: 14px;
+      font-size: 17px;
+      color: #fff;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: .25s;
+    }
+
+    .btn-submit:hover {
+      background: #5538ff;
+    }
+
+    .success-box {
+      margin-top: 18px;
+      background: #ceffd4;
+      border-left: 5px solid #28b300;
+      padding: 12px;
+      border-radius: 12px;
+      display: none;
     }
   </style>
 </head>
 <body>
+
   <div class="main-content">
     <header>
       <div class="header-left">
         <button id="menuBtn" class="menu-btn">☰</button>
-        <h1>Team GTKRPS</h1>
+        <h1>Pendaftaran Team GTKRPS</h1>
       </div>
     </header>
 
-    <section style="text-align:center; margin-top:80px; padding: 0 10px;">
-      <h2 style="font-size:2em; color:#00b4d8;">Coming Soon 🚀</h2>
-      <p style="margin-top:20px; color:#ccc; font-size:1.1em;">
-        Kami sedang dalam pengembangan.<br>
-        Silakan kunjungi kembali nanti!
-      </p>
+    <section class="form-container">
+      <h2>Formulir Pendaftaran Team</h2>
 
-      <!-- Countdown Timer -->
-      <div class="countdown" id="countdown">
-        <div class="countdown-item"><span id="days">0</span>Days</div>
-        <div class="countdown-item"><span id="hours">0</span>Hours</div>
-        <div class="countdown-item"><span id="minutes">0</span>Minutes</div>
-        <div class="countdown-item"><span id="seconds">0</span>Seconds</div>
-      </div>
+      <form id="teamForm">
+        <div class="form-input">
+          <label>Full Name</label>
+          <input type="text" id="teamName" required placeholder="Contoh: ShadowRiders">
+        </div>
+
+        <div class="form-input">
+          <label>Discord Account</label>
+          <input type="text" id="leaderName" required placeholder="example#1234">
+        </div>
+
+        <div class="form-input">
+          <label>Team Members (minimum 3)</label>
+          <textarea id="members" rows="4" required placeholder="Separate with commas..."></textarea>
+        </div>
+
+        <div class="form-input">
+          <label>Reasons to Join</label>
+          <textarea id="reason" rows="4" required placeholder="Tell us why your team wants to join GTKRPS..."></textarea>
+        </div>
+
+        <button class="btn-submit" type="submit">Submit Registration</button>
+
+        <div class="success-box" id="successBox">
+          Registration successfully submitted!
+        </div>
+      </form>
     </section>
   </div>
 
-  <!-- Sidebar otomatis dimasukkan oleh sidebar.js -->
   <script src="../sidebar.js"></script>
 
   <script>
-    // Set tanggal rilis Countdown (ubah sesuai jadwal)
-    const launchDate = new Date("Dec 31, 2025 00:00:00").getTime();
+    document.getElementById("teamForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
 
-    const countdownTimer = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = launchDate - now;
+      const webhookUrl = "https://discord.com/api/webhooks/1437685779878121557/0RNvPRCN_msrqd9NbFv61lOdMzw-3TwUBdCi0rOsOTAjDm6TG9qBeGxHSR8H2oAj8uSu";
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      const data = {
+        content: "**PENDAFTARAN TEAM GTKRPS BARU**",
+        embeds: [{
+          title: "Pendaftaran Team Masuk",
+          color: 5814783,
+          fields: [
+            { name: "Full Name", value: document.getElementById("teamName").value },
+            { name: "Discord", value: document.getElementById("Discord").value },
+            { name: "Members", value: document.getElementById("members").value },
+            { name: "Reasons to Join", value: document.getElementById("reason").value }
+          ],
+          footer: { text: "GTKRPS Registration" }
+        }]
+      };
 
-      document.getElementById("days").innerText = days;
-      document.getElementById("hours").innerText = hours;
-      document.getElementById("minutes").innerText = minutes;
-      document.getElementById("seconds").innerText = seconds;
+      await fetch(webhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
 
-      if (distance < 0) {
-        clearInterval(countdownTimer);
-        document.getElementById("countdown").innerHTML = "<h3>🚀 Bot Telah Tersedia!</h3>";
-      }
-    }, 1000);
+      document.getElementById("successBox").style.display = "block";
+      document.getElementById("teamForm").reset();
+    });
   </script>
+
 </body>
 </html>
