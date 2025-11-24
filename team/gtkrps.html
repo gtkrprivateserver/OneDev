@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daftar Team GTKRPS</title>
+  <title>Pendaftaran Team GTKRPS</title>
   <link rel="stylesheet" href="../styles.css">
+
   <style>
     .form-container {
       max-width: 750px;
@@ -82,6 +83,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <div class="main-content">
@@ -97,23 +99,23 @@
 
       <form id="teamForm">
         <div class="form-input">
-          <label>Full Name</label>
+          <label>Full Name (Team Name)</label>
           <input type="text" id="teamName" required placeholder="Contoh: ShadowRiders">
         </div>
 
         <div class="form-input">
-          <label>Discord Account</label>
-          <input type="text" id="leaderName" required placeholder="example#1234">
+          <label>Discord Account Leader</label>
+          <input type="text" id="discord" required placeholder="example#0001">
         </div>
 
         <div class="form-input">
-          <label>Team Members (minimum 3)</label>
-          <textarea id="members" rows="4" required placeholder="Separate with commas..."></textarea>
+          <label>Team Members (min 3)</label>
+          <textarea id="members" rows="4" required placeholder="Pisahkan dengan koma..."></textarea>
         </div>
 
         <div class="form-input">
           <label>Reasons to Join</label>
-          <textarea id="reason" rows="4" required placeholder="Tell us why your team wants to join GTKRPS..."></textarea>
+          <textarea id="reason" rows="4" required placeholder="Jelaskan alasan team kamu ingin bergabung..."></textarea>
         </div>
 
         <button class="btn-submit" type="submit">Submit Registration</button>
@@ -131,31 +133,38 @@
     document.getElementById("teamForm").addEventListener("submit", async function(e) {
       e.preventDefault();
 
+      // Masukkan webhook DISINI ↓↓
       const webhookUrl = "https://discord.com/api/webhooks/1437685779878121557/0RNvPRCN_msrqd9NbFv61lOdMzw-3TwUBdCi0rOsOTAjDm6TG9qBeGxHSR8H2oAj8uSu";
 
-      const data = {
-        content: "**PENDAFTARAN TEAM GTKRPS BARU**",
-        embeds: [{
-          title: "Pendaftaran Team Masuk",
-          color: 5814783,
-          fields: [
-            { name: "Full Name", value: document.getElementById("teamName").value },
-            { name: "Discord", value: document.getElementById("Discord").value },
-            { name: "Members", value: document.getElementById("members").value },
-            { name: "Reasons to Join", value: document.getElementById("reason").value }
-          ],
-          footer: { text: "GTKRPS Registration" }
-        }]
+      const payload = {
+        content: "**📥 PENDAFTARAN TEAM GTKRPS BARU**",
+        embeds: [
+          {
+            title: "Pendaftaran Baru Diterima",
+            color: 5814783,
+            fields: [
+              { name: "Team Name", value: document.getElementById("teamName").value },
+              { name: "Discord Leader", value: document.getElementById("discord").value },
+              { name: "Members", value: document.getElementById("members").value },
+              { name: "Reasons to Join", value: document.getElementById("reason").value }
+            ],
+            footer: { text: "GTKRPS Registration System" }
+          }
+        ]
       };
 
-      await fetch(webhookUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      });
+      try {
+        await fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
 
-      document.getElementById("successBox").style.display = "block";
-      document.getElementById("teamForm").reset();
+        document.getElementById("successBox").style.display = "block";
+        document.getElementById("teamForm").reset();
+      } catch (err) {
+        alert("Gagal mengirim ke webhook.");
+      }
     });
   </script>
 
