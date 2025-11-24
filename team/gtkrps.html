@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pendaftaran Team GTKRPS</title>
+  <title>GTKRPS Team Registration</title>
   <link rel="stylesheet" href="../styles.css">
 
   <style>
@@ -90,7 +90,7 @@
     <header>
       <div class="header-left">
         <button id="menuBtn" class="menu-btn">☰</button>
-        <h1>Pendaftaran Team GTKRPS</h1>
+        <h1>GTKRPS Team Registration</h1>
       </div>
     </header>
 
@@ -100,7 +100,7 @@
       <form id="teamForm">
         <div class="form-input">
           <label>Full Name (Team Name)</label>
-          <input type="text" id="teamName" required placeholder="Contoh: ShadowRiders">
+          <input type="text" id="teamName" required placeholder="Example: ShadowRiders">
         </div>
 
         <div class="form-input">
@@ -110,12 +110,12 @@
 
         <div class="form-input">
           <label>Team Members (min 3)</label>
-          <textarea id="members" rows="4" required placeholder="Pisahkan dengan koma..."></textarea>
+          <textarea id="members" rows="4" required placeholder="Separate with commas..."></textarea>
         </div>
 
         <div class="form-input">
           <label>Reasons to Join</label>
-          <textarea id="reason" rows="4" required placeholder="Jelaskan alasan team kamu ingin bergabung..."></textarea>
+          <textarea id="reason" rows="4" required placeholder="Explain the reasons why your team wants to join..."></textarea>
         </div>
 
         <button class="btn-submit" type="submit">Submit Registration</button>
@@ -137,10 +137,10 @@
       const webhookUrl = "https://discord.com/api/webhooks/1437685779878121557/0RNvPRCN_msrqd9NbFv61lOdMzw-3TwUBdCi0rOsOTAjDm6TG9qBeGxHSR8H2oAj8uSu";
 
       const payload = {
-        content: "**📥 PENDAFTARAN TEAM GTKRPS BARU**",
+        content: "**NEW GTKRPS TEAM REGISTRATION**",
         embeds: [
           {
-            title: "Pendaftaran Baru Diterima",
+            title: "📥New Registrations Accepted",
             color: 5814783,
             fields: [
               { name: "Team Name", value: document.getElementById("teamName").value },
@@ -148,7 +148,7 @@
               { name: "Members", value: document.getElementById("members").value },
               { name: "Reasons to Join", value: document.getElementById("reason").value }
             ],
-            footer: { text: "GTKRPS Registration System" }
+            footer: { text: "🛃Automatic Registration System" }
           }
         ]
       };
