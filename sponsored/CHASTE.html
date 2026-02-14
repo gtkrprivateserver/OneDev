@@ -1,1 +1,72 @@
-y
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CHASTE SQUAD - Tim Kreatif Digital</title>
+
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="chaste-slider.css">
+</head>
+<body>
+
+  <div id="adsContainer"></div>
+
+  <div class="main-content">
+
+    <!-- HEADER -->
+    <header>
+      <div class="header-left">
+        <button id="menuBtn" class="menu-btn">☰</button>
+        <h1>CHASTE SQUAD</h1>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-text">
+        <h2>Kami Adalah <span>CHASTE SQUAD</span> – Tim Kreatif Digital</h2>
+        <p>
+          Kami menghadirkan desain kreatif, branding modern, website profesional,
+          dan strategi digital untuk membantu bisnis berkembang di era digital.
+        </p>
+        <a href="services.html" class="btn-primary">Lihat Portofolio</a>
+      </div>
+
+      <div class="hero-visual">
+        <div class="robot-sphere"></div>
+      </div>
+    </section>
+
+    <!-- SLIDER SECTION -->
+    <section class="slider-section">
+      <h2>Proyek Kreatif Kami</h2>
+      <div class="slider">
+        <img src="images/slide1.jpg" class="slide active">
+        <img src="images/slide2.jpg" class="slide">
+        <img src="images/slide3.jpg" class="slide">
+      </div>
+    </section>
+
+  </div>
+
+  <script src="/sidebar.js"></script>
+
+  <!-- SCRIPT SLIDER -->
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+
+    function showSlide(index) {
+      slides.forEach(slide => slide.classList.remove('active'));
+      slides[index].classList.add('active');
+    }
+
+    setInterval(() => {
+      current = (current + 1) % slides.length;
+      showSlide(current);
+    }, 3000);
+  </script>
+
+</body>
+</html>
