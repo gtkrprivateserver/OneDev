@@ -1,0 +1,31 @@
+/* ==========================
+   CHASTE SQUAD SLIDER
+========================== */
+
+.slider-section {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.slider-section h2 {
+  margin-bottom: 30px;
+}
+
+.slider {
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.slide {
+  width: 100%;
+  display: none;
+  border-radius: 15px;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.slide.active {
+  display: block;
+}
